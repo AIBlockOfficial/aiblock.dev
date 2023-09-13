@@ -1,0 +1,49 @@
+import Unicorn from './img/743546cf1b1fd9d143e7899b8a6388de/unicorn_construction.png';
+import Pipelining from './img/433e26e95b0c450bcdbd02fc36f2b509/pipelining.png';
+import Block from './img/2a338d39d11d6068544a8ac89b11040f/block_add_pipelining.png';
+
+# Block Mining Process
+The process for mining a block in ZNP is somewhat complex. It starts with the following general way:
+
+1. Users send their transactions to the [Mempool](mempool-node) ring, which then place all valid transactions into a waiting pool to be included in a block.
+
+2. Once the block process starts, transactions from the waiting pool are added to the next block and then sent to all [Miners](miner-node) participating in this round.
+
+3. The Miners mine the block and then send their Proof-of-Works (PoWs) back to the Mempool ring.
+
+4. The Mempool ring then selects the final winner, who receives a token reward, and the block and its associated winning information gets sent to the [Storage](storage-node) ring.
+
+The details of the mining process, as laid out in this doc, involve the communications between the Mempool ring and the Miners in the process of the direct mining of the block.
+
+## UNiCORN Construction
+
+The entire mining process requires the use of a single [UNiCORN](unicorns), which is generated from a seed value. This seed value is composed of the transactions that are going into the block to be mined, the applications of all Miners who want to mine the block, and the list of successful Miners from 2 blocks ago (more info on this last part later).
+
+This UNiCORN is used for a number of processes, most notably:
+
+1. Miner subset selection
+2. Miner winner selection
+
+The construction is therefore the following, with pruning of input values to their hashes in order to save on storage cost:
+
+<img src={Unicorn} alt="unicorn_construction" />
+
+## Process for a Single Block
+
+Once a UNiCORN is constructed, the output can be placed into a pseudo-random number generator (PRNG) as seed in order to select a subset of the Miners who applied. The subset is the only group who can then start mining the block in the expected fashion. Once a miner has found a valid PoW they can submit it to the Mempool ring, who will store all successful PoWs from participating miners into a pending list.
+
+Once the round is considered closed, the winner for the round is selected once again via the pre-calculated UNiCORN. After this, the block is sent to the Storage ring for permanent storage.
+
+## Parallel Pipeline for All Blocks
+
+In practice, although the above process works, it is inefficient and requires the following block to needlessly wait for the previous block to finish before it can begin. What we can do instead is create a parallel process where two blocks are mined simultaneously, as in the following diagram:
+
+<img src={Pipelining} alt="pipelining" />
+
+In order for such a process to work, it's important to ensure that the `previous_hash` field of the block header is correct since the previous block will not be complete yet. As such, the `previous_hash` value will no longer point to the immediately preceding block in the chain but will rather be composed of values from the two blocks previous to the preceding block. In simple terms, the `previous_hash` for block `t` will be composed of values from blocks `t - 2` and `t - 3`, rather than from `t - 1`.
+
+The following diagram describes this process for block `n + 2`, which has a previous hash composed of the previous hash of block `n - 1` and the hash of the entire block in `n`:
+
+<img src={Block} alt="block_add_pipelining" />
+
+Finally, after a winner has been found and selected the Mempool ring then sends the block, as well as the UNiCORN input values, to the Storage ring for storage.

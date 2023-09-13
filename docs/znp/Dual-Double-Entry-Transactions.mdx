@@ -1,0 +1,34 @@
+import Shadowmourne from './img/909c07898b4f5751941461e6fbe98473/Shadowmourne-the-runeblade.jpeg';
+
+# Dual Double Entry Transactions
+Currently, Bitcoin payments reflect as "charity": Alice pays Bob 1 BTC for a mid-range car, but the Bitcoin ledger can only reliably show that Alice charitably gave Bob 1 BTC. Zenotta's blockchain needs to be able to reflect the token payment as well as the asset the payment is for. To this end, what is required is a *dual double entry*, or DDE, transaction. 
+
+## How a DDE Transaction Works
+Bob has Shadowmourne, an awesome axe weapon used in the game World of Warcraft (WoW) which he wishes to sell through the Zenotta blockchain:
+
+<img src={Shadowmourne} alt="shadowmourne-the-runeblade" />
+<small>Shadowmourne &copy; Activision Blizzard, Inc.</small>
+
+Alice is new to the game, but wants to get a leg up on the competition and so decides to buy the in-game item. In the event that Alice pays Bob 100 ZNT for the axe, the following sequence occurs:
+
+1. Alice creates a transaction that sends 100 ZNT to Bob, and expects the encoding scheme for his WoW axe
+
+2. Bob creates a transaction that sends the WoW axe's encoding scheme to Alice, and expects 100 ZNT in return
+
+3. Alice and Bob exchange their respective halves of an identifier called a DRUID (Double Resolution Unique ID)
+
+4. Alice and Bob each concatenate the other party's half to their own in order to create the final DRUID, and attach the DRUID to their own respective transactions as an attribute (`druid: Option<String>`)
+
+5. Alice sends her DRUID transaction to the Mempool node for verification. Since Bob is currently offline and has not sent his corresponding DRUID transaction, the Mempool node simply adds Alice's transaction to its DRUID pool as a DRUID droplet (`druid_pool: BTreeMap<String, DruidDroplet>`) and waits until Bob sends his
+
+6. Once Bob sends his transaction, the Mempool node matches it with Alice's by checking the corresponding DRUID, removes Alice's transaction droplet from the DRUID pool, and processes each transaction separately before adding them to the next block
+
+**NOTE:** Even though both transactions are processed separately, both still retain the DRUID value. This allows for auditing of the trade at a later stage
+
+## Receipt-Based Payments
+In addition to enabling auditable trades of tokens for data assets, the DDE transaction also enables receipt-based payments. A receipt-based payment is one in which Alice wants to give Bob 100 ZNT as a charitable gift, but requires Bob to approve the gift before it gets processed into a block.
+
+In order to facilitate this, Alice simply needs to leave the expected asset field in her transaction blank (signifying that she expects nothing in return). Bob does the same on his side, by requesting 100 ZNT but leaving the data asset to sell blank (signifying he does not intend to provide anything of value in return). The process is the same as before, with both Alice and Bob submitting their respective transactions with the same DRUID and having them processed by the Mempool node.
+
+## Future Considerations and Improvements
+In order for receipt-based payments to truly be effective, the content will need to be signed with each user's private key before submitting to the Mempool node. This means that eventually there will need to be some value in the data field for receipt-based payments, but this can be fixed to a value which does not require a creation event (as normal data assets do).

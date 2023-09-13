@@ -1,0 +1,383 @@
+openapi: 3.0.3
+info:
+  title: A-Block API
+  description: |-
+    The A-Block API allows you to interact with the A-Block chain without the need for complicated, risky smart contracts. It's here to let you work with A-Block in a way that's quick, simple and easy.
+    
+    Some useful links:
+    - [A-Block Network repository](https://github.com/ABlockOfficial/Network)
+    - [The source API definition for the A-Block Network](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
+  #termsOfService: http://swagger.io/terms/
+  contact:
+    email: byron.houwens@a-block.net
+  license:
+    name: GPL-3.0
+    url: https://www.gnu.org/licenses/gpl-3.0.en.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about A-Block
+  url: https://a-block.net
+servers:
+  - url: http://49.12.234.10:3003
+    description: Mempool Node
+tags:
+  - name: debug_data
+    description: Getting general information about the node
+  - name: transaction
+    description: All calls associated with making transactions
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: address
+    description: Checking and creating addresses
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+paths:
+  /debug_data:
+    get:
+      tags:
+        - debug_data
+      summary: Get general information about the current node
+      description: Get general information about the current node
+      operationId: debugData
+      parameters:
+        - in: header
+          name: x-request-id
+          required: true
+          description: An idempotent key for retrieving cached responses from the node
+          schema:
+            type: array
+            items:
+              type: string
+              example: 'afac3a3dd8a04538934db1c20cc29767'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDebugData'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseDebugData'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBadRequest'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseBadRequest'
+  /create_transactions:
+    post:
+      tags:
+        - transaction
+      summary: Create new transaction/s
+      description: Create new transaction/s, which will be submitted to the Mempool nodes for inclusion into a new block. This call assumes a full transaction as part of the request body, which might make raw calls difficult to manage. For convenience, it may be best to use an A-Block library or SDK that abstracts this call for you.
+      operationId: createTx
+      parameters:
+        - in: header
+          name: x-request-id
+          required: true
+          description: An idempotent key for retrieving cached responses from the node
+          schema:
+            type: array
+            items:
+              type: string
+              example: 'afac3a3dd8a04538934db1c20cc29767'
+      requestBody:
+        description: Create a new transaction
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCreateTransactions'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseCreateTransactions'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBadRequest'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseBadRequest'
+      #security:
+      #  - petstore_auth:
+      #      - write:pets
+      #      - read:pets
+  /fetch_balance:
+    post:
+      tags:
+        - address
+      summary: Fetches the balance/s for 1 or more addresses
+      description: Fetches the balance/s for 1 or more addresses
+      operationId: fetchBalance
+      requestBody:
+        description: List of addresses to fetch the balance for
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FetchBalance'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseFetchBalance'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseFetchBalance'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBadRequest'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ResponseBadRequest'
+      # security:
+      #   - api_key: []
+components:
+  schemas:
+    FetchBalance:
+      type: object
+      properties:
+        address_list:
+          type: array
+          items:
+            type: string
+            example: "d6fa779a3de8b216c56375018375e490c7e2ce92918abce4caecf73b1f77c38f"
+    TransactionCreate:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a957bc20
+          description: The ID of the transaction being created
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionInput'
+          description: The inputs to the transaction
+        outputs:
+          type: integer
+          format: int32
+          example: 7
+        version:
+          type: integer
+          format: int8
+          example: 2
+          description: The transaction's schema version
+        druid_info:
+          type: object
+          properties:
+            druid:
+              type: string
+              example: 'DRUID_1'
+            participants:
+              type: integer
+              example: 2
+            expectations:
+              type: object
+              properties:
+                from:
+                  type: string
+                to:
+                  type: string
+                asset:
+                  type: object
+      xml:
+        name: txcreate
+    TransactionInput:
+      type: object
+      properties:
+        previous_out:
+          type: string
+          example: 'f0698b112da09'
+        script_signature:
+          $ref: '#/components/schemas/Script'
+      xml:
+        name: txinput
+    Script:
+      type: object
+      properties:
+        stack:
+          type: array
+          items:
+            type: string
+    ResponseDebugData:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '45v340cd2f8c4782a5b058832565afb1'
+          description: The ID of the call, which corresponds to the x-request-id used in the header
+        status:
+          type: string
+          example: 'Success'
+          description: The status of the call, which will be one of either "Success", "Error", or "Pending"
+        reason:
+          type: string
+          example: 'Debug data successfully retrieved'
+          description: The reason for the status of the call. Most useful to debug errors
+        route:
+          type: string
+          example: 'debug_data'
+          description: The endpoint route that was called
+        content:
+          type: object
+          properties:
+            node_type:
+              type: string
+              example: 'Compute'
+              description: The type of this node
+            node_api:
+              type: array
+              description: The publicly visible endpoints available on this node
+              items:
+                type: string
+              example:
+                - fetch_balance
+                - create_receipt_asset
+                - create_transactions
+            node_peers:
+              type: array
+              description: The publicly visible nodes that this node is connected to
+              items:
+                type: string
+              example:
+                - 'Storage'
+    ResponseCreateTransactions:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '45v340cd2f8c4782a5b058832565afb1'
+          description: The ID of the call, which corresponds to the x-request-id used in the header
+        status:
+          type: string
+          example: 'Success'
+          description: The status of the call, which will be one of either "Success", "Error", or "Pending"
+        reason:
+          type: string
+          example: 'Transaction/s successfully created'
+          description: The reason for the status of the call. Most useful to debug errors
+        route:
+          type: string
+          example: 'create_transactions'
+          description: The endpoint route that was called
+        content:
+          type: object
+          properties:
+            node_type:
+              type: string
+              example: 'Compute'
+              description: The type of this node
+            node_api:
+              type: array
+              description: The publicly visible endpoints available on this node
+              items:
+                type: string
+              example:
+                - fetch_balance
+                - create_receipt_asset
+                - create_transactions
+            node_peers:
+              type: array
+              description: The publicly visible nodes that this node is connected to
+              items:
+                type: string
+              example:
+                - 'Storage'
+    ResponseFetchBalance:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '45v340cd2f8c4782a5b058832565afb1'
+          description: The ID of the call, which corresponds to the x-request-id used in the header
+        status:
+          type: string
+          example: 'Success'
+          description: The status of the call, which will be one of either "Success", "Error", or "Pending"
+        reason:
+          type: string
+          example: 'Balance successfully fetched'
+          description: The reason for the status of the call. Most useful to debug errors
+        route:
+          type: string
+          example: 'fetch_balance'
+          description: The endpoint route that was called
+        content:
+          type: object
+          properties:
+            total:
+              type: object
+              properties:
+                tokens:
+                  type: number
+                  example: 5463669
+                receipts:
+                  type: object
+            address_list:
+              type: object
+              example: {
+                "d6fa779a3de8b216c56375018375e490c7e2ce92918abce4caecf73b1f77c38f": [
+                      {
+                          "out_point": {
+                              "t_hash": "g9182e1e2a55b0ef36f1183602d74e63",
+                              "n": 0
+                          },
+                          "value": {
+                              "Token": 5463669
+                          }
+                      }
+                  ]
+              }
+            
+    ResponseBadRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          example: null
+        status:
+          type: string
+          example: "Error"
+        reason:
+          type: string
+          example: 'Bad Request'
+        route:
+          type: string
+          example: null
+        content:
+          type: string
+          example: null
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header

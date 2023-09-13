@@ -1,0 +1,34 @@
+
+# ZNP Node Types
+Unlike Bitcoin, where all full node miners perform identical functions, Zenotta makes use of different node types in the ZNP. Different node types allow the ZNP to facilitate quick payment settlement times, ensure geographic diversity, ensure lighter storage requirements for the blockchain, and most importantly enable token-for-asset payments.
+
+## The Types at a Glance
+The ZNP consists of 3 main node types:
+- [**Mempool Node**](Mempool-Node): The Mempool node is a special type of node responsible for collecting transactions and bundling them into new blocks. They also partition the mining network for mining and validate the blocks that these partitions mine. *There are only a limited number of Mempool nodes*.
+
+- [**Miner Node**](Miner-Node): The Miner node is most like the Bitcoin miner you may be familiar with. They are responsible for mining new blocks that they receive from the Mempool nodes and collect the associated block reward for their efforts. They are only able to mine a block if they manage to get into the partition for that round. *There can be an unlimited number of Miner nodes*.
+
+- [**Storage Node**](Storage-Node): The Storage node is responsible for storing the full blockchain history. Once blocks are mined by the miners and sent to the Mempool nodes for validation, they are pushed on to the Storage nodes for long-term storage. Anybody is allowed to request a full history of the blockchain from the Storage nodes, but they are not required to keep such a history to participate in the network. *There are only a limited number of Storage nodes*.
+
+## Why Different Node Types?
+A good question, since many blockchains seem to function with one node type. There are a few key concerns that the Zenotta system needs to address, which different node types help solve:
+
+### Quick Payment Settlement
+Currently, Bitcoin recommends a minimum waiting time of 6 blocks before accepting a payment transaction. This is due to the architecture of Bitcoin, in which the owner of a token can only be verified to exist *after* that owner has spent that token. Such a structure is what we call **past facing**, because it needs to look into the past in order to validate a transaction. Such past facing (in addition to distributed orphan blocks) means that we have to wait a certain amount of time before we can say that a transaction has been included for certain. This structure is great for security, but terrible for settlement speeds, and results in a number of non-ideal patches to solve (such as Lightning).
+
+Zenotta, by contrast, has quick settlement and high security built directly into the blockchain structure, giving us the best of both worlds. The key to such a structure is the use of Mempool nodes, which are relatively few in number compared to the Miner nodes. All transactions must pass through the Mempool nodes, who can coordinate transaction spending and verify ownership immediately without the need for orphan blocks or lengthy wait times. The question "who in the network has the longest chain?", which can have multiple answers at any given point in Bitcoin, is always the same for Zenotta: the Mempool nodes.
+
+### Geographic Diversity
+Currently, many cryptocurrencies find their mining being down in one geographic region. Mining pool concentration for Bitcoin was for a substantial period of time up to 81% in China. This presents certain risks for a cryptocurrency, such as sudden changes in legislation, which can cause disruptions or even collapse. 
+
+For Zenotta, this challenge is a simple one to overcome. Each of the relatively small number of Mempool nodes is placed in a different geographical region; this prevents any one nation or body of law from affecting Zenotta's functioning and minimises potential risk.
+
+### Lighter Storage Requirements
+Joining the Bitcoin or Ethereum networks as a full miner requires the downloading of the entire blockchain in order to participate. This can result in terabytes of storage being consumed, a high barrier entry for new participants.
+
+For Zenotta, by contrast, the burden of blockchain storage is given to the Storage nodes. Anybody is allowed to query the Storage node for the full blockchain history should they so choose, but none of this is required to participate in mining, meaning that potential miners can hit the ground running as quickly as possible.
+
+### Token-For-Asset Payments
+Up until now, the recording of token payments for a given asset have not been possible on any blockchain. The Zenotta DDE Blockchain is the first blockchain to allow for the transfer of tokens for assets to be recorded as payments. Unfortunately, the requirement of recording one asset's transfer for another means that the **past facing** architecture of other blockchains will not work for Zenotta.
+
+As a result, the introduction of Mempool nodes allows for two "half-transactions" to be compiled and included in the same block as a single transaction pair, even though each half comes from a different user. This is only possible because the Mempool nodes exist and facilitate all transactions in the system, creating a novel **present-facing** architecture for the Zenotta network.

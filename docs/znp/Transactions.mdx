@@ -1,0 +1,64 @@
+
+# Transactions
+Transactions in the Zenotta system are structured similarly to those found in Bitcoin. They consist primarily of a reference to a previous spendable amount on the blockchain (for Zenotta this can be tokens or data assets) and a reference to an address to send the spendable amount to. To accomplish this, the spender is required to verify that they are the original owner of the spendable amount through public key signature schemes.
+
+## Structure
+In the codebase, a transaction is structured as follows:
+
+```rust
+pub struct Transaction {
+    pub inputs: Vec<TxIn>,
+    pub outputs: Vec<TxOut>,
+    pub version: usize,
+    pub druid: Option<String>,
+    pub druid_participants: Option<usize>,
+    pub expect_value: Option<Asset>,
+    pub expect_value_amount: Option<TokenAmount>,
+}
+```
+
+The attributes we care about for ownership verification are `inputs` and `outputs`, corresponding to the `TxIn` and `TxOut` data structures respectively.
+
+## Inputs
+The inputs to a transaction are codified in the `TxIn` data structure, which looks like the following:
+
+```rust
+pub struct TxIn {
+    pub previous_out: Option<OutPoint>,
+    pub script_signature: Script,
+}
+```
+
+where the `OutPoint` referenced in `previous_out` looks like the following:
+
+```rust
+pub struct OutPoint {
+    pub t_hash: String,
+    pub n: i32,
+}
+```
+
+Here the `OutPoint` has a `t_hash` corresponding to the hash of the previous spendable transaction in the blockchain. Within the `script_signature` attribute we find a transaction execution script which will define how the spendable amount should actually be spent. Included in all `script_signature` entries is at least one signature which matches the public key of the spendable transaction already in the blockchain. The public key for this specific transaction will be found in that transaction's referenced output.
+
+## Outputs
+The outputs of a transactions are codified in the `TxOut` data structure, which looks like the following:
+
+```rust
+pub struct TxOut {
+    pub value: Option<Asset>,
+    pub amount: TokenAmount,
+    pub locktime: u64,
+    pub drs_block_hash: Option<String>,
+    pub drs_tx_hash: Option<String>,
+    pub script_public_key: Option<String>,
+}
+```
+
+Here we'll focus on the `script_public_key`, which is the public key that the owner of the transaction needs to use (and sign with) in order to spend the amount on in the future.
+
+## Signing
+In the Zenotta system, in order to tie the `TxIn` of the current transaction to the `TxOut` of the previous the user needs to sign the **hash of the `OutPoint`** referencing that `TxOut`. In this way it becomes impossible to spend a `TxOut` amount without
+
+- **(A)** The `OutPoint` referencing a specific `TxOut`
+- **(B)** The user having the private key corresponding to the `TxOut`'s public key
+- **(C)** Being able to sign with the private key to on-spend the tokens
