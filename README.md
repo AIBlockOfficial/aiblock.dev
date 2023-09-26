@@ -39,3 +39,14 @@ $ GIT_USER=<Your GitHub username> yarn deploy
 ```
 
 If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+
+### Docker
+
+Build docker image:
+
+`docker build -t a-block-io .`
+
+Run image on [http://localhost:8080](http://localhost:8080):
+
+`docker run -p 8080:8080 a-block-io`
+

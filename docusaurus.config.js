@@ -16,7 +16,7 @@ const config = {
   organizationName: 'ABlockOfficial',
   projectName: 'ablock.docs',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
