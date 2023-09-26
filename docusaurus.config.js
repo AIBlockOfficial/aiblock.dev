@@ -4,6 +4,8 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+const { DOCUSAURUS_VERSION } = require("@docusaurus/utils");
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'A-Block',
@@ -29,19 +31,14 @@ presets: [
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
+          routeBasePath: "/",
+          sidebarPath: require.resolve("./sidebars.js"),
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            "https://github.com/ABlockOfficial",
+          // docLayoutComponent: "@theme/DocPage",
+          // docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -52,13 +49,18 @@ presets: [
     themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      docs: {
+        sidebar: {
+          hideable: true,
+        },
+      },
       navbar: {
         title: 'A-Block',
         logo: {
           alt: 'Site Logo',
           src: 'img/logo.png',
           srcDark: 'img/logo_dark.png',
-          href: '/api',
+          href: '/',
           target: '_self',
           width: 32,
           height: 32,
@@ -93,7 +95,7 @@ presets: [
             items: [
               {
                 label: 'Developer Docs',
-                to: '#',
+                to: '/docs',
               },
               {
                 label: 'API',
