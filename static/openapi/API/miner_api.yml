@@ -1,0 +1,54 @@
+openapi: 3.0.3
+info:
+  title: Miner API - Incomplete
+  description: |-
+    The Miner node is most like the Bitcoin miner you may be familiar with. They are responsible for mining new blocks that they receive from the Mempool nodes and collect the associated block reward for their efforts. 
+    They are only able to mine a block if they manage to get into the partition for that round. There can be an unlimited number of Miner nodes.
+  contact:
+    email: byron.houwens@a-block.net
+  license:
+    name: GPL-3.0
+    url: https://www.gnu.org/licenses/gpl-3.0.en.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about A-Block
+  url: https://a-block.net
+servers:
+  - url: http://0.0.0.0:0000
+    description: Miner Node
+tags:
+  - name: info
+    description: Getting information about a wallet
+  - name: payement
+    description: All calls associated with making transactions
+  - name: address
+    description: Checking and creating addresses
+paths:
+  /wallet_info:
+    get:
+      tags:
+        - info
+      summary: wallet_info
+      description: description...
+      operationId: walletInfo
+  /new_payment_address:
+    post:
+      tags:
+        - payment
+      summary: new_payment_address
+      description: description...
+      operationId: createPaymentAddress
+  /import_keypairs:
+    post:
+      tags:
+        - address
+      summary: import_keypairs
+      description: description...
+      operationId: importKeypairs
+  /export_keypairs:
+    post:
+      tags:
+        - address
+      summary: export_keypairs
+      description: description...
+      operationId: exportKeypairs
