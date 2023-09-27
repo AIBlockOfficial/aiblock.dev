@@ -1,8 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 const { DOCUSAURUS_VERSION } = require("@docusaurus/utils");
 
@@ -10,49 +10,41 @@ const { DOCUSAURUS_VERSION } = require("@docusaurus/utils");
 const config = {
   title: 'A-Block',
   tagline: 'Technical hub for A-Block\'s ecosystem',
-  favicon: 'img/favicon.ico',
   url: 'http://localhost:3000/',
   baseUrl: '/',
-
-  // GitHub pages deployment config.
+  onBrokenLinks: "warn",
+  onBrokenMarkdownLinks: "warn",
+  favicon: "img/favicon.ico",
   organizationName: 'ABlockOfficial',
   projectName: 'ablock.docs',
 
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
-
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
-  },
-presets: [
+  presets: [
     [
-      'classic',
+      "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          routeBasePath: "/",
+          routeBasePath: "/docs",
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl:
-            "https://github.com/ABlockOfficial",
-          // docLayoutComponent: "@theme/DocPage",
-          // docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
+          editUrl: "https://github.com/ABlockOfficial",
+          docLayoutComponent: "@theme/DocPage",
+          docItemComponent: "@theme/ApiItem" // Derived from docusaurus-theme-openapi
         },
         blog: false,
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
-        },
-      }),
-    ],
+          customCss: require.resolve("./src/css/custom.css")
+        }
+      })
+    ]
   ],
 
-    themeConfig:
+  themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       docs: {
         sidebar: {
-          hideable: true,
-        },
+          hideable: true
+        }
       },
       navbar: {
         title: 'A-Block',
@@ -67,164 +59,133 @@ presets: [
           className: 'custom-navbar-logo-class',
         },
         items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'docSidebar',
-            position: 'left',
-            label: 'Docs',
-          },
           // {
-          //   type: 'apiSidebar',
-          //   sidebarId: 'apiSidebar',
-          //   href: '/api',
-          //   label: 'API',
-          //   position: 'left',
-          //   routeBasePath: '/api',
+          //   type: "doc",
+          //   docId: "intro",
+          //   position: "left",
+          //   label: "Docs"
           // },
           {
-            href: 'https://github.com/ABlockOfficial/',
-            label: 'GitHub',
-            position: 'right',
+            type: "doc",
+            docId: "api-overview",
+            position: "left",
+            label: "API"
           },
-        ],
+          // {
+          //   type: 'dropdown',
+          //   label: 'API',
+          //   position: 'left',
+          //   items: [
+          //     {
+          //       label: 'Mempool',
+          //       href: '/docs/mempool-api',
+          //     },
+          //     {
+          //       label: 'Miner',
+          //       href: '/docs/miner-api',
+          //     },
+          //     {
+          //       label: 'Storage',
+          //       href: '/docs/storage-api',
+          //     },],
+          // },
+          {
+            href: "https://github.com/facebook/docusaurus",
+            label: "GitHub",
+            position: "right"
+          }
+        ]
       },
       footer: {
-        links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Developer Docs',
-                to: '/docs',
-              },
-              {
-                label: 'API',
-                to: '/api',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/ablock',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discord.gg/dDgabkJMEG',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/ABlockOfficial',
-              },
-              {
-                label: 'Docs Website',
-                href: 'https://github.com/ABlockOfficial/ablock.docs',
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} A-Block, Inc. Built with Docusaurus.`,
+        // links: [
+        //   {
+        //     title: 'Docs',
+        //     items: [
+        //       {
+        //         label: 'Developer Docs',
+        //         to: '/docs',
+        //       },
+        //       {
+        //         label: 'API',
+        //         to: '/api',
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     title: 'Community',
+        //     items: [
+        //       {
+        //         label: 'Stack Overflow',
+        //         href: 'https://stackoverflow.com/questions/tagged/ablock',
+        //       },
+        //       {
+        //         label: 'Discord',
+        //         href: 'https://discord.gg/dDgabkJMEG',
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     title: 'More',
+        //     items: [
+        //       {
+        //         label: 'GitHub',
+        //         href: 'https://github.com/ABlockOfficial',
+        //       },
+        //       {
+        //         label: 'Docs Website',
+        //         href: 'https://github.com/ABlockOfficial/ablock.docs',
+        //       },
+        //     ],
+        //   },
+        // ],
+        copyright: `Copyright © ${new Date().getFullYear()} A-Block, Inc. Built with Docusaurus ${DOCUSAURUS_VERSION}.`,
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-      },
+        additionalLanguages: ["ruby", "csharp", "php"]
+      }
     }),
 
+  plugins: [
+    [
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "openapi",
+        docsPluginId: "classic",
+        config: {
+          mempool: {
+            specPath: "openapi/mempool.yml",
+            outputDir: "docs/mempool-api",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag"
+            },
+            hideSendButton: true,
+          },
+          miner: {
+            specPath: "openapi/miner.yml",
+            outputDir: "docs/miner-api",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag"
+            },
+            hideSendButton: true,
+          },
+          storage: {
+            hideSendButton: true,
+            specPath: "openapi/storage.yml",
+            outputDir: "docs/storage-api",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag"
+            },
+          }
+        }
+      },
+    ],
+  ],
+  themes: ["docusaurus-theme-openapi-docs"]
 };
 
 module.exports = config;
-
-//   themeConfig:
-//     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-//     ({
-//       navbar: {
-//         title: 'A-Block',
-//         logo: {
-//           alt: 'Site Logo',
-//           src: 'img/logo.png',
-//           srcDark: 'img/logo_dark.png',
-//           href: '/api',
-//           target: '_self',
-//           width: 32,
-//           height: 32,
-//           className: 'custom-navbar-logo-class',
-//         },
-//         items: [
-//           {
-//             type: 'docSidebar',
-//             sidebarId: 'docSidebar',
-//             position: 'left',
-//             label: 'Docs',
-//           },
-//           {
-//             type: 'apiSidebar',
-//             sidebarId: 'apiSidebar',
-//             href: '/api',
-//             label: 'API',
-//             position: 'left',
-//             routeBasePath: '/api',
-//           },
-//           {
-//             href: 'https://github.com/ABlockOfficial/',
-//             label: 'GitHub',
-//             position: 'right',
-//           },
-//         ],
-//       },
-//       footer: {
-//         links: [
-//           {
-//             title: 'Docs',
-//             items: [
-//               {
-//                 label: 'Developer Docs',
-//                 to: '#',
-//               },
-//               {
-//                 label: 'API',
-//                 to: '/api',
-//               },
-//             ],
-//           },
-//           {
-//             title: 'Community',
-//             items: [
-//               {
-//                 label: 'Stack Overflow',
-//                 href: 'https://stackoverflow.com/questions/tagged/ablock',
-//               },
-//               {
-//                 label: 'Discord',
-//                 href: 'https://discord.gg/dDgabkJMEG',
-//               },
-//             ],
-//           },
-//           {
-//             title: 'More',
-//             items: [
-//               {
-//                 label: 'GitHub',
-//                 href: 'https://github.com/ABlockOfficial',
-//               },
-//               {
-//                 label: 'Docs Website',
-//                 href: 'https://github.com/ABlockOfficial/ablock.docs',
-//               },
-//             ],
-//           },
-//         ],
-//         copyright: `Copyright © ${new Date().getFullYear()} A-Block, Inc. Built with Docusaurus.`,
-//       },
-//       prism: {
-//         theme: lightCodeTheme,
-//         darkTheme: darkCodeTheme,
-//       },
-//     }),
