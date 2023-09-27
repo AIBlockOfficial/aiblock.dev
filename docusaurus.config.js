@@ -1,79 +1,58 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+
+const { DOCUSAURUS_VERSION } = require("@docusaurus/utils");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'A-Block',
   tagline: 'Technical hub for A-Block\'s ecosystem',
-  favicon: 'img/favicon.ico',
   url: 'http://localhost:3000/',
   baseUrl: '/',
-
-  // GitHub pages deployment config.
+  onBrokenLinks: "warn",
+  onBrokenMarkdownLinks: "warn",
+  favicon: "img/favicon.ico",
   organizationName: 'ABlockOfficial',
   projectName: 'ablock.docs',
 
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
-
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
-  },
-
   presets: [
     [
-      "docusaurus-preset-openapi",
-      /** @type {import('docusaurus-preset-openapi').Options} */
-      {
-        api: {
-          path: "./static/openapi/API/mempool_api.yml",
-          routeBasePath: "/mempool",
+      "classic",
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
+        docs: {
+          routeBasePath: "/docs",
+          sidebarPath: require.resolve("./sidebars.js"),
+          editUrl: "https://github.com/ABlockOfficial",
+          docLayoutComponent: "@theme/DocPage",
+          docItemComponent: "@theme/ApiItem" // Derived from docusaurus-theme-openapi
         },
-        docs: false,
-        // {
-        //   sidebarPath: require.resolve("./sidebars.js"),
-        //   routeBasePath: "/docs",
-        // },
+        blog: false,
         theme: {
-          customCss: require.resolve("./src/css/custom.css"),
-        },
-      },
-    ],
-  ],
-
-  plugins: [
-    [
-      "docusaurus-plugin-openapi",
-      {
-        id: "api",
-        path: "./static/openapi/API",
-        routeBasePath: "api",
-      },
-    ],
-    [
-      "docusaurus-plugin-openapi",
-      {
-        id: "storage",
-        path: "static/openapi/API/storage_api.yml",
-        routeBasePath: "/api/storage",
-      },
-    ],
+          customCss: require.resolve("./src/css/custom.css")
+        }
+      })
+    ]
   ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      docs: {
+        sidebar: {
+          hideable: true
+        }
+      },
       navbar: {
         title: 'A-Block',
         logo: {
           alt: 'Site Logo',
           src: 'img/logo.png',
           srcDark: 'img/logo_dark.png',
-          href: '/api',
+          href: '/',
           target: '_self',
           width: 32,
           height: 32,
@@ -81,25 +60,41 @@ const config = {
         },
         items: [
           // {
-          //   type: 'docSidebar',
-          //   sidebarId: 'docSidebar',
-          //   position: 'left',
-          //   label: 'Docs',
+          //   type: "doc",
+          //   docId: "intro",
+          //   position: "left",
+          //   label: "Docs"
           // },
           {
-            // type: 'apiSidebar',
-            // sidebarId: 'apiSidebar',
-            href: '/api',
-            label: 'API',
-            position: 'left',
-            routeBasePath: '/api',
+            type: "doc",
+            docId: "api-overview",
+            position: "left",
+            label: "API"
           },
+          // {
+          //   type: 'dropdown',
+          //   label: 'API',
+          //   position: 'left',
+          //   items: [
+          //     {
+          //       label: 'Mempool',
+          //       href: '/docs/mempool-api',
+          //     },
+          //     {
+          //       label: 'Miner',
+          //       href: '/docs/miner-api',
+          //     },
+          //     {
+          //       label: 'Storage',
+          //       href: '/docs/storage-api',
+          //     },],
+          // },
           {
-            href: 'https://github.com/ABlockOfficial/',
-            label: 'GitHub',
-            position: 'right',
-          },
-        ],
+            href: "https://github.com/facebook/docusaurus",
+            label: "GitHub",
+            position: "right"
+          }
+        ]
       },
       footer: {
         // links: [
@@ -108,7 +103,7 @@ const config = {
         //     items: [
         //       {
         //         label: 'Developer Docs',
-        //         to: '#',
+        //         to: '/docs',
         //       },
         //       {
         //         label: 'API',
@@ -143,13 +138,54 @@ const config = {
         //     ],
         //   },
         // ],
-        copyright: `Copyright © ${new Date().getFullYear()} A-Block, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} A-Block, Inc. Built with Docusaurus ${DOCUSAURUS_VERSION}.`,
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-      },
+        additionalLanguages: ["ruby", "csharp", "php"]
+      }
     }),
+
+  plugins: [
+    [
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "openapi",
+        docsPluginId: "classic",
+        config: {
+          mempool: {
+            specPath: "openapi/mempool.yml",
+            outputDir: "docs/mempool-api",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag"
+            },
+            hideSendButton: true,
+          },
+          miner: {
+            specPath: "openapi/miner.yml",
+            outputDir: "docs/miner-api",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag"
+            },
+            hideSendButton: true,
+          },
+          storage: {
+            hideSendButton: true,
+            specPath: "openapi/storage.yml",
+            outputDir: "docs/storage-api",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag"
+            },
+          }
+        }
+      },
+    ],
+  ],
+  themes: ["docusaurus-theme-openapi-docs"]
 };
 
 module.exports = config;
