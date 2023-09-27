@@ -1,19 +1,20 @@
 ---
 sidebar_position: 0
-title: Introduction
+title: API Overview
 ---
 
-# Welcome to the A-Block API Documentation
+# Welcome to the A-Block API
 
 The A-Block API allows you to interact with the A-Block chain without the need for complicated, risky smart contracts. It's here to let you work with A-Block in a way that's quick, simple and easy.
 
-Currently, only our API documentation is available :
+- [Mempool API](/docs/mempool-api)
 
-- [Mempool API](/api/introduction)
+- [Storage API](/docs/storage-api)
 
-- [Miner API](/api/introduction-1)
+- Miner API - Coming soon
+<!-- - [Miner API](/docs/miner-api) -->
 
-- [Storage API](/api/introduction-2)
+---
 
 Some useful links:
 
