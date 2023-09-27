@@ -14,7 +14,7 @@ $ yarn
 $ yarn start
 ```
 
-This command starts a local development server and opens up a browser window. This command will execute "refresh", regenerating all openAPI md files. (See package.json scripts)
+This command starts a local development server and opens up a browser window. It will also execute "gen-all", regenerating all openAPI md files. (See package.json scripts)
 
 ### Build
 

@@ -20,7 +20,7 @@ const sidebars = {
   //     label: 'Getting started',
   //   }
   // ],
-  ApiSidebar: [
+  apiSidebar: [
     {
       type: 'doc',
       id: 'api-overview',
@@ -29,6 +29,7 @@ const sidebars = {
     {
       type: "category",
       label: "Mempool",
+      collapsible: true,
       link: {
         type: "generated-index",
         title: "Mempool API",

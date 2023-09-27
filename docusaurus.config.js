@@ -26,7 +26,6 @@ const config = {
         docs: {
           routeBasePath: "/docs",
           sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/ABlockOfficial",
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem" // Derived from docusaurus-theme-openapi
         },
@@ -71,26 +70,8 @@ const config = {
             position: "left",
             label: "API"
           },
-          // {
-          //   type: 'dropdown',
-          //   label: 'API',
-          //   position: 'left',
-          //   items: [
-          //     {
-          //       label: 'Mempool',
-          //       href: '/docs/mempool-api',
-          //     },
-          //     {
-          //       label: 'Miner',
-          //       href: '/docs/miner-api',
-          //     },
-          //     {
-          //       label: 'Storage',
-          //       href: '/docs/storage-api',
-          //     },],
-          // },
           {
-            href: "https://github.com/facebook/docusaurus",
+            href: "https://github.com/ABlockOfficial",
             label: "GitHub",
             position: "right"
           }
@@ -130,10 +111,6 @@ const config = {
         //       {
         //         label: 'GitHub',
         //         href: 'https://github.com/ABlockOfficial',
-        //       },
-        //       {
-        //         label: 'Docs Website',
-        //         href: 'https://github.com/ABlockOfficial/ablock.docs',
         //       },
         //     ],
         //   },
