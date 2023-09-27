@@ -39,18 +39,18 @@ const sidebars = {
       // @ts-ignore
       items: require("./docs/mempool-api/sidebar.js")
     },
-    {
-      type: "category",
-      label: "Miner",
-      link: {
-        type: "generated-index",
-        title: "Miner API",
-        description: "Miner API generated with swagger",
-        slug: "/miner-api"
-      },
-      // @ts-ignore
-      items: require("./docs/miner-api/sidebar.js")
-    },
+    // {
+    //   type: "category",
+    //   label: "Miner",
+    //   link: {
+    //     type: "generated-index",
+    //     title: "Miner API",
+    //     description: "Miner API generated with swagger",
+    //     slug: "/miner-api"
+    //   },
+    //   // @ts-ignore
+    //   items: require("./docs/miner-api/sidebar.js")
+    // },
     {
       type: "category",
       label: "Storage",

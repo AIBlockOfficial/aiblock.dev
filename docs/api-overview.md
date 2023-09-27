@@ -9,9 +9,10 @@ The A-Block API allows you to interact with the A-Block chain without the need f
 
 - [Mempool API](/docs/mempool-api)
 
-- [Miner API](/docs/miner-api)
-
 - [Storage API](/docs/storage-api)
+
+- Miner API - Coming soon
+<!-- - [Miner API](/docs/miner-api) -->
 
 ---
 

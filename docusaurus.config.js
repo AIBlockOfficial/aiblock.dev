@@ -140,15 +140,15 @@ const config = {
             },
             hideSendButton: true,
           },
-          miner: {
-            specPath: "openapi/miner.yml",
-            outputDir: "docs/miner-api",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-              categoryLinkSource: "tag"
-            },
-            hideSendButton: true,
-          },
+          // miner: {
+          //   specPath: "openapi/miner.yml",
+          //   outputDir: "docs/miner-api",
+          //   sidebarOptions: {
+          //     groupPathsBy: "tag",
+          //     categoryLinkSource: "tag"
+          //   },
+          //   hideSendButton: true,
+          // },
           storage: {
             hideSendButton: true,
             specPath: "openapi/storage.yml",
