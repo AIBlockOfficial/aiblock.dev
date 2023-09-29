@@ -4,7 +4,7 @@ info:
   description: |-
     The Storage node is responsible for storing the full blockchain history. 
     Once blocks are mined by the miners and sent to the Mempool nodes for validation, they are pushed on to the Storage nodes for long-term storage. 
-    Anybody is allowed to request a full history of the blockchain from the Storage nodes, but they are not required to keep such a history to participate in the network. 
+    Anybody is allowed to request a full history of the blockchain from the Storage nodes, but they are not required to keep such a history to participate in the network.
   contact:
     email: byron.houwens@a-block.net
   license:
@@ -19,18 +19,16 @@ servers:
     description: Storage Node
 tags:
   - name: info
-    description: Getting information about and from the node
+    description: Getting information about and from the node.
   - name: block
-    description: All calls associated with auditing and checking blocks in the chain
-  - name: transaction
-    description: All calls associated with auditing and checking transactions in the chain
+    description: All calls associated with auditing and checking blocks in the chain.
 paths:
   /debug_data:
     get:
       tags:
         - info
       summary: debug_data
-      description: Get general information about the current node
+      description: Get general information about the current node.
       operationId: debugData
       parameters:
         - in: header
@@ -38,35 +36,34 @@ paths:
           required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
-            type: array
-            items:
-              type: string
-              example: 'afac3a3dd8a04538934db1c20cc29767'
+            type: string
+            example: "fde57c5d0e0c49f8a9e91ba5acc18cfd"
+            pattern: ^[a-z0-9]{32}$
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseDebugData'          
+                $ref: "#/components/schemas/ResponseDebugData"
             application/xml:
               schema:
-                $ref: '#/components/schemas/ResponseDebugData'
-        '400':
+                $ref: "#/components/schemas/ResponseDebugData"
+        "400":
           description: Invalid input
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBadRequest'          
+                $ref: "#/components/schemas/ResponseBadRequest"
             application/xml:
               schema:
-                $ref: '#/components/schemas/ResponseBadRequest'
+                $ref: "#/components/schemas/ResponseBadRequest"
   /latest_block:
     get:
       tags:
         - block
       summary: latest_block
-      description: Get the latest block successfully mined and stored on this Storage node
+      description: Get the latest block successfully mined and stored on this Storage node.
       operationId: latestBlock
       parameters:
         - in: header
@@ -74,35 +71,34 @@ paths:
           required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
-            type: array
-            items:
-              type: string
-              example: 'afac3a3dd8a04538934db1c20cc29767'
+            type: string
+            example: "afac3a3dd8a04538934db1c20cc29767"
+            pattern: ^[a-z0-9]{32}$
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseLatestBlock'          
+                $ref: "#/components/schemas/ResponseLatestBlock"
             application/xml:
               schema:
-                $ref: '#/components/schemas/ResponseLatestBlock'
-        '400':
+                $ref: "#/components/schemas/ResponseLatestBlock"
+        "400":
           description: Invalid input
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBadRequest'          
+                $ref: "#/components/schemas/ResponseBadRequest"
             application/xml:
               schema:
-                $ref: '#/components/schemas/ResponseBadRequest'
+                $ref: "#/components/schemas/ResponseBadRequest"
   /block_by_num:
     post:
       tags:
         - block
       summary: block_by_num
-      description: Fetches block/s from the chain by block number. Multiple block numbers can be supplied in the same request body
+      description: Fetches block/s from the chain by block number. Multiple block numbers can be supplied in the same request body.
       operationId: blockByNum
       parameters:
         - in: header
@@ -110,43 +106,41 @@ paths:
           required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
-            type: array
-            items:
-              type: string
-              example: 'afac3a3dd8a04538934db1c20cc29767'
+            type: string
+            example: "a1d46199e5c89b00509e118f5af83172"
+            pattern: ^[a-z0-9]{32}$
       requestBody:
         description: List of block numbers to fetch blocks for in the chain
         content:
           application/json:
             schema:
-              example:
-                [0, 10, 20000]
+              example: [0, 10, 20000]
         required: true
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBlockByNum'          
+                $ref: "#/components/schemas/ResponseBlockByNum"
             application/xml:
               schema:
-                $ref: '#/components/schemas/ResponseBlockByNum'
-        '400':
+                $ref: "#/components/schemas/ResponseBlockByNum"
+        "400":
           description: Invalid input
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBadRequest'          
+                $ref: "#/components/schemas/ResponseBadRequest"
             application/xml:
               schema:
-                $ref: '#/components/schemas/ResponseBadRequest'
+                $ref: "#/components/schemas/ResponseBadRequest"
   /blockchain_entry:
     post:
       tags:
-        - info
+        - block
       summary: blockchain_entry
-      description: Fetches a block or transaction from the chain
+      description: Fetches a block or transaction from the chain.
       operationId: blockchainEntry
       requestBody:
         description: The hash of the block or transaction to fetch
@@ -154,8 +148,7 @@ paths:
           application/json:
             schema:
               type: string
-              example:
-                "ga0e7a2ff46a4a9c9775118db6de61ec"
+              example: "ga0e7a2ff46a4a9c9775118db6de61ec"
         required: true
       parameters:
         - in: header
@@ -163,63 +156,64 @@ paths:
           required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
-            type: array
-            items:
-              type: string
-              example: 'afac3a3dd8a04538934db1c20cc29767'
+            type: string
+            example: "afac3a3dd8a04538934db1c20cc29767"
+            pattern: ^[a-z0-9]{32}$
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBlockchainEntry'          
+                $ref: "#/components/schemas/ResponseBlockchainEntry"
             application/xml:
               schema:
-                $ref: '#/components/schemas/ResponseBlockchainEntry'
-        '400':
+                $ref: "#/components/schemas/ResponseBlockchainEntry"
+        "400":
           description: Invalid input
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBadRequest'          
+                $ref: "#/components/schemas/ResponseBadRequest"
             application/xml:
               schema:
-                $ref: '#/components/schemas/ResponseBadRequest'
-  /address_construction:
-    post:
-      tags:
-        - transaction
-      summary: address_construction
-      description: Fetches the block number/s for the given transaction hash/es, if the hashes are present
-      operationId: addressConstruction
+                $ref: "#/components/schemas/ResponseBadRequest"
 components:
   schemas:
+    # Script:
+    #   type: object
+    #   description: Block script
+    #   properties:
+    #     stack:
+    #       type: array
+    #       description: script stack
+    #       items:
+    #         type: string
     ResponseDebugData:
       type: object
       properties:
         id:
           type: string
-          example: '45v340cd2f8c4782a5b058832565afb1'
+          example: "fde57c5d0e0c49f8a9e91ba5acc18cfd"
           description: The ID of the call, which corresponds to the x-request-id used in the header
         status:
           type: string
-          example: 'Success'
+          example: "Success"
           description: The status of the call, which will be one of either "Success", "Error", or "Pending"
         reason:
           type: string
-          example: 'Debug data successfully retrieved'
+          example: "Debug data successfully retrieved"
           description: The reason for the status of the call. Most useful to debug errors
         route:
           type: string
-          example: 'debug_data'
+          example: "debug_data"
           description: The endpoint route that was called
         content:
           type: object
           properties:
             node_type:
               type: string
-              example: 'Compute'
+              example: "Compute"
               description: The type of this node
             node_api:
               type: array
@@ -236,51 +230,55 @@ components:
               items:
                 type: string
               example:
-                - 'Storage'
+                - "Storage"
+            routes_pow:
+              type: object
+              properties:
+                create_transactions:
+                  type: number
+                  example: 2
     ResponseCheckTxPresence:
       type: object
       properties:
         id:
           type: string
-          example: '45v340cd2f8c4782a5b058832565afb1'
+          example: "45v340cd2f8c4782a5b058832565afb1"
           description: The ID of the call, which corresponds to the x-request-id used in the header
         status:
           type: string
-          example: 'Success'
+          example: "Success"
           description: The status of the call, which will be one of either "Success", "Error", or "Pending"
         reason:
           type: string
-          example: 'Database item(s) successfully retrieved'
+          example: "Database item(s) successfully retrieved"
           description: The reason for the status of the call. Most useful to debug errors
         route:
           type: string
-          example: 'check_transaction_presence'
+          example: "check_transaction_presence"
           description: The endpoint route that was called
         content:
           type: array
           items:
             type: number
-          example: [
-              999661
-          ]
+          example: [999661]
     ResponseLatestBlock:
       type: object
       properties:
         id:
           type: string
-          example: '45v340cd2f8c4782a5b058832565afb1'
+          example: "45v340cd2f8c4782a5b058832565afb1"
           description: The ID of the call, which corresponds to the x-request-id used in the header
         status:
           type: string
-          example: 'Success'
+          example: "Success"
           description: The status of the call, which will be one of either "Success", "Error", or "Pending"
         reason:
           type: string
-          example: 'Transaction/s successfully created'
+          example: "Transaction/s successfully created"
           description: The reason for the status of the call. Most useful to debug errors
         route:
           type: string
-          example: 'create_transactions'
+          example: "create_transactions"
           description: The endpoint route that was called
         content:
           type: object
@@ -303,64 +301,45 @@ components:
                       type: array
                       description: The UNiCORN random number value, which is composed of both the UNiCORN witness and seed value for verification. The example array in this documentation is truncated for brevity.
                       items:
-                        example: [
-                          56,
-                          53,
-                          48,
-                          57,
-                          52,
-                          57,
-                          50,
-                        ]
+                        example: [56, 53, 48, 57, 52, 57, 50]
                     nonce_and_mining_tx_hash:
                       type: array
                       items:
-                        example: [
-                            [
-                                168,
-                                23,
-                                49,
-                                67,
-                                25,
-                                109
-                            ],
-                            "g130489f617edf5792163c2d4d72568a"
-                        ]
-                    previous_hash: 
+                        example:
+                          [
+                            [168, 23, 49, 67, 25, 109],
+                            "g130489f617edf5792163c2d4d72568a",
+                          ]
+                    previous_hash:
                       type: string
-                      example: 'b0004...7c383'
+                      example: "b0004...7c383"
                     txs_merkle_root_and_hash:
                       type: array
                       items:
-                        example: [
-                            "",
-                           "48dda...ee9df"
-                        ]
+                        example: ["", "48dda...ee9df"]
                 transactions:
-                    type: array
-                    description: A list of hashes for all transactions in this block
-                    items:
-                      example: [
-                        "g130489f617edf5792163c2d4d72568a"
-                      ]
+                  type: array
+                  description: A list of hashes for all transactions in this block
+                  items:
+                    example: ["g130489f617edf5792163c2d4d72568a"]
     ResponseBlockByNum:
       type: object
       properties:
         id:
           type: string
-          example: '45v340cd2f8c4782a5b058832565afb1'
+          example: "45v340cd2f8c4782a5b058832565afb1"
           description: The ID of the call, which corresponds to the x-request-id used in the header
         status:
           type: string
-          example: 'Success'
+          example: "Success"
           description: The status of the call, which will be one of either "Success", "Error", or "Pending"
         reason:
           type: string
-          example: 'Database item(s) successfully retrieved'
+          example: "Database item(s) successfully retrieved"
           description: The reason for the status of the call. Most useful to debug errors
         route:
           type: string
-          example: 'block_by_num'
+          example: "block_by_num"
           description: The endpoint route that was called
         content:
           type: array
@@ -368,89 +347,88 @@ components:
             type: array
             items:
               type: object
-            example: [
-            "eefe38...a1aca0",
-            {
-                "block": {
-                    "header": {
-                        "version": 0,
-                        "bits": 0,
-                        "nonce": [],
-                        "b_num": 0,
-                        "seed_value": [],
-                        "previous_hash": null,
-                        "merkle_root_hash": ""
-                    },
-                    "transactions": [
-                        "000001",
-                        "000002",
-                        "000003",
-                        "000004",
-                    ]
-                },
-                "mining_tx_hash_and_nonces": {
-                    "1": [
-                        "g458b6a340cdb3f40f66adff12637aeb",
-                        [
-                            112,
-                            129,
-                            50,
-                            22,
-                            128,
-                            18,
-                            179,
-                        ]
-                    ]
-                }
-            }
-        ]
+              example: 
+              # [
+              #   "eefe38...a1aca0",
+              #     {
+              #         block: {
+              #             header: {
+              #                 "version": 0,
+              #                 "bits": 0,
+              #                 "nonce": [],
+              #                 "b_num": 0,
+              #                 "seed_value": [],
+              #                 "previous_hash": null,
+              #                 "merkle_root_hash": ""
+              #             },
+              #             transactions: [
+              #                 "000001",
+              #                 "000002",
+              #                 "000003",
+              #                 "000004",
+              #             ]
+              #         },
+              #         mining_tx_hash_and_nonces: {
+              #             "1": [
+              #                 "g458b6a340cdb3f40f66adff12637aeb",
+              #                 [
+              #                     112,
+              #                     129,
+              #                     50,
+              #                     22,
+              #                     128,
+              #                     18,
+              #                     179,
+              #                 ]
+              #             ]
+              #         }
+              #     }
+              # ]
     ResponseBlockchainEntry:
       type: object
       properties:
         id:
           type: string
-          example: '45v340cd2f8c4782a5b058832565afb1'
+          example: "45v340cd2f8c4782a5b058832565afb1"
           description: The ID of the call, which corresponds to the x-request-id used in the header
         status:
           type: string
-          example: 'Success'
+          example: "Success"
           description: The status of the call, which will be one of either "Success", "Error", or "Pending"
         reason:
           type: string
-          example: 'Database item(s) successfully retrieved'
+          example: "Database item(s) successfully retrieved"
           description: The reason for the status of the call. Most useful to debug errors
         route:
           type: string
-          example: 'blockchain_entry'
+          example: "blockchain_entry"
           description: The endpoint route that was called
-        content: 
+        content:
           type: object
-          example: {"Transaction": {
-            "inputs": [
+          example:
+            {
+              "Transaction":
                 {
-                    "previous_out": null,
-                    "script_signature": {
-                        "stack": [
-                            {
-                                "Num": 1585843
-                            }
-                        ]
-                    }
-                }
-            ],
-            "outputs": [
-                {
-                    "value": {
-                        "Token": 5369041
-                    },
-                    "locktime": 1585943,
-                    "drs_block_hash": null,
-                    "script_public_key": "0dafb...afdb3"
-                }
-            ],
-            "version": 5,
-            "druid_info": null
-        }}
+                  "inputs":
+                    [
+                      {
+                        "previous_out": null,
+                        "script_signature": { "stack": [{ "Num": 1585843 }] },
+                      },
+                    ],
+                  "outputs":
+                    [
+                      {
+                        "value": { "Token": 5369041 },
+                        "locktime": 1585943,
+                        "drs_block_hash": null,
+                        "script_public_key": "0dafb...afdb3",
+                      },
+                    ],
+                  "version": 5,
+                  "druid_info": null,
+                },
+            }
     ResponseBadRequest:
       type: object
       properties:
@@ -462,7 +440,7 @@ components:
           example: "Error"
         reason:
           type: string
-          example: 'Bad Request'
+          example: "Bad Request"
         route:
           type: string
           example: null

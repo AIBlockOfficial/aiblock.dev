@@ -21,23 +21,45 @@ const sidebars = {
   //   }
   // ],
   apiSidebar: [
-    {
-      type: 'doc',
-      id: 'api-overview',
-      label: 'Overview',
-    },
+    // {
+    //   type: 'doc',
+    //   id: 'api-overview',
+    //   label: 'Overview',
+    // },
     {
       type: "category",
-      label: "Mempool",
-      collapsible: true,
+      label: "Overview",
       link: {
-        type: "generated-index",
-        title: "Mempool API",
-        description: "Mempool API generated with swagger",
-        slug: "/mempool-api"
+        type: "doc",
+        id: 'api-overview'
       },
-      // @ts-ignore
-      items: require("./docs/mempool-api/sidebar.js")
+      collapsible: false,
+      items: [
+        {
+          type: "category",
+          label: "Mempool",
+          link: {
+            type: "generated-index",
+            title: "Mempool API",
+            description: "Mempool API generated with swagger",
+            slug: "/mempool-api"
+          },
+          // @ts-ignore
+          items: require("./docs/mempool-api/sidebar.js")
+        },
+        {
+          type: "category",
+          label: "Storage",
+          link: {
+            type: "generated-index",
+            title: "Storage API",
+            description: "Storage API generated with swagger",
+            slug: "/storage-api"
+          },
+          // @ts-ignore
+          items: require("./docs/storage-api/sidebar.js")
+        }
+      ]
     },
     // {
     //   type: "category",
@@ -51,18 +73,6 @@ const sidebars = {
     //   // @ts-ignore
     //   items: require("./docs/miner-api/sidebar.js")
     // },
-    {
-      type: "category",
-      label: "Storage",
-      link: {
-        type: "generated-index",
-        title: "Storage API",
-        description: "Storage API generated with swagger",
-        slug: "/storage-api"
-      },
-      // @ts-ignore
-      items: require("./docs/storage-api/sidebar.js")
-    }
   ],
 };
 

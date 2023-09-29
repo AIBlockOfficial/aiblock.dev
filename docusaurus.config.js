@@ -42,7 +42,8 @@ const config = {
     ({
       docs: {
         sidebar: {
-          hideable: true
+          autoCollapseCategories: true,
+          // hideable: true
         }
       },
       navbar: {
@@ -51,7 +52,7 @@ const config = {
           alt: 'Site Logo',
           src: 'img/logo.png',
           srcDark: 'img/logo_dark.png',
-          href: '/',
+          href: '#',
           target: '_self',
           width: 32,
           height: 32,
@@ -136,7 +137,8 @@ const config = {
             outputDir: "docs/mempool-api",
             sidebarOptions: {
               groupPathsBy: "tag",
-              categoryLinkSource: "tag"
+              categoryLinkSource: "tag",
+              sidebarCollapsible: false,
             },
             hideSendButton: true,
           },
@@ -146,17 +148,19 @@ const config = {
           //   sidebarOptions: {
           //     groupPathsBy: "tag",
           //     categoryLinkSource: "tag"
+          // sidebarCollapsible: false,
           //   },
           //   hideSendButton: true,
           // },
           storage: {
-            hideSendButton: true,
             specPath: "openapi/storage.yml",
             outputDir: "docs/storage-api",
             sidebarOptions: {
               groupPathsBy: "tag",
-              categoryLinkSource: "tag"
+              categoryLinkSource: "tag",
+              sidebarCollapsible: false,
             },
+            hideSendButton: true,
           }
         }
       },
