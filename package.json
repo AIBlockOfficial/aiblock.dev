@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "yarn gen-all && docusaurus start",
-    "build": "yarn gen-all && docusaurus build",
+    "build": "yarn re-gen && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
