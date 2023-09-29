@@ -37,6 +37,12 @@ jobs:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+      with:
+        images: ${{ env.REGISTRY }}/${{ github.repository }}
 
     - name: Setup Buildx so we can cache
       uses: docker/setup-buildx-action@v1
@@ -47,13 +53,13 @@ jobs:
       with:
         context: .
         push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ env.REPOSITORY_NAME }}/${{ env.IMAGE_NAME}}:${{ env.IMAGE_TAG }}
+        tags: ${{ steps.meta.outputs.tags }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
     - name: Sign the published Docker image
       if: ${{ github.event_name != 'pull_request' }}
       env:
-        TAGS: ${{ env.REPOSITORY_NAME }}/${{ env.IMAGE_NAME}}:${{ env.IMAGE_TAG }}
+        TAGS: ${{ steps.meta.outputs.tags }}
         DIGEST: ${{ steps.build-and-push.outputs.digest }}
       run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
