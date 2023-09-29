@@ -40,7 +40,9 @@ paths:
           required: true
           description: An idempotent key for retrieving cached responses from the node.
           schema:
-              $ref: '#components/schemas/XRequestId'
+              type: string
+              example: '4d1e5754af0931a15138445c3ecd1a82'
+              pattern: ^[a-z0-9]{32}$
       responses:
         '200':
           description: Successful operation
@@ -64,8 +66,8 @@ paths:
     post:
       tags:
         - transaction
-      summary: create_transactions - Incomplete section
-      description: Create new transaction/s, which will be submitted to the Mempool nodes for inclusion into a new block. This call assumes a full transaction as part of the request body, which might make raw calls difficult to manage. For convenience, it may be best to use an A-Block library or SDK that abstracts this call for you.
+      summary: create_transactions - Incomplete
+      description: This section is incomplete and docs could be outdated. Create new transaction/s, which will be submitted to the Mempool nodes for inclusion into a new block. This call assumes a full transaction as part of the request body, which might make raw calls difficult to manage. For convenience, it may be best to use an A-Block library or SDK that abstracts this call for you.
       operationId: createTx
       parameters:
         - in: header
@@ -73,7 +75,9 @@ paths:
           required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
-              $ref: '#components/schemas/XRequestId'
+              type: string
+              example: '4d1e5754af0931a15138445c3ecd1a82'
+              pattern: ^[a-z0-9]{32}$
       requestBody:
         description: Create a new transaction
         content:
@@ -113,7 +117,9 @@ paths:
           required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
-              $ref: '#components/schemas/XRequestId'
+              type: string
+              example: '4d1e5754af0931a15138445c3ecd1a82'
+              pattern: ^[a-z0-9]{32}$
       requestBody:
         description: Create a new receipt/asset
         content:
@@ -153,7 +159,9 @@ paths:
           required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
-              $ref: '#components/schemas/XRequestId'
+              type: string
+              example: '4d1e5754af0931a15138445c3ecd1a82'
+              pattern: ^[a-z0-9]{32}$
       requestBody:
         description: List of addresses to fetch the balance from.
         content:
@@ -184,12 +192,6 @@ paths:
 ### ------ Schemas ------ ###     
 components:
   schemas:
-
-    # REQUEST HEADER
-    XRequestId:
-      type: string
-      example: '4d1e5754af0931a15138445c3ecd1a82'
-      pattern: ^[a-z0-9]{32}$
 
     # REQUEST BODY
     FetchBalance:
