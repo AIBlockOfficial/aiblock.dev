@@ -52,7 +52,7 @@ const config = {
           alt: 'Site Logo',
           src: 'img/logo.png',
           srcDark: 'img/logo_dark.png',
-          href: '/',
+          href: '#',
           target: '_self',
           width: 32,
           height: 32,
