@@ -3,7 +3,8 @@ info:
   title: Mempool API
   description: |-
     The Mempool node is a special type of node responsible for collecting transactions and bundling them into new blocks. 
-    They also partition the mining network for mining and validate the blocks that these partitions mine. There are only a limited number of Mempool nodes.  
+    They also partition the mining network for mining and validate the blocks that these partitions mine. 
+    There are only a limited number of Mempool nodes.  
   contact:
     email: byron.houwens@a-block.net
   license:
@@ -16,6 +17,8 @@ externalDocs:
 servers:
   - url: http://49.12.234.10:3003
     description: Mempool Node
+    
+# TAGS
 tags:
   - name: info
     description: Getting general information about the node
@@ -29,18 +32,15 @@ paths:
       tags:
         - info
       summary: debug_data
-      description: Get general information about the current node
+      description: Get general information about the current node.
       operationId: debugData
       parameters:
         - in: header
           name: x-request-id
           required: true
-          description: An idempotent key for retrieving cached responses from the node
+          description: An idempotent key for retrieving cached responses from the node.
           schema:
-            type: array
-            items:
-              type: string
-              example: 'afac3a3dd8a04538934db1c20cc29767'
+              $ref: '#components/schemas/XRequestId'
       responses:
         '200':
           description: Successful operation
@@ -64,7 +64,7 @@ paths:
     post:
       tags:
         - transaction
-      summary: create_transactions
+      summary: create_transactions - Incomplete section
       description: Create new transaction/s, which will be submitted to the Mempool nodes for inclusion into a new block. This call assumes a full transaction as part of the request body, which might make raw calls difficult to manage. For convenience, it may be best to use an A-Block library or SDK that abstracts this call for you.
       operationId: createTx
       parameters:
@@ -73,10 +73,7 @@ paths:
           required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
-            type: array
-            items:
-              type: string
-              example: 'afac3a3dd8a04538934db1c20cc29767'
+              $ref: '#components/schemas/XRequestId'
       requestBody:
         description: Create a new transaction
         content:
@@ -116,16 +113,13 @@ paths:
           required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
-            type: array
-            items:
-              type: string
-              example: 'afac3a3dd8a04538934db1c20cc29767'
+              $ref: '#components/schemas/XRequestId'
       requestBody:
         description: Create a new receipt/asset
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TransactionCreate'
+              $ref: '#/components/schemas/ReceiptCreate'
         required: true
       responses:
         '200':
@@ -133,10 +127,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseCreateTransactions'          
+                $ref: '#/components/schemas/ResponseCreateReceipt'          
             application/xml:
               schema:
-                $ref: '#/components/schemas/ResponseCreateTransactions'
+                $ref: '#/components/schemas/ResponseCreateReceipt'
         '400':
           description: Invalid input
           content:
@@ -151,10 +145,17 @@ paths:
       tags:
         - address
       summary: fetch_balance
-      description: Fetches the balance/s for 1 or more addresses
+      description: Fetches the balance/s for 1 or more addresses.
       operationId: fetchBalance
+      parameters:
+        - in: header
+          name: x-request-id
+          required: true
+          description: An idempotent key for retrieving cached responses from the node
+          schema:
+              $ref: '#components/schemas/XRequestId'
       requestBody:
-        description: List of addresses to fetch the balance for
+        description: List of addresses to fetch the balance from.
         content:
           application/json:
             schema:
@@ -179,20 +180,42 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/ResponseBadRequest'
-      # security:
-      #   - api_key: []
+
+### ------ Schemas ------ ###     
 components:
   schemas:
+
+    # REQUEST HEADER
+    XRequestId:
+      type: string
+      example: '4d1e5754af0931a15138445c3ecd1a82'
+      pattern: ^[a-z0-9]{32}$
+
+    # REQUEST BODY
     FetchBalance:
       type: object
-      properties:
-        address_list:
-          type: array
-          items:
-            type: string
-            example: "d6fa779a3de8b216c56375018375e490c7e2ce92918abce4caecf73b1f77c38f"
+      example:
+          {
+            address_list: [
+            "e1e957ba8e44843bb80e9d6d905066ec98763ca797093181ab6c695934549035"
+            ]
+          }
+
+    ReceiptCreate:
+          type: object
+          example:
+            {
+              receipt_amount: 1000,
+              script_public_key: "b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01",
+              public_key: "ffe056dcad98fbeb8fdeb79ef95fb49b0c9b5d2bc3c5191cb08df55fa71c4e5d",
+              signature: "014643bab9a5859ccf6b0403d68c38b26b8888a41034b533f1a0ec2ba6b3afad5ac988e630a69b28f068c74d386df0ae86410aca1c8b1ce0b968f09b83111d07",
+              drs_tx_hash_spec: "Default"
+            }
+
     TransactionCreate:
       type: object
+      xml:
+        name: txcreate
       properties:
         id:
           type: string
@@ -229,9 +252,8 @@ components:
                 to:
                   type: string
                 asset:
-                  type: object
-      xml:
-        name: txcreate
+                  type: object              
+
     TransactionInput:
       type: object
       properties:
@@ -249,12 +271,63 @@ components:
           type: array
           items:
             type: string
+
+    # RESPONSE BODY
+    ResponseCreateReceipt:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '4d1e5754af0931a15138445c3ecd1a82'
+          description: The ID of the call, which corresponds to the x-request-id used in the header
+        status:
+          type: string
+          example: 'Success'
+          description: The status of the call, which will be one of either "Success", "Error", or "Pending"
+        reason:
+          type: string
+          example: 'Debug data successfully retrieved'
+          description: The reason for the status of the call. Most useful to debug errors
+        route:
+          type: string
+          example: 'debug_data'
+          description: The endpoint route that was called
+        content:
+          type: object
+          properties:
+            asset:
+              type: object
+              properties:
+                asset:
+                  type: object
+                  properties:
+                    Receipt: 
+                      type: object
+                      properties:
+                        amount:
+                          type: number
+                          example: 1000
+                        drs_tx_hash: 
+                          type: string
+                          example: default_drs_tx_hash
+                        metadata:
+                          type: string
+                          example: null
+                extra_info:
+                  type: string
+                  example: null
+            to_address:
+              type: string
+              example: b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01
+            tx_hash:      
+              type: string
+              example: default_drs_tx_hash
     ResponseDebugData:
       type: object
       properties:
         id:
           type: string
-          example: '45v340cd2f8c4782a5b058832565afb1'
+          example: '4d1e5754af0931a15138445c3ecd1a82'
           description: The ID of the call, which corresponds to the x-request-id used in the header
         status:
           type: string
@@ -291,12 +364,13 @@ components:
                 type: string
               example:
                 - 'Storage'
+
     ResponseCreateTransactions:
       type: object
       properties:
         id:
           type: string
-          example: '45v340cd2f8c4782a5b058832565afb1'
+          example: 'a1d46199e5c89b00509e118f5af83172'
           description: The ID of the call, which corresponds to the x-request-id used in the header
         status:
           type: string
@@ -333,6 +407,7 @@ components:
                 type: string
               example:
                 - 'Storage'
+
     ResponseFetchBalance:
       type: object
       properties:
