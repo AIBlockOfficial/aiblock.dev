@@ -3,8 +3,6 @@ on:
   push:
     branches: 
       - main
-      - bug-fix-tags
-
 env:
   REGISTRY: ghcr.io
   #IMAGE_NAME: ${{ github.repository }}
