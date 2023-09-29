@@ -3,7 +3,7 @@ on:
   push:
     branches: 
       - main
-      - initial-build
+      - bug-fix-tags
 
 env:
   REGISTRY: ghcr.io
