@@ -6,6 +6,7 @@ on:
       - pipeline-test
 env:
   REGISTRY: ghcr.io
+  REPOSITORY: ablockofficial/ablock.docs
   PROJECT_ID: a-block-platform
   REGION: europe-west6
   CLUSTER_NAME: a-cluster
@@ -38,8 +39,8 @@ jobs:
         context: .
         push: ${{ github.event_name != 'pull_request' }}
         tags: |
-          ${{ env.REGISTRY }}/${{ github.repository }}:latest
-          ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.sha }}
+          ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:latest
+          ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ github.sha }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
@@ -72,7 +73,7 @@ jobs:
   #     id: meta
   #     uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
   #     with:
-  #       images: ${{ env.REGISTRY }}/${{ github.repository }}
+  #       images: ${{ env.REGISTRY }}/${{ env.REPOSITORY }}
   #   - name: Install cosign
   #     if: github.event_name != 'pull_request'
   #     uses: sigstore/cosign-installer@6e04d228eb30da1757ee4e1dd75a0ec73a653e06 #v3.1.1
