@@ -12,6 +12,10 @@ env:
   CLUSTER_NAME: a-cluster
   DEPLOYMENT: a-block-io
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build-push:
     name: Build local context and push image
@@ -49,16 +53,19 @@ jobs:
     needs: build-push
     runs-on: ubuntu-latest
     steps:
+
     - name: Install gcloud
       uses: google-github-actions/setup-gcloud@v1
       with:
         project_id: ${{ env.PROJECT_ID }}
         service_account_key: ${{ secrets.GCLOUD_AUTH }}
+    
     - name: Configure kubectl
       run: |
         gcloud config set project ${{ env.PROJECT_ID }}
         gcloud config set compute/region ${{ env.REGION }}
         gcloud container clusters get-credentials ${{ env.CLUSTER_NAME }}
+    
     - name: Restart deployment
       run: |
         kubectl rollout restart deployment/$DEPLOYMENT
