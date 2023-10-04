@@ -11,6 +11,7 @@ env:
   REGION: europe-west6
   CLUSTER_NAME: a-cluster
   DEPLOYMENT: a-block-io
+  GCLOUD_KEY: <GCLOUD_KEY>
 
 permissions:
   contents: read
@@ -54,11 +55,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: 'Authenticate to gcp'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: ${{ secrets.GCLOUD_KEY }}
+
     - name: Install gcloud
       uses: google-github-actions/setup-gcloud@v1
       with:
         project_id: ${{ env.PROJECT_ID }}
-        service_account_key: ${{ secrets.GCLOUD_AUTH }}
     
     - name: Configure kubectl
       run: |
