@@ -64,15 +64,21 @@ jobs:
       with:
         project_id: ${{ env.PROJECT_ID }}
     
-    - name: Set up cloud SDK
-      uses: google-github-actions/setup-gcloud@v1
+    # - name: Set up cloud SDK
+    #   uses: google-github-actions/setup-gcloud@v1
     
-    - name: Configure kubectl
-      run: |
-        gcloud config set project ${{ env.PROJECT_ID }}
-        gcloud config set compute/region ${{ env.REGION }}
-        gcloud container clusters get-credentials ${{ env.CLUSTER_NAME }}
-    
+    # - name: Configure kubectl
+    #   run: |
+    #     gcloud config set project ${{ env.PROJECT_ID }}
+    #     gcloud config set compute/region ${{ env.REGION }}
+    #     gcloud container clusters get-credentials ${{ env.CLUSTER_NAME }}
+   
+    - name: Get cluster credentials
+      uses: 'google-github-actions/get-gke-credentials@v1'
+      with:
+        cluster_name:  ${{ env.CLUSTER_NAME }}
+        location: ${{ env.REGION }}
+        
     - name: Restart deployment
       run: |
         kubectl rollout restart deployment/${{ env.DEPLOYMENT }}
