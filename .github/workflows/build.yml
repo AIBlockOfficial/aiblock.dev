@@ -54,8 +54,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: 'Authenticate to gcp'
-      uses: 'google-github-actions/auth@v1'
+    - name: Authenticate to gcp
+      uses: google-github-actions/auth@v1
       with:
         credentials_json: ${{ secrets.GCLOUD_KEY }}
 
@@ -63,6 +63,9 @@ jobs:
       uses: google-github-actions/setup-gcloud@v1
       with:
         project_id: ${{ env.PROJECT_ID }}
+    
+    - name: Set up cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
     
     - name: Configure kubectl
       run: |
@@ -72,7 +75,7 @@ jobs:
     
     - name: Restart deployment
       run: |
-        kubectl rollout restart deployment/$DEPLOYMENT
+        kubectl rollout restart deployment/${{ env.DEPLOYMENT }}
 
 
   # sign:
