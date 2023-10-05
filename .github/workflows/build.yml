@@ -5,13 +5,12 @@ on:
       - main
       - pipeline-test
 env:
-  REGISTRY: ghcr.io
-  REPOSITORY: ablockofficial/ablock.docs
-  PROJECT_ID: a-block-platform
-  REGION: europe-west6
-  CLUSTER_NAME: a-cluster
+  REGISTRY: ${{ vars.REGISTRY }}
+  REPOSITORY:  ${{ vars.REPOSITORY }}
+  PROJECT_ID: ${{ vars.PROJECT_ID }}
+  REGION: ${{ vars.REGION }}
+  CLUSTER_NAME: ${{ vars.CLUSTER_NAME }}
   DEPLOYMENT: a-block-io
-  GCLOUD_KEY: <GCLOUD_KEY>
 
 permissions:
   contents: read
@@ -23,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Setup dpcker buildx
+    - name: Setup docker buildx
       uses: docker/setup-buildx-action@v1
     
     - name: Check out the repo
