@@ -1,0 +1,51 @@
+name: build-deploy
+on: 
+  push:
+    branches: 
+      - main
+      - pipeline-test
+env:
+  DEPLOYMENT: a-block-io
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build: 
+    uses: ${{ vars.WORKFLOW_PATH }}/build.yml
+    with: 
+      REGISTRY: ${{ vars.REGISTRY }}
+      REPOSITORY: ${{ vars.REPOSITORY }}
+  deploy:
+    uses: ${{ vars.WORKFLOW_PATH }}/deploy.yml
+    secrets: inherit
+    with:
+      REGION: ${{ vars.REGION }}
+      PROJECT_ID: ${{ vars.PROJECT_ID }}
+      CLUSTER_NAME: ${{ vars.CLUSTER_NAME }}
+      DEPLOYMENT: ${{ env.DEPLOYMENT }}
+      
+
+
+  # sign:
+  #   name: Sign latest built image
+  #   needs: build-push
+  #   runs-on: ubuntu-latest
+  #   steps: 
+  #   - name: Extract metadata (tags, labels) for Docker
+  #     id: meta
+  #     uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+  #     with:
+  #       images: ${{ env.REGISTRY }}/${{ env.REPOSITORY }}
+  #   - name: Install cosign
+  #     if: github.event_name != 'pull_request'
+  #     uses: sigstore/cosign-installer@6e04d228eb30da1757ee4e1dd75a0ec73a653e06 #v3.1.1
+  #     with:
+  #       cosign-release: 'v2.1.1'
+  #   - name: Sign the published Docker image
+  #     if: ${{ github.event_name != 'pull_request' }}
+  #     env:
+  #       TAGS: ${{ steps.meta.outputs.tags }}
+  #       DIGEST: ${{ jobs.build-push.steps.build-abnd-push.outputs.digest }}
+  #     run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
