@@ -13,12 +13,12 @@ permissions:
 
 jobs:
   build: 
-    uses: ${{ vars.WORKFLOW_PATH }}/build.yml
+    uses: ${{ vars.WORKFLOW_PATH }}/build.yml@main
     with: 
       REGISTRY: ${{ vars.REGISTRY }}
       REPOSITORY: ${{ vars.REPOSITORY }}
   deploy:
-    uses: ${{ vars.WORKFLOW_PATH }}/deploy.yml
+    uses: ${{ vars.WORKFLOW_PATH }}/deploy.yml@main
     secrets: inherit
     with:
       REGION: ${{ vars.REGION }}
