@@ -6,6 +6,7 @@ on:
       - pipeline-test
 env:
   DEPLOYMENT: a-block-io
+  WORKFLOW_PATH: ${{ vars.WORKFLOW_PATH }}
 
 permissions:
   contents: read
@@ -13,7 +14,7 @@ permissions:
 
 jobs:
   build: 
-    uses: ${{ vars.WORKFLOW_PATH }}/build.yml@main
+    uses: ${{ env.WORKFLOW_PATH }}/build.yml@main
     with: 
       REGISTRY: ${{ vars.REGISTRY }}
       REPOSITORY: ${{ vars.REPOSITORY }}
