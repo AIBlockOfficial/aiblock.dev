@@ -6,7 +6,6 @@ on:
       - pipeline-test
 env:
   DEPLOYMENT: a-block-io
-  WORKFLOW_PATH: ${{ vars.ORGANISATION_WORKFLOW_PATH }}
 
 permissions:
   contents: read
@@ -14,12 +13,12 @@ permissions:
 
 jobs:
   build: 
-    uses: ${{ env.ORGANISATION_WORKFLOW_PATH }}/build.yml@main
+    uses: ablockofficial/platform/.github/workflows/build.yml@main
     with: 
       REGISTRY: ${{ vars.REGISTRY }}
       REPOSITORY: ${{ vars.REPOSITORY }}
   deploy:
-    uses: ${{ vars.ORGANISATION_WORKFLOW_PATH }}/deploy.yml@main
+    uses: ablockofficial/platform/.github/workflows/build.yml@main
     secrets: inherit
     with:
       REGION: ${{ vars.REGION }}
