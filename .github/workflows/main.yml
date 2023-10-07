@@ -12,6 +12,13 @@ permissions:
   packages: write
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+    - name: echo vars
+      run: |
+        echo "REGISTRY : ${{ vars.REGISTRY }}"
+        echo "REPOSITORY : ${{ vars.REPOSITORY }}
   build: 
     uses: ablockofficial/platform/.github/workflows/build.yml@main
     with: 
