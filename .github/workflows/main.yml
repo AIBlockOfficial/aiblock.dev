@@ -22,9 +22,8 @@ jobs:
         echo "REGISTRY : $REGISTRY
         echo "REPOSITORY : $REPOSITORY
       env:
-        REPOSITORY_VAR: ${{ vars.REPOSITORY_VAR }}
-        ORGANIZATION_VAR: ${{ vars.ORGANIZATION_VAR }}
-        OVERRIDE_VAR: ${{ vars.OVERRIDE_VAR }}
+        REPOSITORY: ${{ vars.REPOSITORY }}
+        REGISTRY: ${{ vars.REGISTRY }}
   build: 
     uses: ablockofficial/platform/.github/workflows/build.yml@main
     with: 
