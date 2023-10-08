@@ -14,21 +14,11 @@ permissions:
   packages: write
 
 jobs:
-  debug:
-    runs-on: ubuntu-latest
-    steps:
-    - name: echo vars
-      run: |
-        echo "REGISTRY : $REGISTRY
-        echo "REPOSITORY : $REPOSITORY
-      env:
-        REPOSITORY: ${{ vars.REPOSITORY }}
-        REGISTRY: ${{ vars.REGISTRY }}
   build: 
     uses: ablockofficial/platform/.github/workflows/build.yml@main
     with: 
-      REGISTRY: $REGISTRY
-      REPOSITORY: $REPOSITORY
+      REGISTRY:  ${{ vars.REGISTRY }}
+      REPOSITORY: ${{ vars.REPOSITORY }}
   deploy:
     uses: ablockofficial/platform/.github/workflows/deploy.yml@main
     secrets: inherit
