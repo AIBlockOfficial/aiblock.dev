@@ -30,7 +30,7 @@ jobs:
       REGISTRY: $REGISTRY
       REPOSITORY: $REPOSITORY
   deploy:
-    uses: ablockofficial/platform/.github/workflows/build.yml@main
+    uses: ablockofficial/platform/.github/workflows/deploy.yml@main
     secrets: inherit
     with:
       REGION: ${{ vars.REGION }}
