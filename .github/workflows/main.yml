@@ -4,19 +4,19 @@ on:
     branches: 
       - main
       - pipeline-test
-      
+
 permissions:
   contents: read
   packages: write
 
 jobs:
   build: 
-    uses: ablockofficial/platform/.github/workflows/build.yml@main
+    uses: ${{ vars.ORGANISATION_WORKFLOW_PATH }}/build.yml@main
     with: 
       REGISTRY:  ${{ vars.REGISTRY }}
       REPOSITORY: ${{ vars.REPOSITORY }}
   deploy:
-    uses: ablockofficial/platform/.github/workflows/deploy.yml@main
+    uses: ${{ vars.ORGANISATION_WORKFLOW_PATH }}/deploy.yml@main
     secrets: inherit
     needs: build
     with:
