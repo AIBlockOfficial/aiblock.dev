@@ -4,9 +4,7 @@ on:
     branches: 
       - main
       - pipeline-test
-env:
-  DEPLOYMENT: a-block-io
-
+      
 permissions:
   contents: read
   packages: write
@@ -25,7 +23,7 @@ jobs:
       REGION: ${{ vars.REGION }}
       PROJECT_ID: ${{ vars.PROJECT_ID }}
       CLUSTER_NAME: ${{ vars.CLUSTER_NAME }}
-      DEPLOYMENT: ${{ env.DEPLOYMENT }}
+      DEPLOYMENT: a-block-io
       
   # sign:
   #   name: Sign latest built image
