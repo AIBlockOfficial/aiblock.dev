@@ -17,8 +17,12 @@ jobs:
     steps:
     - name: echo vars
       run: |
-        echo "REGISTRY : ${{ vars.REGISTRY }}"
-        echo "REPOSITORY : ${{ vars.REPOSITORY }}
+        echo "REGISTRY : $REGISTRY
+        echo "REPOSITORY : $REPOSITORY
+      env:
+        REPOSITORY_VAR: ${{ vars.REPOSITORY_VAR }}
+        ORGANIZATION_VAR: ${{ vars.ORGANIZATION_VAR }}
+        OVERRIDE_VAR: ${{ vars.OVERRIDE_VAR }}
   build: 
     uses: ablockofficial/platform/.github/workflows/build.yml@main
     with: 
@@ -33,8 +37,6 @@ jobs:
       CLUSTER_NAME: ${{ vars.CLUSTER_NAME }}
       DEPLOYMENT: $DEPLOYMENT
       
-
-
   # sign:
   #   name: Sign latest built image
   #   needs: build-push
