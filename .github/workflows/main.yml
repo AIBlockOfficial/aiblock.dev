@@ -6,8 +6,6 @@ on:
       - pipeline-test
 env:
   DEPLOYMENT: a-block-io
-  REGISTRY: ${{ vars.REGISTRY }}
-  REPOSITORY: ${{ vars.REPOSITORY }}
 
 permissions:
   contents: read
@@ -22,11 +20,12 @@ jobs:
   deploy:
     uses: ablockofficial/platform/.github/workflows/deploy.yml@main
     secrets: inherit
+    needs: build
     with:
       REGION: ${{ vars.REGION }}
       PROJECT_ID: ${{ vars.PROJECT_ID }}
       CLUSTER_NAME: ${{ vars.CLUSTER_NAME }}
-      DEPLOYMENT: $DEPLOYMENT
+      DEPLOYMENT: ${{ env.DEPLOYMENT }}
       
   # sign:
   #   name: Sign latest built image
