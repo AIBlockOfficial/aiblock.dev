@@ -28,12 +28,12 @@ const sidebars = {
     // },
     {
       type: "category",
-      label: "Overview",
+      label: "Core Endpoints",
       link: {
         type: "doc",
         id: 'api-overview'
       },
-      collapsible: false,
+      collapsible: true,
       items: [
         {
           type: "category",
@@ -61,6 +61,16 @@ const sidebars = {
         }
       ]
     },
+    {
+      type: "category",
+      label: "Basic Tutorials",
+      // link: {
+      //   type: 'doc',
+      //   id: 'basic-tutorials'
+      // },
+      collapsible: true,
+      items: require("./docs/basic-tutorials/sidebar.js")
+    }
     // {
     //   type: "category",
     //   label: "Miner",
