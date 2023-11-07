@@ -1,7 +1,7 @@
 ---
 id: get-started
 title: "Get Started"
-description: "The Mempool node is a special type of node responsible for collecting transactions and bundling them into new blocks."
+description: "Get started setting up your A-Block wallet through the A-Block.js SDK"
 sidebar_label: Get Started
 sidebar_position: 0
 hide_title: true
@@ -13,13 +13,129 @@ import SchemaTabs from "@theme/SchemaTabs";
 import TabItem from "@theme/TabItem";
 import Export from "@theme/ApiDemoPanel/Export";
 
-## Get Started
+# Get Started
 
+Integration wih A-Block can be done simply and easily through the <a href="https://github.com/ABlockOfficial/A-Block.js#a-blockjs">A-Block.js SDK</a>. 
+To get started, we can install it to our JavaScript/TypeScript project with `npm`:
 
+<code style={{"display":"inline-block","padding":"10px","marginBottom":"15px"}}>npm install @a-block/a-blockjs</code>
 
-The Mempool node is a special type of node responsible for collecting transactions and bundling them into new blocks. 
-They also partition the mining network for mining and validate the blocks that these partitions mine. 
-There are only a limited number of Mempool nodes.  
+or alternatively with `yarn`:
 
-<div style={{"display":"flex","flexDirection":"column","marginBottom":"var(--ifm-paragraph-margin-bottom)"}}><h3 style={{"marginBottom":"0.25rem"}}>Contact</h3><span><a href={"mailto:byron.houwens@a-block.net"}>byron.houwens@a-block.net</a></span></div><div style={{"marginBottom":"var(--ifm-paragraph-margin-bottom)"}}><h3 style={{"marginBottom":"0.25rem"}}>License</h3><a href={"https://www.gnu.org/licenses/gpl-3.0.en.html"}>GPL-3.0</a></div>
-      
+<code style={{"display":"inline-block","padding":"10px","marginBottom":"15px"}}>yarn add @a-block/a-blockjs</code>
+
+..
+
+## Create A-Block Wallet
+
+Create an instance of an A-Block wallet can be done in two main ways:
+
+1. **initNew**: A new wallet, created from scratch for a new user
+2. **initFromSeed**: An existing wallet, generated from a saved seed phrase
+
+..
+
+### Create a New Wallet
+
+You can create a new instance of an A-Block wallet via the SDK's `initNew` method:
+
+```javascript
+    import { ABlockWallet } from '@a-block/a-blockjs';
+
+    const COMPUTE_HOST = 'example.compute.host.com';
+    const INTERCOM_HOST = 'example.intercom.host.com';
+    const PASSPHRASE = 'a secure passphrase';
+
+    // Create the wallet object
+    const wallet = new ABlockWallet();
+
+    // Initialize the wallet with the needed configuration
+    // NOTE: This is an async call
+    wallet
+    .initNew({
+        computeHost: COMPUTE_HOST,
+        intercomHost: INTERCOM_HOST,
+        passPhrase: PASSPHRASE,
+    })
+    .then((initResult) => {
+        // Display the seed phrase to the user for safe keeping
+        let seedPhrase = initResult.content.initNewResponse[0];
+    });
+```
+
+This method needs a few parameters to be specified:
+
+- **computeHost**: The IP or domain of the mempool node you want to connect to. You'll need this to make transactions on the network
+- **intercomHost**: The IP or domain of an intercom node you want to connect to. You'll need this if you want to make any 2-way transactions with other people/wallets
+- **passPhrase**: The passphrase to encrypt your wallet's keypair/s. Make sure this is a super secure value
+
+The `initNew` method is async, so you'll need to use a `.then` or `await` the result in order to get the wallet's seed phrase, for example. 
+Once you have a seed phrase, you can always re-initialize the same wallet using that same seed phrase.
+
+..
+
+### Generate an Existing Wallet
+
+If you have an existing seed phrase and want to generate a wallet from it, you can use the `initFromSeed` method:
+
+```javascript
+import { ABlockWallet } from '@a-block/a-blockjs';
+
+//... other initialization params
+
+const SEED_PHRASE = 'a seed phrase that should look like a bunch of random words'
+
+// Create the wallet object
+const wallet = new ABlockWallet();
+
+// Initialize the wallet with the needed configuration
+wallet.initFromSeed({
+    computeHost: COMPUTE_HOST,
+    intercomHost: INTERCOM_HOST,
+    passPhrase: PASSPHRASE,
+  },
+  seedPhrase: SEED_PHRASE
+).then((initResult) => {
+  const masterKey = initResult.content.initFromSeedResponse;
+});
+```
+
+..
+
+## Working with the Wallet
+
+Once initialized, you can access all the functionalities within the wallet. A-Block is a UTXO blockchain, so you 
+can generate a new keypair, for example, by using the `getNewKeypair` method:
+
+```javascript
+import { ABlockWallet } from '@a-block/a-blockjs';
+
+const wallet = new ABlockWallet();
+
+// ... Initialize the wallet correctly
+
+// The array argument can contain existing keypairs to be used
+const newKeypairResult = wallet.getNewKeypair([]);
+
+// Final keypair
+const newKeypair: IKeypairEncrypted = newKeypairResult.content.newKeypairResponse;
+```
+
+You can then do a number of things with the keypair, for example getting the address associated with that keypair and 
+fetching its balance:
+
+```javascript
+//... newKeypair initialized
+
+// Get the associated address
+const address = newKeypair.address;
+
+// You can now fetch the balance for the address from the chain
+const balanceResult = await client.fetchBalance([address]);
+const balance = balanceResult.content.fetchBalanceResponse;
+```
+
+You can find the rest of the associated functions for your wallet in the SDK's README, but this should give you a good point to 
+start from. Next, we'll see how to send and receive payments with the new wallet.
+
+..
