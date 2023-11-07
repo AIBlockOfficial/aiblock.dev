@@ -15,83 +15,43 @@ import Export from "@theme/ApiDemoPanel/Export";
 
 # Create an Item
 
-After setting up a wallet, you can Create an Item very easily through the A-Block.js SDK. If you're developing 
-this in a test environment, you can create 2 new keypairs. We'll use address 1 as our sender (Alice) and address 2 as our receiver (Bob).
+Items in A-Block can represent anything that lives completely on-chain: cryptocurrencies, fiat currencies (such as dollars), other tokens of value (such as NFTs), even financial products and derivatives. 
+Once issued on the A-Block chain, any item can be tracked, owned and traded in a distributed manner.
+
+Any wallet can issue a new item, you can set the quantity of that item to issue, and none of it requires any smart contracts or complicated logic at any point. This makes the process of issuing items on 
+the A-Block chain quick and easy, needing only a few lines of code. Let's issue a new NFT, which will be an artwork:
 
 ```javascript
 import { ABlockWallet } from '@a-block/a-blockjs';
 
 const wallet = new ABlockWallet();
 
-// ... Initialize the wallet correctly
+//... Initialize the wallet correctly
 
-// ALICE ADDRESS
+// A keypair to assign our new item to
+const newKeypairResult = wallet.getNewKeypair([]);
+const newKeypair = newKeypairResult.content.newKeypairResponse;
 
-const aliceKeypairResult = wallet.getNewKeypair([]);
-const aliceKeypair: IKeypairEncrypted = newKeypairResult.content.newKeypairResponse;
-const aliceAddress = newKeypair.address;
+// The metadata for our item
+const metadata = {
+    imageURL: '...',
+    description: '...'
+};
 
-// BOB ADDRESS
-
-const bobKeypairResult = wallet.getNewKeypair([]);
-const bobKeypair: IKeypairEncrypted = newKeypairResult.content.newKeypairResponse;
-const bobAddress = newKeypair.address;
+// Issue a new item, specifying all arguments
+const createReceiptResponse = await wallet.createReceipts(
+    newKeypair,                 // Keypair to assign item to
+    false,                      // Generate a unique identifier for this item, if set to false
+    10000,                      // The quantity of the item to issue
+    JSON.stringify(metadata)    // The metadata of the item
+).content
+.createReceiptResponse;
 ```
 
-With these addresses available, we can now Create an Item.
-
-...
-
-## Sending a Payment
-
-The wallet provides a `makeTokenPayment` method, which simplifies the entire token payment process. This method does all the transaction construction for you, but importantly **it does not check the validity of the payment address**, so 
-as the developer you'll need to make sure your application verifies that Bob's address is in fact valid. Otherwise we can make the payment simply:
+Critically, we set the `defaultDrsTxHash` argument to `false`, which will generate a unique identifier for this item that we can later track on the blockchain. The `createReceipts` method will provide 
+default values for most arguments, meaning we can issue items even more simply:
 
 ```javascript
-const paymentResult = await wallet.makeTokenPayment({
-   bobAddress,      // Address to pay (in this case we want to pay Bob)
-   10,              // Payment amount
-   [aliceKeypair],  // An array of keypairs to pay from
-   aliceKeypair,    // Where the change of your payment should go to
-});
+// Create 1000 new items that have a unique identifier
+const createReceiptResponse = await client.createReceipts(keyPair, false, 1000).content.createReceiptResponse;
 ```
-
-For this example we're assuming that Alice has `10` tokens to pay Bob. It's also important to note that the `makeTokenPayment` method is async, since it's making a call to the blockchain in order to effect the payment. That means 
-you'll need to `await` the result, or handle it asynchronously.
-
-..
-
-## Receiving a Payment
-
-The balance of Bob's address can then be checked on the UTXO, after a sufficient amount of time for the payment to go through on the chain
-
-```javascript
-const bobBalanceCall = await wallet.fetchBalance([bobAddress]);
-const bobBalance = bobBalanceCall.content.fetchBalanceResponse;
-```
-
-The response structure for `bobBalance` will then be something like the following:
-
-```json
-{
-    "total": {
-        "tokens": 10,
-        "receipts": {}
-    },
-    "address_list": {
-        "a0b08...c02e5": [
-            {
-                "out_point": {
-                    "t_hash": "g3b13...3353f",
-                    "n": 0
-                },
-                "value": {
-                    "Token": 10
-                }
-            },
-        ]
-    }
-}
-```
-
-That's it! A-Block.js has been designed to make sending and receiving payments as quick and easy as possible. Next, we'll take a look at how to make atomic, 2-way payments.
