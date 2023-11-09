@@ -1,0 +1,57 @@
+---
+id: create-an-item
+title: "Create an Item"
+description: "Create an item on A-Block without smart contracts"
+sidebar_label: Create an Item
+sidebar_position: 3
+hide_title: true
+custom_edit_url: null
+---
+
+import ApiLogo from "@theme/ApiLogo";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+import Export from "@theme/ApiDemoPanel/Export";
+
+# Create an Item
+
+Items in A-Block can represent anything that lives completely on-chain: cryptocurrencies, fiat currencies (such as dollars), other tokens of value (such as NFTs), even financial products and derivatives. 
+Once issued on the A-Block chain, any item can be tracked, owned and traded in a distributed manner.
+
+Any wallet can issue a new item, you can set the quantity of that item to issue, and none of it requires any smart contracts or complicated logic at any point. This makes the process of issuing items on 
+the A-Block chain quick and easy, needing only a few lines of code. Let's issue a new NFT, which will be an artwork:
+
+```javascript
+import { ABlockWallet } from '@a-block/a-blockjs';
+
+const wallet = new ABlockWallet();
+
+//... Initialize the wallet correctly
+
+// A keypair to assign our new item to
+const newKeypairResult = wallet.getNewKeypair([]);
+const newKeypair = newKeypairResult.content.newKeypairResponse;
+
+// The metadata for our item
+const metadata = {
+    imageURL: '...',
+    description: '...'
+};
+
+// Issue a new item, specifying all arguments
+const createReceiptResponse = await wallet.createReceipts(
+    newKeypair,                 // Keypair to assign item to
+    false,                      // Generate a unique identifier for this item, if set to false
+    10000,                      // The quantity of the item to issue
+    JSON.stringify(metadata)    // The metadata of the item
+).content
+.createReceiptResponse;
+```
+
+Critically, we set the `defaultDrsTxHash` argument to `false`, which will generate a unique identifier for this item that we can later track on the blockchain. The `createReceipts` method will provide 
+default values for most arguments, meaning we can issue items even more simply:
+
+```javascript
+// Create 1000 new items that have a unique identifier
+const createReceiptResponse = await client.createReceipts(keyPair, false, 1000).content.createReceiptResponse;
+```

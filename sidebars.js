@@ -28,12 +28,12 @@ const sidebars = {
     // },
     {
       type: "category",
-      label: "Overview",
+      label: "Core Endpoints",
       link: {
         type: "doc",
         id: 'api-overview'
       },
-      collapsible: false,
+      collapsible: true,
       items: [
         {
           type: "category",
@@ -60,6 +60,28 @@ const sidebars = {
           items: require("./docs/storage-api/sidebar.js")
         }
       ]
+    },
+    {
+      type: "category",
+      label: "Basic Tutorials",
+      // link: {
+      //   type: 'doc',
+      //   id: 'basic-tutorials'
+      // },
+      collapsible: true,
+      items: require("./docs/basic-tutorials/sidebar.js")
+    },
+    // {
+    //   type: "category",
+    //   label: "Build Apps",
+    //   collapsible: true,
+    //   items: require("./docs/build-apps/sidebar.js")
+    // },
+    {
+      type: "category",
+      label: "Run a Valence Node",
+      collapsible: true,
+      items: require("./docs/valence-nodes/sidebar.js")
     },
     // {
     //   type: "category",

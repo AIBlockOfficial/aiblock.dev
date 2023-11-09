@@ -14,7 +14,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
-  favicon: "img/favicon.ico",
+  favicon: "img/favicon.png",
   organizationName: 'ABlockOfficial',
   projectName: 'ablock.docs',
 
@@ -47,24 +47,18 @@ const config = {
         }
       },
       navbar: {
-        title: 'A-Block',
+        // title: 'A-Block',
         logo: {
           alt: 'Site Logo',
-          src: 'img/logo.png',
-          srcDark: 'img/logo_dark.png',
+          src: 'img/a_block_logo_full.svg',
+          srcDark: 'img/a_block_logo_full.svg',
           href: '#',
           target: '_self',
-          width: 32,
+          width: 150,
           height: 32,
           className: 'custom-navbar-logo-class',
         },
         items: [
-          // {
-          //   type: "doc",
-          //   docId: "intro",
-          //   position: "left",
-          //   label: "Docs"
-          // },
           {
             type: "doc",
             docId: "api-overview",
@@ -116,7 +110,7 @@ const config = {
         //     ],
         //   },
         // ],
-        copyright: `Copyright © ${new Date().getFullYear()} A-Block, Inc. Built with Docusaurus ${DOCUSAURUS_VERSION}.`,
+        copyright: `Copyright © ${new Date().getFullYear()} A-Block Technologies AG`,
       },
       prism: {
         theme: lightCodeTheme,
