@@ -70,7 +70,19 @@ const sidebars = {
       // },
       collapsible: true,
       items: require("./docs/basic-tutorials/sidebar.js")
-    }
+    },
+    // {
+    //   type: "category",
+    //   label: "Build Apps",
+    //   collapsible: true,
+    //   items: require("./docs/build-apps/sidebar.js")
+    // },
+    {
+      type: "category",
+      label: "Run a Valence Node",
+      collapsible: true,
+      items: require("./docs/valence-nodes/sidebar.js")
+    },
     // {
     //   type: "category",
     //   label: "Miner",
