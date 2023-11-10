@@ -1,63 +1,33 @@
-name: build
+name: build-deploy
 on: 
   push:
     branches: 
       - main
-env:
-  REGISTRY: ghcr.io
-  #IMAGE_NAME: ${{ github.repository }}
-  IMAGE_NAME: 'a-block-io'
-  IMAGE_TAG: 'latest'
-  REPOSITORY_NAME: 'ablockofficial/ablock.docs'
+      - pipes 
+
+permissions:
+  contents: read
+  packages: write
+  security-events: write
 
 jobs:
-  build-push-sign:
-    name: Build and push node image
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-    steps:
-
-    - name: Check out the repo
-      uses: actions/checkout@v3
-
-    - name: Install cosign
-      if: github.event_name != 'pull_request'
-      uses: sigstore/cosign-installer@6e04d228eb30da1757ee4e1dd75a0ec73a653e06 #v3.1.1
-      with:
-        cosign-release: 'v2.1.1'
-
-    - name: Log in to the Container registry
-      if: github.event_name != 'pull_request'
-      uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
-      with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    
-    - name: Extract metadata (tags, labels) for Docker
-      id: meta
-      uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-      with:
-        images: ${{ env.REGISTRY }}/${{ github.repository }}
-
-    - name: Setup Buildx so we can cache
-      uses: docker/setup-buildx-action@v1
-
-    - name: Build and push Docker images
-      id: build-and-push
-      uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
-      with:
-        context: .
-        push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ steps.meta.outputs.tags }}
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-
-    - name: Sign the published Docker image
-      if: ${{ github.event_name != 'pull_request' }}
-      env:
-        TAGS: ${{ steps.meta.outputs.tags }}
-        DIGEST: ${{ steps.build-and-push.outputs.digest }}
-      run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+  build: 
+    uses: ablockofficial/platform/.github/workflows/build.yml@main
+    with: 
+      REGISTRY:  ${{ vars.REGISTRY }}
+      REPOSITORY: ${{ vars.REPOSITORY }}
+  scan-image:
+    uses: ablockofficial/platform/.github/workflows/scan-image.yml@main
+    secrets: inherit
+    needs: build
+    with:
+      IMAGE: ${{ vars.REGISTRY }}/${{ vars.REPOSITORY }}:${{ github.sha }}
+  deploy:
+    uses: ablockofficial/platform/.github/workflows/deploy.yml@main
+    secrets: inherit
+    needs: scan-image
+    with:
+      REGION: ${{ vars.REGION }}
+      PROJECT_ID: ${{ vars.PROJECT_ID }}
+      CLUSTER_NAME: ${{ vars.CLUSTER_NAME }}
+      DEPLOYMENT: charts
