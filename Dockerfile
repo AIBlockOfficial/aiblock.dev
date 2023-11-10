@@ -7,7 +7,7 @@ COPY package.json yarn.lock ./
 RUN yarn install --dev  
 
 # Copy and build for release
-COPY ./ ./.
+COPY . .
 RUN yarn build
 
 # Use distroless
