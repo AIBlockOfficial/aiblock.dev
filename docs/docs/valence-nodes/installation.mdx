@@ -1,0 +1,56 @@
+---
+id: installation
+title: "Installation"
+description: "How to install a Valence node on A-Block"
+sidebar_label: Installation
+sidebar_position: 0
+hide_title: true
+tags:
+  - valence
+  - getting started
+---
+
+# Installation
+
+## Prerequisites
+
+In order to run this server as a community provider, or simply to use it yourself, you'll need to have Docker installed (minimum tested v20.10.12) and be comfortable working with the command line. 
+Developing on the Valence node source code will also require Rust (tested on 1.68.0 nightly), but you can read up more on this, as well as view the source code itself, over on <a href="https://github.com/ABlockOfficial/Valence">GitHub</a>.
+
+..
+
+## Installing
+
+With Docker installed and running, you can clone the Valence repo and get everything installed with the following:
+
+```shell
+# SSH clone
+git clone git@gitlab.com:ABlockOfficial/Valence.git
+
+# Navigate to the repo
+cd Valence
+
+# Build Docker image
+docker build -t valence .
+```
+
+..
+
+## Running
+
+To use the server as is, you can simply run the following in the root folder of the repo:
+
+```shell
+docker-compose up -d
+```
+
+Docker will orchestrate the node itself, the Redis instance, and the MongoDB long-term storage, after which you can make calls to your server at port 3030. Data saved to the Redis and MongoDB instances is kept within a Docker volume.
+
+To run the server in a development environment, run the following command:
+
+```shell
+cargo build --release
+cargo run --release
+```
+
+
