@@ -1,0 +1,257 @@
+---
+id: get-started
+title: "Get Started"
+description: "Get started setting up your A-Block wallet through the A-Block.js SDK"
+sidebar_label: Get Started
+sidebar_position: 0
+hide_title: true
+tags:
+  - ablock.js
+  - getting started
+---
+
+# Get Started
+
+## Installation
+Integration wih A-Block can be done simply and easily through the <a href="https://github.com/ABlockOfficial/A-Block.js#a-blockjs">A-Block.js SDK</a>. 
+To get started, we can install it to our JavaScript/TypeScript project with `npm`:
+
+```sh
+npm install @a-block/a-blockjs
+```
+
+or alternatively with `yarn`:
+
+```sh
+yarn add @a-block/a-blockjs
+```
+
+<br/><br/>
+
+## Create A-Block Wallet
+
+Create an instance of an A-Block wallet can be done in three main ways:
+
+1. **initNew**: A new wallet, created from scratch for a new user
+2. **fromSeed**: An existing wallet, generated from a saved seed phrase
+3. **fromMasterKey**: An existing wallet, generated from a saved master key
+
+<br/><br/>
+
+### Create a New Wallet
+
+You can create a new instance of an A-Block wallet via the SDK's `initNew` method:
+
+```javascript
+    import { ABlockWallet } from '@a-block/a-blockjs';
+
+    const CONFIG = {
+      mempoolHost: 'example.mempool.host.com',
+      passphrase: 'a secure passphrase',
+    /* Optional, subject to certain requests not being usable.
+      storageHost: example.storage.host.com;
+      intercomHost: example.intercom.host.com;
+      notaryHost: example.notary.host.com;
+    */
+    };
+
+    // Create the wallet object
+    const wallet = new ABlockWallet();
+
+    // Initialize the wallet with the needed configuration
+    // NOTE: This is an async call
+    wallet
+    .initNew(CONFIG)
+    .then((initResult) => {
+      const [seedPhrase, masterKeyEncrypted] = initResult.content.initNewResponse;
+
+      // Display the seed phrase to the user for safe keeping
+      display(seedPhrase);
+
+      // Store the encrypted master key safely
+      saveMasterKey(masterKeyEncrypted);
+    });
+```
+
+This method needs a few parameters to be specified:
+
+- **`mempoolHost`**: The IP or domain of the mempool node you want to connect to. You'll need this to ... ** *required **
+- `storageHost`: The IP or domain of the storage node you want to connect to. You'll need this to make transactions on the network
+- `intercomHost`: The IP or domain of an intercom node you want to connect to. You'll need this if you want to make any 2-way transactions with other people/wallets
+- `notaryHost`: The IP or domain of the notary node you want to connect to. You'll need this to ...
+- **`passphrase`**: The passphrase to encrypt your wallet's keypair/s. Make sure this is a super secure value ** *required **
+
+The `initNew` method is async, so you'll need to use a `.then` or `await` the result in order to get the wallet's seed phrase, for example. 
+Once you have a seed phrase, you can always re-initialize the same wallet using that same seed phrase.
+
+<br/><br/>
+
+### Generate an Existing Wallet
+
+If you have an existing seed phrase and want to generate a wallet from it, you can use `fromMasterKey` or `initFromSeed` methods:
+
+#### `fromMasterKey`
+
+When a master key already exists, this type of initialization **should** be used. This typically occurs when the wallet has been initialized previously using `initNew` and the encrypted master key has been stored safely. Using an existing master key will ensure that BIP39 key-pair derivation is consistent. This type of initialization does not have a return value.
+
+```typescript
+// Initialize the wallet with the needed configuration
+wallet.fromMasterKey(masterKey, CONFIG);
+```
+
+####   `fromSeed` 
+Initialization of the wallet through the use of an existing seed phrase may happen for one of two reasons:
+
+1. The user has lost their key-pairs and re-generation is needed by providing the seed phrase.
+2. A valid seed phrase has been pre-generated due to specific UX design constraints and needs to be used to initialize the wallet.
+
+This type of initialization will return the corresponding master key (in an encrypted format) which was created using the provided seed phrase. This master key needs to be stored safely in the same manner as initialization using `initNew`.
+
+```typescript
+const sp = 'existing seed phrase';
+// Initialize the wallet with the needed configuration
+wallet.fromSeed(sp, CONFIG).then((fromSeedResult) => {
+
+  const masterKeyEncrypted = fromSeedResult.content.fromSeedResponse;
+
+  // Store the encrypted master key safely
+  saveMasterKey(masterKeyEncrypted);
+});
+```
+
+<br/><br/>
+
+### Offline Initialization
+
+In some cases, it might be desirable to initialize the wallet without a network connection. This will allow the wallet to be used offline, but will inadvertently prevent the wallet from being able to perform any operations that require interaction with the ABlock network. The following functions are available with an offline configuration:
+
+-   `regenAddresses` - Re-generate lost key-pairs from a list of given addresses.
+-   `getNewKeypair` - Generate a new key-pair.
+-   `getSeedPhrase` - Get the existing seed phrase from memory (requires initialization from seed phrase).
+-   `getMasterKey` - Get the existing master key from memory.
+
+<details>
+<summary>Offline Initialization</summary>
+<br/>
+
+```typescript
+import { ABlockWallet } from '@a-block/a-blockjs';
+
+// Create the wallet object
+const wallet = new ABlockWallet();
+
+// Initialize the wallet with the needed configuration
+const initResult = wallet.initNew({passphrase: 'a secure passphrase'}, true).then((initResult) => {
+    const [seedPhrase, masterKeyEncrypted] = initResult.content.initNewResponse;
+
+    // Display the seed phrase to the user for safe keeping
+    display(seedPhrase);
+
+    // Store the encrypted master key safely
+    saveMasterKey(masterKeyEncrypted);
+});
+
+// Configuration
+const config = {
+  mempoolHost: 'example.mempool.host.com',
+  storageHost: 'example.storage.host.com';
+  intercomHost: 'example.intercom.host.com';
+  notaryHost: 'example.notary.host.com';
+};
+
+// Initialize network configuration when required
+const initNetworkResult = wallet.initNetwork(config);
+```
+</details>
+
+
+<br/><br/>
+
+### User-defined Methods
+
+Many methods will either **require** or **return** different types of data depending on the operation. It is entirely up to the developer to store and retrieve data safely.
+
+<details>
+<summary>User-defined Methods</summary>
+<br/>
+
+```typescript
+  function saveMasterKey(masterKeyEncrypter: IMasterKeyEncrypted): void {
+    // Write your I/O operations here to safely store the encrypted master key
+    ...
+  }
+
+  function getMasterKey(): IMasterKeyEncrypted {
+    // Write your I/O operations here to safely retrieve
+    // the encrypted master key
+    ...
+  }
+
+  function saveKeypair(keyPair: IKeyPairEncrypted): void {
+    // Write your I/O operations here to safely store the key pair
+    ...
+  }
+
+  function getKeypairs(): IKeyPairEncrypted[] {
+    // Write your I/O operations here to safely retrieve
+    // the encrypted key pairs
+    ...
+  }
+
+  function getAllEncryptedTxs(): ICreateTransactionEncrypted[] {
+    // Write your I/O operations here to get all encrypted
+    // transactions
+    ...
+  }
+
+  function saveEncryptedTx(druid: string, encryptedTx: ICreateTransactionEncrypted): void {
+    // Write your I/O operations here to save the encrypted transaction
+    // with its corresponding DRUID value in a key-value format
+    ...
+  }
+
+```
+</details>
+
+<br></br>
+
+## Working with the Wallet
+
+Once initialized, you can access all the functionalities within the wallet. 
+
+### Generating Key-pairs
+
+A-Block is a UTXO blockchain, so you can generate a new keypair, for example, by using the `getNewKeypair` method:
+
+```javascript
+import { ABlockWallet } from '@a-block/a-blockjs';
+
+const wallet = new ABlockWallet();
+
+// ... Initialize the wallet correctly
+
+// The array argument can contain existing keypairs to be used
+const newKeypairResult = wallet.getNewKeypair([]);
+
+// Final keypair
+const newKeypair: IKeypairEncrypted = newKeypairResult.content.newKeypairResponse;
+```
+
+### Fetch Balance
+
+You can then do a number of things with the keypair, for example getting the address associated with that keypair and 
+fetching its balance:
+
+```javascript
+//... newKeypair initialized
+
+// Get the associated address
+const address = newKeypair.address;
+
+// You can now fetch the balance for the address from the chain
+const balanceResult = await client.fetchBalance([address]);
+const balance = balanceResult.content.fetchBalanceResponse;
+```
+
+You can find the rest of the associated functions for your wallet in the SDK's README, but this should give you a good point to 
+start from. Next, we'll see how to send and receive payments with the new wallet.

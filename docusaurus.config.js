@@ -24,7 +24,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          routeBasePath: "/docs",
+          routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem" // Derived from docusaurus-theme-openapi
@@ -43,11 +43,9 @@ const config = {
       docs: {
         sidebar: {
           autoCollapseCategories: true,
-          // hideable: true
         }
       },
       navbar: {
-        // title: 'A-Block',
         logo: {
           alt: 'Site Logo',
           src: 'img/a_block_logo_full.svg',
@@ -61,7 +59,13 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "api-overview",
+            docId: "docs/intro",
+            position: "left",
+            label: "Documentation"
+          },
+          {
+            type: "doc",
+            docId: "api/overview",
             position: "left",
             label: "API"
           },
@@ -73,50 +77,49 @@ const config = {
         ]
       },
       footer: {
-        // links: [
-        //   {
-        //     title: 'Docs',
-        //     items: [
-        //       {
-        //         label: 'Developer Docs',
-        //         to: '/docs',
-        //       },
-        //       {
-        //         label: 'API',
-        //         to: '/api',
-        //       },
-        //     ],
-        //   },
-        //   {
-        //     title: 'Community',
-        //     items: [
-        //       {
-        //         label: 'Stack Overflow',
-        //         href: 'https://stackoverflow.com/questions/tagged/ablock',
-        //       },
-        //       {
-        //         label: 'Discord',
-        //         href: 'https://discord.gg/dDgabkJMEG',
-        //       },
-        //     ],
-        //   },
-        //   {
-        //     title: 'More',
-        //     items: [
-        //       {
-        //         label: 'GitHub',
-        //         href: 'https://github.com/ABlockOfficial',
-        //       },
-        //     ],
-        //   },
-        // ],
+        links: [
+          {
+            title: 'Docs',
+            items: [
+              {
+                label: 'Documentation',
+                to: '/docs',
+              },
+              {
+                label: 'API',
+                to: '/api',
+              },
+              {
+                label: 'Tutorials',
+                to: '/docs/tutorials',
+              },
+            ],
+          },
+          {
+            title: 'Community',
+            items: [
+              {
+                label: 'Discord',
+                href: 'https://discord.gg/dDgabkJMEG',
+              },
+            ],
+          },
+          {
+            title: 'More',
+            items: [
+              {
+                label: 'GitHub',
+                href: 'https://github.com/ABlockOfficial',
+              },
+            ],
+          },
+        ],
         copyright: `Copyright © ${new Date().getFullYear()} A-Block Technologies AG`,
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ["ruby", "csharp", "php"]
-      }
+      },
     }),
 
   plugins: [
@@ -128,7 +131,7 @@ const config = {
         config: {
           mempool: {
             specPath: "openapi/mempool.yml",
-            outputDir: "docs/mempool-api",
+            outputDir: "docs/api/mempool",
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",
@@ -136,6 +139,17 @@ const config = {
             },
             hideSendButton: true,
           },
+          storage: {
+            specPath: "openapi/storage.yml",
+            outputDir: "docs/api/storage",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+              sidebarCollapsible: false,
+            },
+            hideSendButton: true,
+          }
+          /** TODO */
           // miner: {
           //   specPath: "openapi/miner.yml",
           //   outputDir: "docs/miner-api",
@@ -146,21 +160,17 @@ const config = {
           //   },
           //   hideSendButton: true,
           // },
-          storage: {
-            specPath: "openapi/storage.yml",
-            outputDir: "docs/storage-api",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-              categoryLinkSource: "tag",
-              sidebarCollapsible: false,
-            },
-            hideSendButton: true,
-          }
         }
       },
     ],
   ],
-  themes: ["docusaurus-theme-openapi-docs"]
+  themes: ["docusaurus-theme-openapi-docs"],
+  stylesheets: [
+    {
+      href: "https://use.fontawesome.com/releases/v5.11.0/css/all.css",
+      type: "text/css",
+    },
+  ],
 };
 
 module.exports = config;
