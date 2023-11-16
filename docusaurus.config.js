@@ -26,7 +26,6 @@ const config = {
         docs: {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
-          // editUrl:
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem" // Derived from docusaurus-theme-openapi
         },
@@ -44,11 +43,9 @@ const config = {
       docs: {
         sidebar: {
           autoCollapseCategories: true,
-          // hideable: true
         }
       },
       navbar: {
-        // title: 'A-Block',
         logo: {
           alt: 'Site Logo',
           src: 'img/a_block_logo_full.svg',
@@ -101,10 +98,6 @@ const config = {
           {
             title: 'Community',
             items: [
-              //       {
-              //         label: 'Stack Overflow',
-              //         href: 'https://stackoverflow.com/questions/tagged/ablock',
-              //       },
               {
                 label: 'Discord',
                 href: 'https://discord.gg/dDgabkJMEG',
@@ -126,63 +119,6 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        // additionalLanguages: ["ruby", "csharp", "php", "java", "powershell"],
-      },
-      // languageTabs: [
-      //   {
-      //     highlight: "bash",
-      //     language: "curl",
-      //     logoClass: "bash",
-      //   },
-      //   {
-      //     highlight: "python",
-      //     language: "python",
-      //     logoClass: "python",
-      //     variant: "requests",
-      //   },
-      //   {
-      //     highlight: "go",
-      //     language: "go",
-      //     logoClass: "go",
-      //   },
-      //   {
-      //     highlight: "javascript",
-      //     language: "nodejs",
-      //     logoClass: "nodejs",
-      //     variant: "axios",
-      //   },
-      //   {
-      //     highlight: "ruby",
-      //     language: "ruby",
-      //     logoClass: "ruby",
-      //   },
-      //   {
-      //     highlight: "csharp",
-      //     language: "csharp",
-      //     logoClass: "csharp",
-      //     variant: "httpclient",
-      //   },
-      //   {
-      //     highlight: "php",
-      //     language: "php",
-      //     logoClass: "php",
-      //   },
-      //   {
-      //     highlight: "java",
-      //     language: "java",
-      //     logoClass: "java",
-      //     variant: "unirest",
-      //   },
-      //   {
-      //     highlight: "powershell",
-      //     language: "powershell",
-      //     logoClass: "powershell",
-      //   }
-      // ],
-      announcementBar: {
-        id: "announcementBar_1",
-        content:
-          "🥳 A-Block.js v2.0 is now available.",
       },
     }),
 
