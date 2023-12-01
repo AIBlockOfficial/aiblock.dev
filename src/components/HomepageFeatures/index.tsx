@@ -1,42 +1,36 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
+import PlaceholderImg from '../PlaceholderImg';
+
+import greenA from "@site/static/img/greenA.svg";
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  Svg?: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Developer Documentation',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Cost-Efficient Transactions',
+    Svg: greenA,
     description: (
-      <>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Suspendisse sed metus ante. Donec nec vehicula.
-      </>
+      <>A-Block's Full Stack system ensures reduced fees with a single transaction fee, bypassing vulnerabilities of Layer-2-based technologies.</>
     ),
   },
   {
-    title: 'API',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Enhanced Flexibility',
+    Svg: greenA,
     description: (
-      <>
-        Maecenas eget lectus vitae eros accumsan commodo.
-        Nulla vitae ipsum semper, porttitor felis eget <code>docs</code> mollis diam. Donec molestie sed erat.
-      </>
+      <>Implementing dApps via API Routes fosters a more adaptable approach compared to rigid Smart Contracts.</>
     ),
   },
   {
-    title: 'Powered by A-Block',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Tailored Solutions',
+    Svg: greenA,
     description: (
-      <>
-        In quis justo at mi euismod elementum. In quis metus tortor. Mauris bibendum enim risus.
-        Curabitur odio libero, sodales et.
-      </>
+      <>A-Block offers opportunities for personalized (White Label) marketplaces and Seek3r Wallets, empowering user ownership.</>
     ),
   },
 ];
@@ -45,7 +39,12 @@ function Feature({ title, Svg, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+      <Svg className={styles.featureSvg} role="img" />
+        {/* {Svg ?
+          <PlaceholderImg />
+          :
+          <Svg className={styles.featureSvg} role="img" />
+        } */}
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
@@ -55,10 +54,11 @@ function Feature({ title, Svg, description }: FeatureItem) {
   );
 }
 
-export default function HomepageFeatures(): JSX.Element {
+export default function HomepageFeatures({ title }: { title: string }): JSX.Element {
   return (
     <section className={styles.features}>
       <div className="container">
+        <h1 className={styles.title}>{title}</h1>
         <div className="row">
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />

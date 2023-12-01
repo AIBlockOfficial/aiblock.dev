@@ -9,7 +9,7 @@ const { DOCUSAURUS_VERSION } = require("@docusaurus/utils");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'A-Block',
-  tagline: 'Technical hub for A-Block\'s ecosystem',
+  tagline: `Revolutionizing Digital Utility and Trade with A-Block's Advanced Blockchain Innovation`,
   url: 'http://localhost:3000/',
   baseUrl: '/',
   onBrokenLinks: "warn",
@@ -24,7 +24,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          routeBasePath: "/",
+          routeBasePath: "/docs",
           sidebarPath: require.resolve("./sidebars.js"),
           docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem" // Derived from docusaurus-theme-openapi
@@ -50,7 +50,7 @@ const config = {
           alt: 'Site Logo',
           src: 'img/a_block_logo_full.svg',
           srcDark: 'img/a_block_logo_full.svg',
-          href: '#',
+          href: '/',
           target: '_self',
           width: 150,
           height: 32,
