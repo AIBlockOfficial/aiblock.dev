@@ -9,6 +9,7 @@ import blueA from '@site/static/img/blueA.svg';
 import greenA from '@site/static/img/greenA.svg';
 
 import styles from './styles.module.css';
+import heroImg from '../../static/img/utopia.jpg';
 
 /** HOMEPAGE */
 
@@ -16,9 +17,8 @@ function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+      <div className="hero container">
+        <img src={heroImg} />
       </div>
     </header>
   );
@@ -27,32 +27,30 @@ function HomepageHeader() {
 export default function Home(): JSX.Element {
   return (
     <Layout
-      title={`Homepage`}
+      title={`Welcome`}
       description="Description will go into a meta tag in <head />">
       <HomepageHeader />
       <main>
-        <HomepageFeatureBlock {...{
-          title: 'The A-Block Digital System', Svg: blueA, description: (
-            <>
-              Designed to combat the shortcomings of Web2 and propel us towards a more robust Web3, A-Block stands as a transformative force.
-              It pioneers a full-stack Layer-0 to Layer-2 blockchain solution, powered by cutting-edge Data Asset™ technology.
-              This comprehensive solution encompasses secure payment systems, decentralized applications (dApps), asset management, and decentralized marketplaces.
-            </>
-          ),
-          inversed: true,
-        }} />
+        <div className={styles.heroIntro}>
+          <h1 className="hero__title">Welcome to A-Block</h1>
+          <p>
+            A-Block is a layer 1 blockchain that provides builders with a quick, easy, and low risk way to build and deploy decentralized applications. It's designed 
+            to let you build without tricky, risky smart contracts, and without the need to learn a new programming language. We provide low code solutions to get you 
+            creating, issuing and making asset payments and transfers in seconds.
+          </p>
+        </div>
 
-        <HomepageFeatures title={'Key Advantages of A-Block'} />
+        <HomepageFeatures bg={true} title={'Key Advantages of A-Block'} />
 
-        <HomepageFeatureBlock {...{
-          title: 'Why A-Block?', Svg: greenA, description: (
+        {/* <HomepageFeatureBlock {...{
+          title: 'Why A-Block?', Svg: greenA, bg: true, description: (
             <>
               Integrity forms the bedrock of society, business, relationships, and human interaction.
               However, the rise of Web2, while enabling widespread access to information, compromised privacy and integrity.
               A-Block emerged to tackle these challenges head-on, presenting innovative technology tailored for both interpersonal and organizational collaboration.
             </>
           )
-        }} />
+        }} /> */}
 
 
       </main>

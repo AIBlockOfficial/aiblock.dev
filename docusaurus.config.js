@@ -9,7 +9,6 @@ const { DOCUSAURUS_VERSION } = require("@docusaurus/utils");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'A-Block',
-  tagline: `Revolutionizing Digital Utility and Trade with A-Block's Advanced Blockchain Innovation`,
   url: 'http://localhost:3000/',
   baseUrl: '/',
   onBrokenLinks: "warn",

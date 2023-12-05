@@ -3,41 +3,44 @@ import clsx from 'clsx';
 import styles from './styles.module.css';
 import PlaceholderImg from '../PlaceholderImg';
 
-import greenA from "@site/static/img/greenA.svg";
+import plug from "@site/static/img/plug_icon.svg";
+import lightning from "@site/static/img/lightning_icon.svg";
+import easy from "@site/static/img/easy_icon.svg";
 
 type FeatureItem = {
   title: string;
   Svg?: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
+  bg?: boolean;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Cost-Efficient Transactions',
-    Svg: greenA,
+    title: 'No Smart Contracts Required',
+    Svg: easy,
     description: (
-      <>A-Block's Full Stack system ensures reduced fees with a single transaction fee, bypassing vulnerabilities of Layer-2-based technologies.</>
+      <>Mint, create, pay and trade without any smart contracts at all. No complicated contracting languages, no specialization, no worries</>
     ),
   },
   {
-    title: 'Enhanced Flexibility',
-    Svg: greenA,
+    title: 'API for Everything',
+    Svg: plug,
     description: (
-      <>Implementing dApps via API Routes fosters a more adaptable approach compared to rigid Smart Contracts.</>
+      <>Implementing dApps via API routes makes everything quicker and easier, no matter what language you're coming from</>
     ),
   },
   {
-    title: 'Tailored Solutions',
-    Svg: greenA,
+    title: 'Quick Settlement',
+    Svg: lightning,
     description: (
-      <>A-Block offers opportunities for personalized (White Label) marketplaces and Seek3r Wallets, empowering user ownership.</>
+      <>High speed settlement and deterministic block times means you get transactions through faster and cheaper</>
     ),
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, Svg, description, bg = false }: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={`${clsx('col col--4')} ${bg ? styles.bg : ''}`}>
       <div className="text--center">
       <Svg className={styles.featureSvg} role="img" />
         {/* {Svg ?
@@ -54,9 +57,9 @@ function Feature({ title, Svg, description }: FeatureItem) {
   );
 }
 
-export default function HomepageFeatures({ title }: { title: string }): JSX.Element {
+export default function HomepageFeatures({ title, bg }: { title: string, bg: boolean }): JSX.Element {
   return (
-    <section className={styles.features}>
+    <section className={`${styles.features} ${bg ? styles.bg : ''}`}>
       <div className="container">
         <h1 className={styles.title}>{title}</h1>
         <div className="row">

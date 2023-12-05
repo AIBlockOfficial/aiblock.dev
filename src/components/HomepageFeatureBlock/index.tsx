@@ -9,13 +9,13 @@ type FeatureItem = {
   Svg?: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
   inversed?: boolean;
+  bg?: boolean;
 };
 
 // export default function HomepageFeatureBlock({ title, Svg, description }: FeatureItem, inversed: boolean): JSX.Element {
-export default function HomepageFeatureBlock({ title, Svg, description, inversed = false }: FeatureItem): JSX.Element {
-  console.log('inversed?', inversed)
+export default function HomepageFeatureBlock({ title, Svg, description, bg = false, inversed = false }: FeatureItem): JSX.Element {
   return (
-    <section className={styles.feature}>
+    <section className={`${styles.feature} ${bg ? styles.bg : ''}`}>
       {!inversed &&
         <>
           <div className={styles.content}>
