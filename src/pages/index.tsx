@@ -34,9 +34,9 @@ export default function Home(): JSX.Element {
         <div className={styles.heroIntro}>
           <h1 className="hero__title">Welcome to A-Block</h1>
           <p>
-            A-Block is a layer 1 blockchain that provides builders with a quick, easy, and low risk way to build and deploy decentralized applications. It's designed 
-            to let you build without tricky, risky smart contracts, and without the need to learn a new programming language. We provide low code solutions to get you 
-            creating, issuing and making asset payments and transfers in seconds.
+            A-Block is a layer 1 blockchain that provides builders with a quick, easy, and low risk way to build decentralized applications. It's designed 
+            to let you build without tricky, risky smart contracts, and without the need to learn a new programming language. Use our low code solutions to get 
+            creating, issuing and making asset trades in seconds.
           </p>
         </div>
 

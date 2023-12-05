@@ -30,7 +30,7 @@ yarn add @a-block/a-blockjs
 
 ## Create A-Block Wallet
 
-Create an instance of an A-Block wallet can be done in three main ways:
+Creating an instance of an A-Block wallet can be done in three main ways:
 
 1. **initNew**: A new wallet, created from scratch for a new user
 2. **fromSeed**: An existing wallet, generated from a saved seed phrase
@@ -51,7 +51,6 @@ You can create a new instance of an A-Block wallet via the SDK's `initNew` metho
     /* Optional, subject to certain requests not being usable.
       storageHost: example.storage.host.com;
       intercomHost: example.intercom.host.com;
-      notaryHost: example.notary.host.com;
     */
     };
 
@@ -75,10 +74,9 @@ You can create a new instance of an A-Block wallet via the SDK's `initNew` metho
 
 This method needs a few parameters to be specified:
 
-- **`mempoolHost`**: The IP or domain of the mempool node you want to connect to. You'll need this to ... ** *required **
+- **`mempoolHost`**: The IP or domain of the mempool node you want to connect to. You'll need this to send and receive transactions from the chain ** *required **
 - `storageHost`: The IP or domain of the storage node you want to connect to. You'll need this to make transactions on the network
 - `intercomHost`: The IP or domain of an intercom node you want to connect to. You'll need this if you want to make any 2-way transactions with other people/wallets
-- `notaryHost`: The IP or domain of the notary node you want to connect to. You'll need this to ...
 - **`passphrase`**: The passphrase to encrypt your wallet's keypair/s. Make sure this is a super secure value ** *required **
 
 The `initNew` method is async, so you'll need to use a `.then` or `await` the result in order to get the wallet's seed phrase, for example. 
@@ -88,11 +86,11 @@ Once you have a seed phrase, you can always re-initialize the same wallet using 
 
 ### Generate an Existing Wallet
 
-If you have an existing seed phrase and want to generate a wallet from it, you can use `fromMasterKey` or `initFromSeed` methods:
+If you have an existing seed phrase and want to generate a wallet from it, you can use `fromMasterKey` or `fromSeed` methods:
 
 #### `fromMasterKey`
 
-When a master key already exists, this type of initialization **should** be used. This typically occurs when the wallet has been initialized previously using `initNew` and the encrypted master key has been stored safely. Using an existing master key will ensure that BIP39 key-pair derivation is consistent. This type of initialization does not have a return value.
+When a master key already exists, this type of initialization **should** be used. This typically occurs when the wallet has been initialized previously using `initNew` and the encrypted master key has been stored safely. Using an existing master key will ensure that BIP39 keypair derivation is consistent. This type of initialization does not have a return value.
 
 ```typescript
 // Initialize the wallet with the needed configuration
@@ -102,7 +100,7 @@ wallet.fromMasterKey(masterKey, CONFIG);
 ####   `fromSeed` 
 Initialization of the wallet through the use of an existing seed phrase may happen for one of two reasons:
 
-1. The user has lost their key-pairs and re-generation is needed by providing the seed phrase.
+1. The user has lost their keypairs and re-generation is needed by providing the seed phrase.
 2. A valid seed phrase has been pre-generated due to specific UX design constraints and needs to be used to initialize the wallet.
 
 This type of initialization will return the corresponding master key (in an encrypted format) which was created using the provided seed phrase. This master key needs to be stored safely in the same manner as initialization using `initNew`.
@@ -125,8 +123,8 @@ wallet.fromSeed(sp, CONFIG).then((fromSeedResult) => {
 
 In some cases, it might be desirable to initialize the wallet without a network connection. This will allow the wallet to be used offline, but will inadvertently prevent the wallet from being able to perform any operations that require interaction with the ABlock network. The following functions are available with an offline configuration:
 
--   `regenAddresses` - Re-generate lost key-pairs from a list of given addresses.
--   `getNewKeypair` - Generate a new key-pair.
+-   `regenAddresses` - Re-generate lost keypairs from a list of given addresses.
+-   `getNewKeypair` - Generate a new keypair.
 -   `getSeedPhrase` - Get the existing seed phrase from memory (requires initialization from seed phrase).
 -   `getMasterKey` - Get the existing master key from memory.
 
@@ -219,7 +217,7 @@ Many methods will either **require** or **return** different types of data depen
 
 Once initialized, you can access all the functionalities within the wallet. 
 
-### Generating Key-pairs
+### Generating Keypairs
 
 A-Block is a UTXO blockchain, so you can generate a new keypair, for example, by using the `getNewKeypair` method:
 

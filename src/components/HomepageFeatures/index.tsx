@@ -19,7 +19,7 @@ const FeatureList: FeatureItem[] = [
     title: 'No Smart Contracts Required',
     Svg: easy,
     description: (
-      <>Mint, create, pay and trade without any smart contracts at all. No complicated contracting languages, no specialization, no worries</>
+      <>Mint, create, pay and trade without any smart contracts at all. No complicated contracting languages, no hours spent debugging, no worries</>
     ),
   },
   {
@@ -33,7 +33,7 @@ const FeatureList: FeatureItem[] = [
     title: 'Quick Settlement',
     Svg: lightning,
     description: (
-      <>High speed settlement and deterministic block times means you get transactions through faster and cheaper</>
+      <>High speed settlement and deterministic block times mean you get transactions through faster and cheaper</>
     ),
   },
 ];
