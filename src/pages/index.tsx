@@ -38,19 +38,24 @@ export default function Home(): JSX.Element {
             to let you build without tricky, risky smart contracts, and without the need to learn a new programming language. Use our low code solutions to get 
             creating, issuing and making asset trades in seconds.
           </p>
+          <div className={styles.blockButton}>
+            <a className="button button--primary button--lg" href="/docs/">
+              Developer Documentation
+            </a>
+          </div>
         </div>
 
         <HomepageFeatures bg={true} title={'Key Advantages of A-Block'} />
 
-        {/* <HomepageFeatureBlock {...{
-          title: 'Why A-Block?', Svg: greenA, bg: true, description: (
-            <>
-              Integrity forms the bedrock of society, business, relationships, and human interaction.
-              However, the rise of Web2, while enabling widespread access to information, compromised privacy and integrity.
-              A-Block emerged to tackle these challenges head-on, presenting innovative technology tailored for both interpersonal and organizational collaboration.
-            </>
-          )
-        }} /> */}
+        <div className={styles.block}>
+          <h2>Get Started</h2>
+          <p>You can start building and using the A-Block tooling by exploring the documentation and API</p>
+          <div className={styles.blockButton}>
+            <a className="button button--primary button--lg" href="/docs/">
+              Developer Documentation
+            </a>
+          </div>
+        </div>
 
 
       </main>

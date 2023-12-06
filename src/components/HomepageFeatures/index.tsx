@@ -61,7 +61,7 @@ export default function HomepageFeatures({ title, bg }: { title: string, bg: boo
   return (
     <section className={`${styles.features} ${bg ? styles.bg : ''}`}>
       <div className="container">
-        <h1 className={styles.title}>{title}</h1>
+        <h2 className={styles.title}>{title}</h2>
         <div className="row">
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />

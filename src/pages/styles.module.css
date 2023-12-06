@@ -28,10 +28,10 @@
 }
 
 .section {
-    display: flex;
-    align-items: center;
-    padding: 2rem 0;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
 }
 
 .buttons {
@@ -45,4 +45,20 @@
   padding: 0;
   max-width: 100%;
   width: 100%;
+}
+
+.blockButton {
+  margin-top: 20px;
+}
+
+.blockButton a {
+  font-size: 1rem;
+}
+
+.block {
+  margin: 0 auto;
+  width: 98%;
+  max-width: 900px;
+  text-align: center;
+  padding: 4rem 0;
 }
