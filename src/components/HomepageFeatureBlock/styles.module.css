@@ -1,0 +1,32 @@
+.feature {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  /* padding: 2rem 0; */
+  padding: 2rem var(--ifm-spacing-horizontal);
+  margin: 0px auto; 
+
+  width: 100%;
+  height: auto;
+
+  border: dotted purple 1px;
+}
+
+.feature.bg {
+  background-color: var(#f5f5f5);
+}
+
+.content {
+  padding: 0 2rem;
+  width: auto;
+}
+
+.image {
+  padding: 0 2rem;
+  width: auto;
+}
+
+.svg {
+  height: 200px;
+  width: 200px;
+}

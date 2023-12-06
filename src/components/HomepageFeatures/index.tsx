@@ -1,51 +1,53 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
+import PlaceholderImg from '../PlaceholderImg';
+
+import plug from "@site/static/img/plug_icon.svg";
+import lightning from "@site/static/img/lightning_icon.svg";
+import easy from "@site/static/img/easy_icon.svg";
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  Svg?: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
+  bg?: boolean;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Developer Documentation',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'No Smart Contracts Required',
+    Svg: easy,
     description: (
-      <>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Suspendisse sed metus ante. Donec nec vehicula.
-      </>
+      <>Mint, create, pay and trade without any smart contracts at all. No complicated contracting languages, no hours spent debugging, no worries</>
     ),
   },
   {
-    title: 'API',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'API for Everything',
+    Svg: plug,
     description: (
-      <>
-        Maecenas eget lectus vitae eros accumsan commodo.
-        Nulla vitae ipsum semper, porttitor felis eget <code>docs</code> mollis diam. Donec molestie sed erat.
-      </>
+      <>Implementing dApps via API routes makes everything quicker and easier, no matter what language you're coming from</>
     ),
   },
   {
-    title: 'Powered by A-Block',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Quick Settlement',
+    Svg: lightning,
     description: (
-      <>
-        In quis justo at mi euismod elementum. In quis metus tortor. Mauris bibendum enim risus.
-        Curabitur odio libero, sodales et.
-      </>
+      <>High speed settlement and deterministic block times mean you get transactions through faster and cheaper</>
     ),
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, Svg, description, bg = false }: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={`${clsx('col col--4')} ${bg ? styles.bg : ''}`}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+      <Svg className={styles.featureSvg} role="img" />
+        {/* {Svg ?
+          <PlaceholderImg />
+          :
+          <Svg className={styles.featureSvg} role="img" />
+        } */}
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
@@ -55,10 +57,11 @@ function Feature({ title, Svg, description }: FeatureItem) {
   );
 }
 
-export default function HomepageFeatures(): JSX.Element {
+export default function HomepageFeatures({ title, bg }: { title: string, bg: boolean }): JSX.Element {
   return (
-    <section className={styles.features}>
+    <section className={`${styles.features} ${bg ? styles.bg : ''}`}>
       <div className="container">
+        <h2 className={styles.title}>{title}</h2>
         <div className="row">
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
