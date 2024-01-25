@@ -1,0 +1,40 @@
+---
+id: new-mempool-node
+title: "AI3lock Mempool Node"
+description: "Learn about ABlock's Mempool node type"
+sidebar_label: -Mempool Node
+sidebar_position: 1
+hide_title: true
+tags:
+  - deep dive documentation
+  - ablock network
+---
+
+# Mempool Node
+
+The Mempool node plays a crucial role in the AI3lock network, serving as one part of the power balance. Unlike fully distributed mining, as seen in Bitcoin, AI3lock opts for a compromise by employing a ring of decentralized Mempool nodes to facilitate transactions. Public, fully distributed Miner nodes are still responsible for mining the blocks and contributing to the fair decision-making process for transaction selection.
+
+## Balance of Power
+
+The network's security and trustlessness are influenced by the ring of Mempool nodes under AI3lock's control. The Mempool nodes create blocks, while Miner nodes mine them, ensuring a balance of control. Removing either set of nodes jeopardizes the entire system, creating a balance akin to the Roman-style Senate and the Public-like Miner nodes.
+
+## Mempool Node Structure
+
+The Mempool node consists of three main components:
+- **`MempoolNode`**: The data structure.
+- **`MempoolInterface`**: A trait for many externally-facing methods.
+- **`MempoolRequest`**: A set of requests that the Mempool node can make and receive.
+
+A limited number of Mempool nodes collaborate with enterprise-level partners, collecting token rewards for processing transactions and validating blocks.
+
+## Constructing Blocks
+
+In each round, all nodes within the Mempool ring share the responsibility of block construction. Each Mempool node has a personal transaction pool, and consensus through RAFT transactions forms a shared `consensused.tx_pool`. New blocks are constructed from this consensused pool. The order of transactions and their ownership by a particular Mempool node are not critical. Even if a block has no transactions, it will be generated. If too many transactions are available, only a subset is used, and the rest go into the next blocks.
+
+## Mempool Nodes and Miner Nodes
+
+After a block is generated and mined, Miner nodes send requests to all Mempool nodes to participate in the next round of block mining. The AI3lock protocol allows only partitions or subsets of the network to mine at any given time. Each Mempool node has its own partition of miners, changing every round. Once the partition list is full, Miner nodes for that Mempool node are selected. Winners, determined by a valid Proof-of-Work, send their block to the Mempool node for validation and storage. For detailed Miner operation, refer to [this wiki page](Miner-Node).
+
+## Mempool Nodes and Storage Nodes
+
+Upon receiving a valid block, the Mempool node declares the winner for its partition and sends the block to the associated Storage node for long-term storage. Round-related attributes in the Mempool node are cleared, and the next round begins.

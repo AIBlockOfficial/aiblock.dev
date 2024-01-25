@@ -1,0 +1,60 @@
+---
+id: storage-node
+title: "AI3lock Storage Node"
+description: "Learn about ABlock's Storage node type"
+sidebar_label: Storage Node
+sidebar_position: 3
+hide_title: true
+tags:
+  - deep dive documentation
+  - ablock network
+---
+
+# Storage Node
+The Storage node has a single, simple responsibility: storing the full blockchain history. Although this is a simple task, it involves the storage of a number of components in the AI3lock system which will be further discussed below.
+
+## Storage Node Structure
+The Storage node is handled by: 
+- **`StorageNode`:** data structure
+- **`StorageInterface`:** a trait that defines many of its externally-facing methods
+
+There are a limited number of Storage nodes that are (for the moment) under direct management of A. Any public miner or user may request to be a new Storage node should they so choose, but this is not required for the system to operate correctly.
+
+The ring of Storage nodes operates under [RAFT consensus](https://raft.github.io/) together, where each Storage node receives all the mined blocks from all Mempool nodes and adds the combined result to their internal ledger. The Storage nodes also need to assess that all the transactions are the same between blocks.
+
+## Receiving Blocks
+Primarily, the Storage node is concerned with receiving blocks, which it does through the `receive_block` method. This method takes the block and performs the following:
+
+- Compares its block ID against all other blocks it has received
+- Matches transactions between all blocks with the same ID, flagging any non-matching blocks as invalid
+- Performs RAFT consensus with peer Storage nodes and, once reached, saves all valid blocks to the database
+
+## Receiving UNiCORN Values
+In order to validate that all blocks in the history are correct and haven't been tampered with, AI3lock's blockchain makes use of a special value called a [UNiCORN](unicorns) in combination with a block hash.
+
+In order to prove that past UNiCORNs were indeed uncontestably random and not pre-computed, tables of values which make up the UNiCORN need to be preserved for audit. This task falls to the Storage nodes as well, under the method `receive_unicorn_table`. Again, the process for receipt is straightforward:
+
+- Use the UNiCORN's built-in evaluation function to prove that the inputs are valid for the provided UNiCORN value
+- Perform RAFT consensus with peer Storage nodes as part of a regular block validation and, once reached, save the block to the database
+
+## Receiving DRUIDs
+The history of [DRUIDs](https://medium.com/the-zendesk/druids-how-to-easily-trade-on-blockchains-without-smart-contracts-ac1af79a34df) in the system is important to record. These values enable anybody to audit the point at which one asset was traded for another, whether that asset is data or tokens. 
+
+Again, the storage of DRUIDs falls to the Storage nodes. The process is handled by the `receive_druids` method and consists of simply saving the DRUIDs directly to disk. There is currently no validation requirement planned for such saves.
+
+The process of storing DRUID histories separately is currently not implemented but is planned for the future. As of now, users can construct these histories manually by searching for DRUID-related transactions within the same block.
+
+## Storage Node Consensus
+In order for a new block to successfully be added to the blockchain, it needs to be found valid and then replicated across all current Storage nodes. The process is as follows:
+
+- RAFT is first set up and leader election is held
+- A new winning block is sent to each Storage node by its connected Mempool node (each Mempool node to a different Storage node)
+- All these blocks are pushed to RAFT and will come out as consensused in each Storage node
+- On `BlockTimeout`, after each block round, each node pushes to raft a `TimeoutBlock(blockNum)`
+- When both a majority of `TimeoutBlock(blockNum)` and a majority of agreeing `block(blocknum)` are consensused, a new `valid_block` is:
+   - Block header and common transactions
+   - Consensused winning nonce and associated coinbase transaction
+- `valid_block` is stored and `BlockTimeout` set for `now + 1 second`
+- Storage event is sent to associated Mempool node
+- Mempool node receives `BlockStored`, pushes it to its RAFT
+- When a majority of Mempool nodes consensus `BlockStored`, the next block mining round begins

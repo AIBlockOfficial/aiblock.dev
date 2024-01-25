@@ -1,0 +1,37 @@
+# The AI3lock Network
+
+The AI3lock Network is responsible for all the network-related code in the AI3lock system. It is the repo responsible for communication between nodes in the mining network, as well as integration with the blockchain data structure found in the `Chain` repo. The following are the table of contents for further documentation below, which will fill you in on the architecture of the project as a whole:
+
+- [Node Types](network-wiki/node-types)
+- [Mempool Node](network-wiki/mempool-node)
+- [Miner Node](network-wiki/miner-node)
+- [Storage Node](network-wiki/storage-node)
+- [UNiCORNs](network-wiki/unicorns)
+- [Transactions](network-wiki/transactions)
+- [Block Mining Process](network-wiki/block-mining)
+- [2 Way Transactions](network-wiki/two-way-transaction)
+
+# AI3lock Blockchain
+To start, it is important to understand how the AI3lock Network fits into the greater AI3lock system. The AI3lock system consists primarily of 2 major components:
+
+- AI3lock Network
+- AI3lock Chain
+
+The **AI3lock Network** sends and receives messages that are passed between different node types, and also relays storage to the **AI3lock Chain** in order to keep a record of blockchain history.
+
+## System Architecture
+The AI3lock system architecture mirrors much of what you'll find in the Bitcoin architecture, as our blockchain is based on Proof-of-Work (PoW) consensus. Unlike traditional Bitcoin, however, our blockchain is capable of faster transaction speeds (leading to faster clearance periods) and our PoW system is light and more inclusive (but more on this later).
+
+The other major difference between AI3lock and traditional blockchains is the introduction of the 2 way transaction system. Unlike traditional blockchains, our blockchain can record both the movement of tokens *and* the movement of assets for those tokens. Thanks to the Data Protocol, those assets can be your ownable and transactable data assets.
+
+To facilitate this, the AI3lock architecture makes use of different types of nodes in its network. You can find out more about the different node types [here](node-types).
+
+## Code Design
+We have a specific design philosophy regarding the code written at AI3lock. The ideal is to have code which will be easily reusable, but most importantly easily understandable. We treat our code like a client-server relationship, where the code is the server and you, the human user, are the client. To that end we have adopted the [Three Tier Architecture](https://en.wikipedia.org/wiki/Multitier_architecture#Three-tier_architecture) approach popularised by [John J. Donovan](https://en.wikipedia.org/wiki/John_J._Donovan), which in brief consists of the following:
+
+- **Presentation Tier**: To be treated like the user interface. At this level there should be the highest abstractions for any module we write, consisting of a few easy-to-use functions that can be implemented in an API for general consumption.
+***Developer Level: Beginner***
+
+- **Logic Tier**: This is one level down from the presentation tier, where the code is more complex but is capable of more powerful functions. Logic and business operations can be found at this level, helping to facilitate the higher-level abstractions in the presentation tier. ***Developer Level: Intermediate***
+
+- **Data Tier**: This is the lowest level of code architecture, and as such is the most complex. Functions and operations at this level will directly interact with system-level operations such as I/O and network connection handling, as well as direct interaction with the blockchain. ***Developer Level: Advanced***

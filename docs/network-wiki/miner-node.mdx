@@ -1,0 +1,34 @@
+---
+id: miner-node
+title: "AI3lock Miner Node"
+description: "Learn about ABlock's Miner node type"
+sidebar_label: Miner Node
+sidebar_position: 2
+hide_title: true
+tags:
+  - deep dive documentation
+  - ablock network
+---
+
+# Miner Node
+The Miner node represents the average miner in the AI3lock system. The miners as a whole are responsible for ensuring that blocks of transactions are mined and added to the blockchain history. For their efforts, winning miners receive a token reward in the same way as in Bitcoin. Unlike Bitcoin, however, AI3lock uses a reduced energy consumption method of mining while still retaining the useful aspects of [Proof-of-Work (PoW)](https://en.bitcoin.it/wiki/Proof_of_work). This method will be discussed further in [Partitioning](#partitioning).
+
+## Balance of Power
+There is a Roman-style balance between the Senate-like Mempool nodes and the Public-like Miner nodes which keeps the AI3lock system trustless. While Mempool nodes bundle transactions into blocks after validating them, it is still up to the Miner nodes to ensure that these blocks get mined and added to the Storage nodes. If Miners decide in majority to reject a block that a Mempool node has constructed, the block cannot be added to the ledger. To go further, Miners could choose to reject a particular bad faith Mempool node outright, rendering it useless, and in an extreme event could abandon the system altogether.
+
+The way in which fairness is ensured regarding block mining and Miner participation will be discussed in the next section.
+
+## Partitioning
+At the root of the Mempool-Miner balance is the partitioning system. Instead of all miners mining the block each round (which wastes enormous amounts of energy), only a select few miners are chosen each round to participate. Miners that were not chosen can therefore spare their energy and attempt to participate again in the next round. In terms of mining, the structure of the network each round is shown in this diagram, where only miner nodes (denote with an "M") inside the orange space are able to mine for that given Mempool node:
+
+{/* Img */}
+
+Each round, Miners can submit a request to a Mempool node they have connected to in order to join the mining of the upcoming block. Each Mempool node can only take a limited number of miners in their partition, and once this partition limit is reached the block can be sent for mining.
+
+Mempool nodes do the following when receiving a Miner's partition request:
+
+- Miner A sends Mempool A a request to join a partition. This request contains a small Proof-of-Work to ensure that the Mempool node is not being exploited by a malicious miner/s.
+- Mempool A then uses the result of the [UNiCORN](unicorns) algorithm to select the miners from the partition to join the mining process.
+- Mempool A provides the block to all selected miners in the partition, including Miner A, and the miners can now start mining.
+- Miners have a deterministic amount of time to mine the block, within which they can submit their winning Proof-of-Work for the block itself.
+- At the end of the round time, the Mempool nodes again use the UNiCORN to select the winning Miner from the set of valid PoW submissions, and the block is sent with their coinbase to the Storage nodes.
