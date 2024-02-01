@@ -36,19 +36,19 @@ const metadata = {
 };
 
 // Issue a new item, specifying all arguments
-const createReceiptResponse = await wallet.createReceipts(
+const createItemResponse = await wallet.createItems(
     newKeypair,                 // Keypair to assign item to
     false,                      // Generate a unique identifier for this item, if set to false
     10000,                      // The quantity of the item to issue
     JSON.stringify(metadata)    // The metadata of the item
 ).content
-.createReceiptResponse;
+.createItemResponse;
 ```
 
-Critically, we set the `defaultDrsTxHash` argument to `false`, which will generate a unique identifier for this item that we can later track on the blockchain. The `createReceipts` method will provide 
+Critically, we set the `defaultDrsTxHash` argument to `false`, which will generate a unique identifier for this item that we can later track on the blockchain. The `createItems` method will provide 
 default values for most arguments, meaning we can issue items even more simply:
 
 ```javascript
 // Create 1000 new items that have a unique identifier
-const createReceiptResponse = await client.createReceipts(keyPair, false, 1000).content.createReceiptResponse;
+const createItemResponse = await client.createItems(keyPair, false, 1000).content.createItemResponse;
 ```

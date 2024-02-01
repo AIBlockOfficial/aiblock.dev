@@ -32,7 +32,7 @@ Primarily, the Storage node is concerned with receiving blocks, which it does th
 ## Receiving UNiCORN Values
 In order to validate that all blocks in the history are correct and haven't been tampered with, AI3lock's blockchain makes use of a special value called a [UNiCORN](unicorns) in combination with a block hash.
 
-In order to prove that past UNiCORNs were indeed uncontestably random and not pre-computed, tables of values which make up the UNiCORN need to be preserved for audit. This task falls to the Storage nodes as well, under the method `receive_unicorn_table`. Again, the process for receipt is straightforward:
+In order to prove that past UNiCORNs were indeed uncontestably random and not pre-computed, tables of values which make up the UNiCORN need to be preserved for audit. This task falls to the Storage nodes as well, under the method `receive_unicorn_table`. Again, the process for item is straightforward:
 
 - Use the UNiCORN's built-in evaluation function to prove that the inputs are valid for the provided UNiCORN value
 - Perform RAFT consensus with peer Storage nodes as part of a regular block validation and, once reached, save the block to the database

@@ -222,7 +222,7 @@ components:
                 type: string
               example:
                 - fetch_balance
-                - create_receipt_asset
+                - create_item_asset
                 - create_transactions
             node_peers:
               type: array

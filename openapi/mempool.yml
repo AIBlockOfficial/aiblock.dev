@@ -104,13 +104,13 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/ResponseBadRequest'
-  /create_receipt_asset:
+  /create_item_asset:
     post:
       tags:
         - transaction
-      summary: create_receipt_asset
-      description: Create new receipt/asset.
-      operationId: createReceiptAsset
+      summary: create_item_asset
+      description: Create new item/asset.
+      operationId: createItemAsset
       parameters:
         - in: header
           name: x-request-id
@@ -121,7 +121,7 @@ paths:
               example: '4d1e5754af0931a15138445c3ecd1a82'
               pattern: ^[a-z0-9]{32}$
       requestBody:
-        description: Create a new receipt/asset
+        description: Create a new item/asset
         content:
           application/json:
             schema:
@@ -207,7 +207,7 @@ components:
           type: object
           example:
             {
-              receipt_amount: 1000,
+              item_amount: 1000,
               script_public_key: "b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01",
               public_key: "ffe056dcad98fbeb8fdeb79ef95fb49b0c9b5d2bc3c5191cb08df55fa71c4e5d",
               signature: "014643bab9a5859ccf6b0403d68c38b26b8888a41034b533f1a0ec2ba6b3afad5ac988e630a69b28f068c74d386df0ae86410aca1c8b1ce0b968f09b83111d07",
@@ -357,7 +357,7 @@ components:
                 type: string
               example:
                 - fetch_balance
-                - create_receipt_asset
+                - create_item_asset
                 - create_transactions
             node_peers:
               type: array
@@ -400,7 +400,7 @@ components:
                 type: string
               example:
                 - fetch_balance
-                - create_receipt_asset
+                - create_item_asset
                 - create_transactions
             node_peers:
               type: array
@@ -438,7 +438,7 @@ components:
                 tokens:
                   type: number
                   example: 5463669
-                receipts:
+                items:
                   type: object
             address_list:
               type: object

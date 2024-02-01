@@ -35,9 +35,9 @@ Alice is new to the game, but wants to get a leg up on the competition and so de
 **NOTE:** Even though both transactions are processed separately, both still retain the DRUID value. This allows for auditing of the trade at a later stage
 
 ## Receipt-Based Payments
-In addition to enabling auditable trades of tokens for data assets, the 2WT also enables receipt-based payments. A receipt-based payment is one in which Alice wants to give Bob 100 ZNT as a charitable gift, but requires Bob to approve the gift before it gets processed into a block.
+In addition to enabling auditable trades of tokens for data assets, the 2WT also enables item-based payments. A item-based payment is one in which Alice wants to give Bob 100 ZNT as a charitable gift, but requires Bob to approve the gift before it gets processed into a block.
 
 In order to facilitate this, Alice simply needs to leave the expected asset field in her transaction blank (signifying that she expects nothing in return). Bob does the same on his side, by requesting 100 ZNT but leaving the data asset to sell blank (signifying he does not intend to provide anything of value in return). The process is the same as before, with both Alice and Bob submitting their respective transactions with the same DRUID and having them processed by the Mempool node.
 
 ## Future Considerations and Improvements
-In order for receipt-based payments to truly be effective, the content will need to be signed with each user's private key before submitting to the Mempool node. This means that eventually there will need to be some value in the data field for receipt-based payments, but this can be fixed to a value which does not require a creation event (as normal data assets do).
+In order for item-based payments to truly be effective, the content will need to be signed with each user's private key before submitting to the Mempool node. This means that eventually there will need to be some value in the data field for item-based payments, but this can be fixed to a value which does not require a creation event (as normal data assets do).
