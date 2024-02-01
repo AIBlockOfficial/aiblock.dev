@@ -1,0 +1,451 @@
+openapi: 3.0.3
+info:
+  title: Mempool API
+  description: |-
+    The Mempool node is a special type of node responsible for collecting transactions and bundling them into new blocks. 
+    They also partition the mining network for mining and validate the blocks that these partitions mine. 
+    There are only a limited number of Mempool nodes.  
+  contact:
+    email: byron.houwens@a-block.net
+  license:
+    name: GPL-3.0
+    url: https://www.gnu.org/licenses/gpl-3.0.en.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about ABlock
+  url: https://a-block.net
+servers:
+  - url: http://49.12.234.10:3003
+    description: Mempool Node
+# TAGS
+tags:
+  - name: info
+    description: Getting general information about the node
+  - name: transaction
+    description: All calls associated with making transactions
+  - name: address
+    description: Checking and creating addresses
+paths:
+  /debug_data:
+    get:
+      tags:
+        - info
+      summary: debug_data
+      description: Get general information about the current node.
+      operationId: debugData
+      parameters:
+        - in: header
+          name: x-cache-id
+          required: true
+          description: An idempotent key for retrieving cached responses from the node.
+          schema:
+              type: string
+              example: '4d1e5754af0931a15138445c3ecd1a82'
+              pattern: ^[a-z0-9]{32}$
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDebugData'          
+  /create_transactions:
+    post:
+      tags:
+        - transaction
+      summary: create_transactions
+      description: Create new transaction/s, which will be submitted to the Mempool nodes for inclusion into a new block. This call assumes a full transaction as part of the request body, which might make raw calls difficult to manage. For convenience, it may be best to use an ABlock library or SDK that abstracts this call for you.
+      operationId: createTx
+      parameters:
+        - in: header
+          name: x-cache-id
+          required: true
+          description: An idempotent key for retrieving cached responses from the node
+          schema:
+              type: string
+              example: '4d1e5754af0931a15138445c3ecd1a82'
+              pattern: ^[a-z0-9]{32}$
+      requestBody:
+        description: Create a new transaction
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCreateTransactions'          
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBadRequest'          
+  /create_item_asset:
+    post:
+      tags:
+        - transaction
+      summary: create_item_asset
+      description: Create new item/asset.
+      operationId: createItemAsset
+      parameters:
+        - in: header
+          name: x-cache-id
+          required: true
+          description: An idempotent key for retrieving cached responses from the node
+          schema:
+              type: string
+              example: '4d1e5754af0931a15138445c3ecd1a82'
+              pattern: ^[a-z0-9]{32}$
+      requestBody:
+        description: Create a new item/asset
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReceiptCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCreateReceipt'          
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBadRequest'          
+  /fetch_balance:
+    post:
+      tags:
+        - address
+      summary: fetch_balance
+      description: Fetches the balance/s for 1 or more addresses.
+      operationId: fetchBalance
+      parameters:
+        - in: header
+          name: x-cache-id
+          required: true
+          description: An idempotent key for retrieving cached responses from the node
+          schema:
+              type: string
+              example: '4d1e5754af0931a15138445c3ecd1a82'
+              pattern: ^[a-z0-9]{32}$
+      requestBody:
+        description: List of addresses to fetch the balance from.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FetchBalance'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseFetchBalance'          
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBadRequest'          
+
+### ------ Schemas ------ ###     
+components:
+  schemas:
+
+    # REQUEST BODY
+    FetchBalance:
+      type: object
+      example:
+          {
+            address_list: [
+            "e1e957ba8e44843bb80e9d6d905066ec98763ca797093181ab6c695934549035"
+            ]
+          }
+
+    ReceiptCreate:
+          type: object
+          example:
+            {
+              item_amount: 1000,
+              script_public_key: "b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01",
+              public_key: "ffe056dcad98fbeb8fdeb79ef95fb49b0c9b5d2bc3c5191cb08df55fa71c4e5d",
+              signature: "014643bab9a5859ccf6b0403d68c38b26b8888a41034b533f1a0ec2ba6b3afad5ac988e630a69b28f068c74d386df0ae86410aca1c8b1ce0b968f09b83111d07",
+              drs_tx_hash_spec: "Default"
+            }
+
+    TransactionCreate:
+      type: object
+      xml:
+        name: txcreate
+      properties:
+        id:
+          type: string
+          example: a957bc20
+          description: The ID of the transaction being created
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionInput'
+          description: The inputs to the transaction
+        outputs:
+          description: The outputs of the transaction
+          type: integer
+          format: int32
+          example: 7
+        version:
+          type: integer
+          format: int8
+          example: 2
+          description: The transaction's schema version
+        druid_info:
+          type: object
+          properties:
+            druid:
+              type: string
+              example: 'DRUID_1'
+            participants:
+              type: integer
+              example: 2
+            expectations:
+              type: object
+              properties:
+                from:
+                  type: string
+                to:
+                  type: string
+                asset:
+                  type: object              
+
+    TransactionInput:
+      type: object
+      properties:
+        previous_out:
+          type: string
+          example: 'f0698b112da09'
+        script_signature:
+          $ref: '#/components/schemas/Script'
+      xml:
+        name: txinput
+    Script:
+      type: object
+      properties:
+        stack:
+          type: array
+          items:
+            type: string
+
+    # RESPONSE BODY
+    ResponseCreateReceipt:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '4d1e5754af0931a15138445c3ecd1a82'
+          description: The ID of the call, which corresponds to the x-cache-id used in the header
+        status:
+          type: string
+          example: 'Success'
+          description: The status of the call, which will be one of either "Success", "Error", or "Pending"
+        reason:
+          type: string
+          example: 'Debug data successfully retrieved'
+          description: The reason for the status of the call. Most useful to debug errors
+        route:
+          type: string
+          example: 'debug_data'
+          description: The endpoint route that was called
+        content:
+          type: object
+          properties:
+            asset:
+              type: object
+              properties:
+                asset:
+                  type: object
+                  properties:
+                    Receipt: 
+                      type: object
+                      properties:
+                        amount:
+                          type: number
+                          example: 1000
+                        drs_tx_hash: 
+                          type: string
+                          example: default_drs_tx_hash
+                        metadata:
+                          type: string
+                          example: null
+                extra_info:
+                  type: string
+                  example: null
+            to_address:
+              type: string
+              example: b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01
+            tx_hash:      
+              type: string
+              example: default_drs_tx_hash
+    ResponseDebugData:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '4d1e5754af0931a15138445c3ecd1a82'
+          description: The ID of the call, which corresponds to the x-cache-id used in the header
+        status:
+          type: string
+          example: 'Success'
+          description: The status of the call, which will be one of either "Success", "Error", or "Pending"
+        reason:
+          type: string
+          example: 'Debug data successfully retrieved'
+          description: The reason for the status of the call. Most useful to debug errors
+        route:
+          type: string
+          example: 'debug_data'
+          description: The endpoint route that was called
+        content:
+          type: object
+          properties:
+            node_type:
+              type: string
+              example: 'Compute'
+              description: The type of this node
+            node_api:
+              type: array
+              description: The publicly visible endpoints available on this node
+              items:
+                type: string
+              example:
+                - fetch_balance
+                - create_item_asset
+                - create_transactions
+            node_peers:
+              type: array
+              description: The publicly visible nodes that this node is connected to
+              items:
+                type: string
+              example:
+                - 'Storage'
+
+    ResponseCreateTransactions:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 'a1d46199e5c89b00509e118f5af83172'
+          description: The ID of the call, which corresponds to the x-cache-id used in the header
+        status:
+          type: string
+          example: 'Success'
+          description: The status of the call, which will be one of either "Success", "Error", or "Pending"
+        reason:
+          type: string
+          example: 'Transaction/s successfully created'
+          description: The reason for the status of the call. Most useful to debug errors
+        route:
+          type: string
+          example: 'create_transactions'
+          description: The endpoint route that was called
+        content:
+          type: object
+          properties:
+            node_type:
+              type: string
+              example: 'Compute'
+              description: The type of this node
+            node_api:
+              type: array
+              description: The publicly visible endpoints available on this node
+              items:
+                type: string
+              example:
+                - fetch_balance
+                - create_item_asset
+                - create_transactions
+            node_peers:
+              type: array
+              description: The publicly visible nodes that this node is connected to
+              items:
+                type: string
+              example:
+                - 'Storage'
+
+    ResponseFetchBalance:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '45v340cd2f8c4782a5b058832565afb1'
+          description: The ID of the call, which corresponds to the x-cache-id used in the header
+        status:
+          type: string
+          example: 'Success'
+          description: The status of the call, which will be one of either "Success", "Error", or "Pending"
+        reason:
+          type: string
+          example: 'Balance successfully fetched'
+          description: The reason for the status of the call. Most useful to debug errors
+        route:
+          type: string
+          example: 'fetch_balance'
+          description: The endpoint route that was called
+        content:
+          type: object
+          properties:
+            total:
+              type: object
+              properties:
+                tokens:
+                  type: number
+                  example: 5463669
+                items:
+                  type: object
+            address_list:
+              type: object
+              example: {
+                "d6fa779a3de8b216c56375018375e490c7e2ce92918abce4caecf73b1f77c38f": [
+                      {
+                          "out_point": {
+                              "t_hash": "g9182e1e2a55b0ef36f1183602d74e63",
+                              "n": 0
+                          },
+                          "value": {
+                              "Token": 5463669
+                          }
+                      }
+                  ]
+              }
+            
+    ResponseBadRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          example: null
+        status:
+          type: string
+          example: "Error"
+        reason:
+          type: string
+          example: 'Bad Request'
+        route:
+          type: string
+          example: null
+        content:
+          type: string
+          example: null
+  # securitySchemes:
+  #   api_key:
+  #     type: apiKey
+  #     name: api_key
+  #     in: header

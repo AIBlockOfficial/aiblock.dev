@@ -129,7 +129,7 @@ const config = {
         docsPluginId: "classic",
         config: {
           mempool: {
-            specPath: "openapi/mempool.yml",
+            specPath: "openapi/mempool_openapi.yml",
             outputDir: "docs/api/mempool",
             sidebarOptions: {
               groupPathsBy: "tag",
@@ -139,7 +139,7 @@ const config = {
             hideSendButton: true,
           },
           storage: {
-            specPath: "openapi/storage.yml",
+            specPath: "openapi/storage_openapi.yml",
             outputDir: "docs/api/storage",
             sidebarOptions: {
               groupPathsBy: "tag",
@@ -147,18 +147,7 @@ const config = {
               sidebarCollapsible: false,
             },
             hideSendButton: true,
-          }
-          /** TODO */
-          // miner: {
-          //   specPath: "openapi/miner.yml",
-          //   outputDir: "docs/miner-api",
-          //   sidebarOptions: {
-          //     groupPathsBy: "tag",
-          //     categoryLinkSource: "tag"
-          // sidebarCollapsible: false,
-          //   },
-          //   hideSendButton: true,
-          // },
+          },
         }
       },
     ],

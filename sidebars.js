@@ -124,7 +124,17 @@ const sidebars = {
           },
           // @ts-ignore
           items: require("./docs/api/storage/sidebar.js")
-        }
+        },
+        // {
+        //   type: "category",
+        //   label: "Miner",
+        //   link: {
+        //     type: "doc",
+        //     id: "api/miner/miner"
+        //   },
+        //   // @ts-ignore
+        //   items: require("./docs/api/storage/sidebar.js")
+        // }
       ]
     },
     {
