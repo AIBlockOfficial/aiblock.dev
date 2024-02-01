@@ -1,6 +1,6 @@
 ---
 id: node-types
-title: "AI3lock Network Node Types"
+title: "ABlock Network Node Types"
 description: "Learn about ABlock's 3 main node types"
 sidebar_label: Node Types
 sidebar_position: 0
@@ -11,35 +11,31 @@ tags:
 ---
 
 # AI3lock Network Node Types
-Unlike Bitcoin, where all full node miners perform identical functions, AI3lock makes use of different node types in the AI3lock Network. Different node types allow the AI3lock Network to facilitate quick payment settlement times, ensure geographic diversity, ensure lighter storage requirements for the blockchain, and most importantly enable token-for-asset payments.
 
-## The Types at a Glance
-The AI3lock Network consists of 3 main node types:
-- [**Mempool Node**](Mempool-Node): The Mempool node is a special type of node responsible for collecting transactions and bundling them into new blocks. They also partition the mining network for mining and validate the blocks that these partitions mine. *There are only a limited number of Mempool nodes*.
+Unlike Bitcoin's uniform full node miners, the AI3lock Network employs diverse node types to enhance functionality. This diversity ensures quick payment settlements, geographic diversity, lighter blockchain storage requirements, and facilitates token-for-asset payments.
 
-- [**Miner Node**](Miner-Node): The Miner node is most like the Bitcoin miner you may be familiar with. They are responsible for mining new blocks that they receive from the Mempool nodes and collect the associated block reward for their efforts. They are only able to mine a block if they manage to get into the partition for that round. *There can be an unlimited number of Miner nodes*.
+## Types at a Glance
 
-- [**Storage Node**](Storage-Node): The Storage node is responsible for storing the full blockchain history. Once blocks are mined by the miners and sent to the Mempool nodes for validation, they are pushed on to the Storage nodes for long-term storage. Anybody is allowed to request a full history of the blockchain from the Storage nodes, but they are not required to keep such a history to participate in the network. *There are only a limited number of Storage nodes*.
+- [**Mempool Node**](Mempool-Node): Collects transactions, bundles them into blocks, and validates mining partitions. *Limited in number*.
+
+- [**Miner Node**](Miner-Node): Similar to Bitcoin miners, responsible for mining new blocks and collecting rewards. *Unlimited in number*.
+
+- [**Storage Node**](Storage-Node): Stores the full blockchain history. Anyone can request it, but not mandatory for network participation. *Limited in number*.
 
 ## Why Different Node Types?
-A good question, since many blockchains seem to function with one node type. There are a few key concerns that the AI3lock system needs to address, which different node types help solve:
 
 ### Quick Payment Settlement
-Currently, Bitcoin recommends a minimum waiting time of 6 blocks before accepting a payment transaction. This is due to the architecture of Bitcoin, in which the owner of a token can only be verified to exist *after* that owner has spent that token. Such a structure is what we call **past facing**, because it needs to look into the past in order to validate a transaction. Such past facing (in addition to distributed orphan blocks) means that we have to wait a certain amount of time before we can say that a transaction has been included for certain. This structure is great for security, but terrible for settlement speeds, and results in a number of non-ideal patches to solve (such as Lightning).
 
-AI3lock, by contrast, has quick settlement and high security built directly into the blockchain structure, giving us the best of both worlds. The key to such a structure is the use of Mempool nodes, which are relatively few in number compared to the Miner nodes. All transactions must pass through the Mempool nodes, who can coordinate transaction spending and verify ownership immediately without the need for orphan blocks or lengthy wait times. The question "who in the network has the longest chain?", which can have multiple answers at any given point in Bitcoin, is always the same for AI3lock: the Mempool nodes.
+Bitcoin recommends a 6-block waiting time for payment validation due to its **past-facing** architecture. AI3lock, in contrast, achieves quick settlement by using Mempool nodes. These nodes coordinate transaction spending and verify ownership immediately, avoiding the need for orphan blocks or lengthy wait times.
 
 ### Geographic Diversity
-Currently, many cryptocurrencies find their mining being down in one geographic region. Mining pool concentration for Bitcoin was for a substantial period of time up to 81% in China. This presents certain risks for a cryptocurrency, such as sudden changes in legislation, which can cause disruptions or even collapse. 
 
-For AI3lock, this challenge is a simple one to overcome. Each of the relatively small number of Mempool nodes is placed in a different geographical region; this prevents any one nation or body of law from affecting AI3lock's functioning and minimises potential risk.
+To overcome risks associated with mining concentration in one region, AI3lock places its Mempool nodes in different geographical regions. This prevents any single entity from affecting the network's functioning.
 
 ### Lighter Storage Requirements
-Joining the Bitcoin or Ethereum networks as a full miner requires the downloading of the entire blockchain in order to participate. This can result in terabytes of storage being consumed, a high barrier entry for new participants.
 
-For AI3lock, by contrast, the burden of blockchain storage is given to the Storage nodes. Anybody is allowed to query the Storage node for the full blockchain history should they so choose, but none of this is required to participate in mining, meaning that potential miners can hit the ground running as quickly as possible.
+Unlike Bitcoin or Ethereum, joining AI3lock as a full miner doesn't require downloading the entire blockchain. Storage nodes handle this, allowing potential miners to participate without consuming large amounts of storage.
 
 ### Token-For-Asset Payments
-Up until now, the recording of token payments for a given asset have not been possible on any blockchain. The AI3lock 2WT Blockchain is the first blockchain to allow for the transfer of tokens for assets to be recorded as payments. Unfortunately, the requirement of recording one asset's transfer for another means that the **past facing** architecture of other blockchains will not work for AI3lock.
 
-As a result, the introduction of Mempool nodes allows for two "half-transactions" to be compiled and included in the same block as a single transaction pair, even though each half comes from a different user. This is only possible because the Mempool nodes exist and facilitate all transactions in the system, creating a novel **present-facing** architecture for the AI3lock network.
+AI3lock's 2WT Blockchain records token payments for assets, unlike other blockchains with a **past-facing** architecture. Mempool nodes enable the inclusion of two "half-transactions" from different users in the same block, creating a unique **present-facing** architecture for the AI3lock network.

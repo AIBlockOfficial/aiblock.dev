@@ -1,6 +1,6 @@
 ---
 id: two-way-transaction
-title: "AI3lock 2WT"
+title: "ABlock 2WT"
 description: "Learn about ABlock's 2WT"
 sidebar_label: 2 Way Transaction
 sidebar_position: 7
@@ -11,12 +11,12 @@ tags:
 ---
 
 # 2 Way Transaction
+
 Currently, Bitcoin payments reflect as "charity": Alice pays Bob 1 BTC for a mid-range car, but the Bitcoin ledger can only reliably show that Alice charitably gave Bob 1 BTC. AI3lock's blockchain needs to be able to reflect the token payment as well as the asset the payment is for. To this end, what is required is a *2 way transaction*, or 2WT. 
 
 ## How a 2WT Works
-Bob has [game item], an awesome [item type] used in the game [game] which he wishes to sell through the AI3lock blockchain:
 
-{/* Image */}
+Bob has [game item], an awesome [item type] used in the game [game] which he wishes to sell through the AI3lock blockchain:
 
 Alice is new to the game, but wants to get a leg up on the competition and so decides to buy the in-game item. In the event that Alice pays Bob 100 ZNT for the axe, the following sequence occurs:
 
@@ -35,9 +35,11 @@ Alice is new to the game, but wants to get a leg up on the competition and so de
 **NOTE:** Even though both transactions are processed separately, both still retain the DRUID value. This allows for auditing of the trade at a later stage
 
 ## Receipt-Based Payments
+
 In addition to enabling auditable trades of tokens for data assets, the 2WT also enables item-based payments. A item-based payment is one in which Alice wants to give Bob 100 ZNT as a charitable gift, but requires Bob to approve the gift before it gets processed into a block.
 
 In order to facilitate this, Alice simply needs to leave the expected asset field in her transaction blank (signifying that she expects nothing in return). Bob does the same on his side, by requesting 100 ZNT but leaving the data asset to sell blank (signifying he does not intend to provide anything of value in return). The process is the same as before, with both Alice and Bob submitting their respective transactions with the same DRUID and having them processed by the Mempool node.
 
 ## Future Considerations and Improvements
+
 In order for item-based payments to truly be effective, the content will need to be signed with each user's private key before submitting to the Mempool node. This means that eventually there will need to be some value in the data field for item-based payments, but this can be fixed to a value which does not require a creation event (as normal data assets do).

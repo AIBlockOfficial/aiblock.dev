@@ -1,6 +1,6 @@
 ---
 id: mempool-node
-title: "AI3lock Mempool Node"
+title: "ABlock Mempool Node"
 description: "Learn about ABlock's Mempool node type"
 sidebar_label: Mempool Node
 sidebar_position: 1
@@ -11,32 +11,30 @@ tags:
 ---
 
 # Mempool Node
-The Mempool node is one half of the very important balance of power in the AI3lock network. While fully distributed mining, as seen in Bitcoin, is ideal for security it is inadequate for other factors such as speed. As a result, we at AI3lock realised that a good compromise is a ring of decentralised Mempool nodes to facilitate transactions, with public, fully distributed Miner nodes still responsible for mining the blocks containing them and for providing the input into the verifiably fair decision-making process for selecting transactions.
+
+The Mempool node plays a crucial role in the AI3lock network, serving as one part of the power balance. Unlike fully distributed mining, as seen in Bitcoin, AI3lock opts for a compromise by employing a ring of decentralized Mempool nodes to facilitate transactions. Public, fully distributed Miner nodes are still responsible for mining the blocks and contributing to the fair decision-making process for transaction selection.
 
 ## Balance of Power
-It is important to consider how a ring of Mempool nodes under the direct control of AI3lock can affect security and trustlessness in the network. By having Mempool nodes create blocks and Miner nodes mine them out, we ensure that there is a balance of control; take either set of nodes out of the system and the whole thing falls apart. There is thus a Roman-style balance between the Senate-like Mempool nodes and the Public-like Miner nodes.
+
+The network's security and trustlessness are influenced by the ring of Mempool nodes under AI3lock's control. The Mempool nodes create blocks, while Miner nodes mine them, ensuring a balance of control. Removing either set of nodes jeopardizes the entire system, creating a balance akin to the Roman-style Senate and the Public-like Miner nodes.
 
 ## Mempool Node Structure
-The Mempool node consists of:
 
-- **`MempoolNode`** the data structure
-- **`MempoolInterface`** a trait for many of the externally-facing methods
-- **`MempoolRequest`** a set of requests that the Mempool node can make and receive
+The Mempool node consists of three main components:
+- **`MempoolNode`**: The data structure.
+- **`MempoolInterface`**: A trait for many externally-facing methods.
+- **`MempoolRequest`**: A set of requests that the Mempool node can make and receive.
 
-There are a limited number of Mempool nodes, all of which sit with a range of enterprise-level partners and collect token rewards for the processing of transactions and validation of blocks.
+A limited number of Mempool nodes collaborate with enterprise-level partners, collecting token rewards for processing transactions and validating blocks.
 
 ## Constructing Blocks
-In each round, the responsibility of block construction shared by all nodes within the Mempool ring. Each Mempool node has a personal transaction pool (the `tx_pool` attribute in the `MempoolNode`) that they collect from users. Regularly, they will consensus through RAFT transactions from that `tx_pool`, and will form the `consensused.tx_pool` shared by all of them. It is from this consensused pool that new blocks are constructed.
 
-When receiving the info from the previous block stored by StorageNodes, and a majority of votes for that event is consensused, a block is generated from already consensused transactions in `consensused.tx_pool`.
-The order of the transactions sent and how many of the transactions in the block belong to a particular Mempool node are not important.
-
-A block will be generated even if it contains no transactions. If too many transactions are available in `consensused.tx_pool`, only a subset will be used for this block, and the remaining will go in one of the next blocks. All nodes will have generated an identical block from consensused information and notify Miners in their partition to begin mining.
+In each round, all nodes within the Mempool ring share the responsibility of block construction. Each Mempool node has a personal transaction pool, and consensus through RAFT transactions forms a shared `consensused.tx_pool`. New blocks are constructed from this consensused pool. The order of transactions and their ownership by a particular Mempool node are not critical. Even if a block has no transactions, it will be generated. If too many transactions are available, only a subset is used, and the rest go into the next blocks.
 
 ## Mempool Nodes and Miner Nodes
-Once a block is generated, while one block is mined & stored, Mining nodes were sending requests to all Mempool nodes to participate in the next round of block mining. This is done because, each round, it is not the whole network that mines (unlike in Bitcoin). Instead, the AI3lock network protocol only allows *partitions* or subsets of the network to mine at any given time, and each Mempool node has its own partition of miners. This partition list (stored in the `partition_list` in `MempoolNode`) changes every round, allowing Miner nodes a new opportunity to mine every round.
 
-Once the partition list for a Mempool node is full, the Miner nodes for that Mempool node are considered selected, and when the new block is ready to be mined, the Mempool node sends it to the Miner nodes who made it into the partition list. Those Miners who find a valid Proof-of-Work for the block within the mining round time are considered the winners, from which one Miner is randomly selected through the [UNiCORN](unicorns), and sends their block to the Mempool node for validation and storage. For specifics on Miner operation, you can [read this wiki page](Miner-Node).
+After a block is generated and mined, Miner nodes send requests to all Mempool nodes to participate in the next round of block mining. The AI3lock protocol allows only partitions or subsets of the network to mine at any given time. Each Mempool node has its own partition of miners, changing every round. Once the partition list is full, Miner nodes for that Mempool node are selected. Winners, determined by a valid Proof-of-Work, send their block to the Mempool node for validation and storage. For detailed Miner operation, refer to [this wiki page](Miner-Node).
 
 ## Mempool Nodes and Storage Nodes
-Once the Mempool node has received a valid block, they declare the winner for their partition and send the block to their associated Storage node for long-term storage. After this point, all the round-related attributes in the Mempool node are cleared and emptied and the next round can begin.
+
+Upon receiving a valid block, the Mempool node declares the winner for its partition and sends the block to the associated Storage node for long-term storage. Round-related attributes in the Mempool node are cleared, and the next round begins.

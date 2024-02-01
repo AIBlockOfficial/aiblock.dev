@@ -1,6 +1,6 @@
 ---
 id: block-mining
-title: "AI3lock Block Mining Process"
+title: "ABlock Block Mining Process"
 description: "Learn about ABlock's Block Mining Process"
 sidebar_label: Block Mining
 sidebar_position: 6
@@ -11,47 +11,35 @@ tags:
 ---
 
 # Block Mining Process
-The process for mining a block on the network is somewhat complex. It starts with the following general way:
 
-1. Users send their transactions to the [Mempool](mempool-node) ring, which then place all valid transactions into a waiting pool to be included in a block.
+The process for mining a block on the network is somewhat complex and involves several steps. Here's a general overview:
 
-2. Once the block process starts, transactions from the waiting pool are added to the next block and then sent to all [Miners](miner-node) participating in this round.
+1. Users send their transactions to the [Mempool](mempool-node) ring, where all valid transactions are placed into a waiting pool to be included in a block.
 
-3. The Miners mine the block and then send their Proof-of-Works (PoWs) back to the Mempool ring.
+2. When the block process starts, transactions from the waiting pool are added to the next block and sent to all [Miners](miner-node) participating in this round.
 
-4. The Mempool ring then selects the final winner, who receives a token reward, and the block and its associated winning information gets sent to the [Storage](storage-node) ring.
+3. Miners mine the block and send their Proof-of-Works (PoWs) back to the Mempool ring.
 
-The details of the mining process, as laid out in this doc, involve the communications between the Mempool ring and the Miners in the process of the direct mining of the block.
+4. The Mempool ring selects the final winner, who receives a token reward, and the block along with its winning information is sent to the [Storage](storage-node) ring.
+
+The mining process involves communications between the Mempool ring and the Miners during the direct mining of the block.
 
 ## UNiCORN Construction
 
-The entire mining process requires the use of a single [UNiCORN](unicorns), which is generated from a seed value. This seed value is composed of the transactions that are going into the block to be mined, the applications of all Miners who want to mine the block, and the list of successful Miners from 2 blocks ago (more info on this last part later).
+The entire mining process requires the use of a single [UNiCORN](unicorns), generated from a seed value. This seed value is composed of the transactions going into the block, the applications of all Miners who want to mine the block, and the list of successful Miners from two blocks ago.
 
-This UNiCORN is used for a number of processes, most notably:
-
-1. Miner subset selection
-2. Miner winner selection
-
-The construction is therefore the following, with pruning of input values to their hashes in order to save on storage cost:
-
-{/* Image */}
+This UNiCORN is used for processes like Miner subset selection and Miner winner selection. The construction involves pruning input values to their hashes to save on storage costs.
 
 ## Process for a Single Block
 
-Once a UNiCORN is constructed, the output can be placed into a pseudo-random number generator (PRNG) as seed in order to select a subset of the Miners who applied. The subset is the only group who can then start mining the block in the expected fashion. Once a miner has found a valid PoW they can submit it to the Mempool ring, who will store all successful PoWs from participating miners into a pending list.
+Once a UNiCORN is constructed, the output is placed into a pseudo-random number generator (PRNG) as a seed to select a subset of the Miners who applied. This subset is the only group allowed to start mining the block. After a Miner finds a valid PoW, they submit it to the Mempool ring, storing all successful PoWs from participating Miners in a pending list.
 
-Once the round is considered closed, the winner for the round is selected once again via the pre-calculated UNiCORN. After this, the block is sent to the Storage ring for permanent storage.
+When the round is considered closed, the winner is selected using the pre-calculated UNiCORN. The block is then sent to the Storage ring for permanent storage.
 
 ## Parallel Pipeline for All Blocks
 
-In practice, although the above process works, it is inefficient and requires the following block to needlessly wait for the previous block to finish before it can begin. What we can do instead is create a parallel process where two blocks are mined simultaneously, as in the following diagram:
+In practice, a more efficient parallel process is used where two blocks are mined simultaneously. The `previous_hash` field in the block header is crucial in this process, as it no longer points to the immediately preceding block. Instead, it's composed of values from two blocks previous to the preceding block (e.g., `t - 2` and `t - 3` instead of `t - 1`).
 
-{/* Image */}
+This process is described in the diagram for block `n + 2`, where the `previous_hash` is composed of the previous hash of block `n - 1` and the hash of the entire block in `n`.
 
-In order for such a process to work, it's important to ensure that the `previous_hash` field of the block header is correct since the previous block will not be complete yet. As such, the `previous_hash` value will no longer point to the immediately preceding block in the chain but will rather be composed of values from the two blocks previous to the preceding block. In simple terms, the `previous_hash` for block `t` will be composed of values from blocks `t - 2` and `t - 3`, rather than from `t - 1`.
-
-The following diagram describes this process for block `n + 2`, which has a previous hash composed of the previous hash of block `n - 1` and the hash of the entire block in `n`:
-
-{/* Image */}
-
-Finally, after a winner has been found and selected the Mempool ring then sends the block, as well as the UNiCORN input values, to the Storage ring for storage.
+Finally, after a winner is found and selected, the Mempool ring sends the block, along with the UNiCORN input values, to the Storage ring for storage.
