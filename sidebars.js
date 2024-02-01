@@ -105,25 +105,21 @@ const sidebars = {
           type: "category",
           label: "Mempool",
           link: {
-            type: "generated-index",
-            title: "Mempool API",
-            description: "Mempool API generated with swagger",
-            slug: "/api/mempool"
+            type: "doc",
+            id: "api/mempool/mempool-api"
           },
           // @ts-ignore
-          items: require("./docs/api/mempool/sidebar.js")
+          items: require("./docs/api/mempool/sidebar.js").slice(1)
         },
         {
           type: "category",
           label: "Storage",
           link: {
-            type: "generated-index",
-            title: "Storage API",
-            description: "Storage API generated with swagger",
-            slug: "/api/storage"
+            type: "doc",
+            id: "api/storage/storage-api"
           },
           // @ts-ignore
-          items: require("./docs/api/storage/sidebar.js")
+          items: require("./docs/api/storage/sidebar.js").slice(1)
         },
         // {
         //   type: "category",
