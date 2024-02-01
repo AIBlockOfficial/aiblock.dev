@@ -12,7 +12,7 @@ info:
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
   version: 1.0.0
 externalDocs:
-  description: Find out more about A-Block
+  description: Find out more about ABlock
   url: https://a-block.net
 servers:
   - url: http://49.12.234.10:3001

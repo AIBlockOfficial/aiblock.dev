@@ -11,21 +11,20 @@ tags:
 
 import DocCardList from '@theme/DocCardList';
 import {useCurrentSidebarCategory, } from '@docusaurus/theme-common';
-import Hero from "../static/img/hero_new.svg"
+import Hero from "../static/img/a_block_logo_full.svg"
 
 <div id="top"></div>
 
 <br />
 
 <div align="center">
-  <a href='https://github.com/ABlockOfficial/A-Block.js' target='_blank'>
-    A-Block Logo
-  </a>
+  <div><Hero /></div>
+  <br />
 
-  <h3 align="center">A-Block API Tutorial</h3>
+  <h3 align="center">API Tutorial</h3>
 
   <p align="center">
-    A guide to understand A-Block's Core API Endpoints
+    A guide to understand ABlock's Core API Endpoints
     <br />
     <br />
   </p>
@@ -34,40 +33,15 @@ import Hero from "../static/img/hero_new.svg"
 ## About The Project
 
 
-The A-Block API allows you to interact with the A-Block chain without the need for complicated, risky smart contracts. It's here to let you work with A-Block in a way that's fast, simple and secure.
+The ABlock API allows you to interact with the ABlock chain without the need for complicated, risky smart contracts. It's here to let you work with ABlock in a way that's fast, simple and secure.
 
-The API is used to interact with the three following nodes :
+The API is used to interact with the following nodes :
 
--   Mempool: 
--   Storage
--   Miner
+-   [**Mempool**](/docs/network-wiki/mempool-node): responsible for collecting transactions and bundling them into new blocks
+-   [**Storage**](/docs/network-wiki/storage-node): responsible for storing the full blockchain history.
+-   [**Miner**](/docs/network-wiki/miner-node): responsible for mining new blocks
 
 ## Quick Access
-
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    {/* <li>
-      <a href="basic-tutorials/get-started#installation">Installation</a>
-    </li>
-    <li>
-      <a href="basic-tutorials/get-started#create-a-block-wallet">Getting Started</a>
-    </li> */}
-     <li>
-      <a href="#usage">Usage</a>
-      {/* <ul>
-        <li><a href="basic-tutorials/get-started#generating-keypairs">Generating Keypairs</a></li>
-        <li><a href="basic-tutorials/get-started#fetch-balance">Fetch Balance</a></li>
-        <li><a href="basic-tutorials/send-and-receive#sending-a-payment">Sending a Payment</a></li>
-        <li><a href="basic-tutorials/send-and-receive#receiving-a-payment">Receiving a Payment</a></li>
-        <li><a href="basic-tutorials/two-way-payments#send-a-payment-for-an-item">Send a Payment for an Item</a></li>
-        <li><a href="basic-tutorials/two-way-payments#fetch-pending-2-way-payments">Fetch Pending 2-Way Payments</a></li>
-        <li><a href="basic-tutorials/two-way-payments#accepting-and-rejecting-2-way-payments">Accepting and Rejecting 2-Way Payments</a></li>
-        <li><a href="basic-tutorials/create-an-item">Create an Item</a></li>
-      </ul> */}
-    </li>
-  </ol>
-</details>
 
 <DocCardList items={useCurrentSidebarCategory().items}/>
 

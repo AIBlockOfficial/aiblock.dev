@@ -32,9 +32,9 @@ export default function Home(): JSX.Element {
       <HomepageHeader />
       <main>
         <div className={styles.heroIntro}>
-          <h1 className="hero__title">Welcome to A-Block</h1>
+          <h1 className="hero__title">Welcome to ABlock</h1>
           <p>
-            A-Block is a layer 1 blockchain that provides builders with a quick, easy, and low risk way to build decentralized applications. It's designed 
+            ABlock is a layer 1 blockchain that provides builders with a quick, easy, and low risk way to build decentralized applications. It's designed 
             to let you build without tricky, risky smart contracts, and without the need to learn a new programming language. Use our low code solutions to get 
             creating, issuing and making asset trades in seconds.
           </p>
@@ -45,11 +45,11 @@ export default function Home(): JSX.Element {
           </div>
         </div>
 
-        <HomepageFeatures bg={true} title={'Key Advantages of A-Block'} />
+        <HomepageFeatures bg={true} title={'Key Advantages of ABlock'} />
 
         <div className={styles.block}>
           <h2>Get Started</h2>
-          <p>You can start building and using the A-Block tooling by exploring the documentation and API</p>
+          <p>You can start building and using the ABlock tooling by exploring the documentation and API</p>
           <div className={styles.blockButton}>
             <a className="button button--primary button--lg" href="/docs/">
               Developer Documentation

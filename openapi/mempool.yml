@@ -12,7 +12,7 @@ info:
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
   version: 1.0.0
 externalDocs:
-  description: Find out more about A-Block
+  description: Find out more about ABlock
   url: https://a-block.net
 servers:
   - url: http://49.12.234.10:3003
@@ -67,7 +67,7 @@ paths:
       tags:
         - transaction
       summary: create_transactions - Incomplete
-      description: This section is incomplete and docs could be outdated. Create new transaction/s, which will be submitted to the Mempool nodes for inclusion into a new block. This call assumes a full transaction as part of the request body, which might make raw calls difficult to manage. For convenience, it may be best to use an A-Block library or SDK that abstracts this call for you.
+      description: This section is incomplete and docs could be outdated. Create new transaction/s, which will be submitted to the Mempool nodes for inclusion into a new block. This call assumes a full transaction as part of the request body, which might make raw calls difficult to manage. For convenience, it may be best to use an ABlock library or SDK that abstracts this call for you.
       operationId: createTx
       parameters:
         - in: header

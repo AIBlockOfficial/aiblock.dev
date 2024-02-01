@@ -8,7 +8,7 @@ const { DOCUSAURUS_VERSION } = require("@docusaurus/utils");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'A-Block',
+  title: 'ABlock',
   url: 'http://localhost:3000/',
   baseUrl: '/',
   onBrokenLinks: "warn",
@@ -113,7 +113,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} A-Block Technologies AG`,
+        copyright: `Copyright © ${new Date().getFullYear()} ABlock Technologies AG`,
       },
       prism: {
         theme: lightCodeTheme,

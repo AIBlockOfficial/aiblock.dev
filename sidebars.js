@@ -93,11 +93,6 @@ const sidebars = {
       defaultStyle: true, // Use the default menu item styling
     },
     {
-      type: "doc",
-      label: "Postman Collections",
-      id: "postman-collections"
-    },
-    {
       type: "category",
       label: "Core Endpoints",
       link: {
@@ -131,6 +126,11 @@ const sidebars = {
           items: require("./docs/api/storage/sidebar.js")
         }
       ]
+    },
+    {
+      type: "doc",
+      label: "Postman Collections",
+      id: "postman-collections"
     },
   ],
 };
