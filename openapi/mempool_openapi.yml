@@ -16,7 +16,7 @@ externalDocs:
   url: https://a-block.net
 servers:
   - url: http://49.12.234.10:3003
-    description: Mempool Node
+    description: Testnet Mempool Node
 # TAGS
 tags:
   - name: info

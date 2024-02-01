@@ -1,0 +1,1 @@
+module.exports = [{"type":"doc","id":"api/miner/miner-api"},{"type":"category","label":"info","link":{"type":"doc","id":"api/miner/info"},"collapsible":false,"items":[{"type":"doc","id":"api/miner/debug-data","label":"debug_data","className":"api-method get"}]}];

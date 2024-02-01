@@ -121,16 +121,16 @@ const sidebars = {
           // @ts-ignore
           items: require("./docs/api/storage/sidebar.js").slice(1)
         },
-        // {
-        //   type: "category",
-        //   label: "Miner",
-        //   link: {
-        //     type: "doc",
-        //     id: "api/miner/miner"
-        //   },
-        //   // @ts-ignore
-        //   items: require("./docs/api/storage/sidebar.js")
-        // }
+        {
+          type: "category",
+          label: "Miner",
+          link: {
+            type: "doc",
+            id: "api/miner/miner-api"
+          },
+          // @ts-ignore
+          items: require("./docs/api/miner/sidebar.js").slice(1)
+        }
       ]
     },
     {

@@ -16,7 +16,7 @@ externalDocs:
   url: https://a-block.net
 servers:
   - url: http://49.12.234.10:3001
-    description: Storage Node
+    description: Testnet Storage Node
 tags:
   - name: info
     description: Getting information about and from the node.
@@ -69,12 +69,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseLatestBlock"
-        "400":
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResponseBadRequest"
   /block_by_num:
     post:
       tags:

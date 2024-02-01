@@ -148,6 +148,16 @@ const config = {
             },
             hideSendButton: true,
           },
+          miner: {
+            specPath: "openapi/miner_openapi.yml",
+            outputDir: "docs/api/miner",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+              sidebarCollapsible: false,
+            },
+            hideSendButton: true,
+          },
         }
       },
     ],
