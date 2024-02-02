@@ -12,7 +12,7 @@ tags:
 
 # Storage Node
 
-The Storage node has a singular responsibility: storing the complete blockchain history. Though seemingly straightforward, this task involves various components within the AI3lock system, detailed below.
+The Storage node has a singular responsibility: storing the complete blockchain history. Though seemingly straightforward, this task involves various components within the ABlock system, detailed below.
 
 ## Storage Node Structure
 
@@ -34,7 +34,7 @@ The primary role of the Storage node is receiving blocks through the `receive_bl
 
 ## Receiving UNiCORN Values
 
-To validate the correctness of blocks, AI3lock's blockchain utilizes a special value called [UNiCORN](unicorns) in combination with a block hash. The Storage nodes handle the preservation of UNiCORN values through the `receive_unicorn_table` method:
+To validate the correctness of blocks, ABlock's blockchain utilizes a special value called [UNiCORN](unicorns) in combination with a block hash. The Storage nodes handle the preservation of UNiCORN values through the `receive_unicorn_table` method:
 - Using the UNiCORN's evaluation function to prove the validity of inputs for the provided UNiCORN value.
 - Performing RAFT consensus with peer Storage nodes.
 - Saving the block to the database.

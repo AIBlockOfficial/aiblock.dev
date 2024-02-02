@@ -11,7 +11,7 @@ tags:
 ---
 
 # Transactions
-Transactions in the AI3lock system are structured similarly to those found in Bitcoin. They consist primarily of a reference to a previous spendable amount on the blockchain (for AI3lock, this can be tokens or items (data assets) ) and a reference to an address to send the spendable amount to. To accomplish this, the spender is required to verify that they are the original owner of the spendable amount through public key signature schemes.
+Transactions in the ABlock system are structured similarly to those found in Bitcoin. They consist primarily of a reference to a previous spendable amount on the blockchain (for ABlock, this can be tokens or items (data assets) ) and a reference to an address to send the spendable amount to. To accomplish this, the spender is required to verify that they are the original owner of the spendable amount through public key signature schemes.
 
 ## Structure
 
@@ -66,7 +66,7 @@ Here we'll focus on the `script_public_key`, which is the public key that the ow
 
 ## Signing
 
-In the AI3lock system, to tie the `TxIn` of the current transaction to the `TxOut` of the previous one, the user needs to sign the **hash of the `OutPoint`** referencing that `TxOut`. This ensures that spending a `TxOut` amount is impossible without:
+In the ABlock system, to tie the `TxIn` of the current transaction to the `TxOut` of the previous one, the user needs to sign the **hash of the `OutPoint`** referencing that `TxOut`. This ensures that spending a `TxOut` amount is impossible without:
 
 - **(A)** The `OutPoint` referencing a specific `TxOut`
 - **(B)** The user having the private key corresponding to the `TxOut`'s public key
