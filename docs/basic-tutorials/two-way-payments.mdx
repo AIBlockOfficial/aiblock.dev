@@ -37,14 +37,14 @@ import { initIAssetToken, initIAssetItem, ABlockWallet } from '@a-block/a-blockj
 // ... wallet initialization set up
 
 // The tokens we want to send
-const tokensToSend = initIAssetToken({"Token": 10});
+const tokensToSend = {"Token": 10};
 
 // The item we want to receive
-const itemAliceWants = initIAssetItem({
+const itemAliceWants = {
   "Receipt": {
       "amount": 10,                // The amount of the item we want
       "drs_tx_hash": "default_drs_tx_hash" // The genesis transaction hash for the item, its identifier on-chain
-  }});
+  }};
 
 // Make the 2-way payment as Alice
 const paymentResult = await wallet.make2WayPayment(

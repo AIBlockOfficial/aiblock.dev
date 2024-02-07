@@ -1,0 +1,23 @@
+---
+id: use-plugins
+sidebar_position: 0
+title: Valence Plugins
+sidebar_label: Valence plugins
+hide_title: false
+tags:
+  - valence-core
+  - valence plugins
+  - getting started
+---
+
+### 🏎️ Use in Plug-ins
+
+The `valence_core` library exposes a few common methods and functionalities that are useful if you're either using plug-ins or writing your own. This core functionality includes:
+
+- **api:** The module here contains most of the `struct`s and `enum`s that are used to communicate between nodes and plug-ins. This includes the `JsonReply`, `ApiErrorResponse` and `APIResponseStatus` structs, as well as functions for JSON serialisation and Warp API replies.
+
+- **db:** The module here contains all the common code associated with data storage. This includes the `KvStoreConnection` trait, which ensures consistent interfacing with data handlers across the Valence ecosystem
+
+- **crypto:** The module here ensures consistency in the handling of cryptography across the Valence ecosystem. If you want to do anything with cryptography in your plug-in, you should use the functions here.
+
+<p align="left">(<a href="#top">back to top</a>)</p>

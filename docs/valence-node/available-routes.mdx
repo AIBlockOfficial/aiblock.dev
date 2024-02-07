@@ -1,0 +1,53 @@
+---
+id: available-routes
+title: Available Routes
+description: "Overview of available routes for a Valence Node"
+sidebar_label: Available Routes
+sidebar_position: 1
+hide_title: true
+tags:
+  - valence
+  - getting started
+---
+
+# 🔌 Available Routes
+
+### **<img src="https://img.shields.io/badge/POST-07BEB8" alt="POST"/> `set_data`**
+Sets data in the Redis instance and marks it for pending retrieval in the server. To send data to Bob, we could use the following headers in the `set_data` call:
+
+```json
+{
+    "address": "76e...dd6",     // Bob's public key address
+    "public_key": "a4c...e45",   // Alice's public key
+    "signature": "b9f...506"     // Alice's signature of Bob's address, using his public key
+}
+```
+
+The body of the `set_data` call would contain the data being exchanged:
+
+```json
+{
+    "data": "hello Bob"
+}
+```
+
+The headers that Alice sends in her call will be validated by the Valence, after which they'll be stored at Bob's address for his later retrieval using the `get_data` call.
+
+<br/>
+
+### **<img src="https://img.shields.io/badge/GET-2176FF" alt="GET"/> `get_data`**
+Gets pending data from the server for a given address. To retrieve data for Bob, he only has to supply his credentials in the call header:
+
+```json
+[
+    {
+        "address": "76e...dd6",     // Bob's public key address
+        "signature": "b9f...506",   // Bob's signature of the public key
+        "public_key": "a4c...e45"   // Bob's public key corresponding to his address
+    }
+]
+```
+
+Again, the Valence will validate the signature before returning the data to Bob.
+
+**For best practice, it's recommended that Alice and Bob encrypt their data using their private keys, before exchanging it with each other.** This ensures that the data exchange is E2E encrypted, and that the Valence maintains no knowledge of the data's content.
