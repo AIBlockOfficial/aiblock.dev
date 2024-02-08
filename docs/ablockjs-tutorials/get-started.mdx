@@ -246,7 +246,7 @@ fetching its balance:
 const address = newKeypair.address;
 
 // You can now fetch the balance for the address from the chain
-const balanceResult = await client.fetchBalance([address]);
+const balanceResult = await wallet.fetchBalance([address]);
 const balance = balanceResult.content.fetchBalanceResponse;
 ```
 

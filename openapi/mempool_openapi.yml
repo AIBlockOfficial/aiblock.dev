@@ -106,7 +106,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReceiptCreate'
+              $ref: '#/components/schemas/ItemCreate'
         required: true
       responses:
         '200':
@@ -114,7 +114,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseCreateReceipt'          
+                $ref: '#/components/schemas/ResponseCreateItem'          
         '400':
           description: Invalid input
           content:
@@ -172,7 +172,7 @@ components:
             ]
           }
 
-    ReceiptCreate:
+    ItemCreate:
           type: object
           example:
             {
@@ -245,7 +245,7 @@ components:
             type: string
 
     # RESPONSE BODY
-    ResponseCreateReceipt:
+    ResponseCreateItem:
       type: object
       properties:
         id:
@@ -273,7 +273,7 @@ components:
                 asset:
                   type: object
                   properties:
-                    Receipt: 
+                    Item: 
                       type: object
                       properties:
                         amount:

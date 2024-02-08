@@ -35,7 +35,7 @@ const tokensToSend = {"Token": 10};
 
 // The item we want to receive
 const itemAliceWants = {
-  "Receipt": {
+  "Item": {
       "amount": 10,                // The amount of the item we want
       "drs_tx_hash": "default_drs_tx_hash" // The genesis transaction hash for the item, its identifier on-chain
   }};
@@ -90,7 +90,7 @@ The result of this call might look something like the following:
                 "from": "",
                 "to": "2a646...f8b98",
                 "asset": {
-                    "Receipt": {
+                    "Item": {
                         "amount": 10,
                         "drs_tx_hash": "default_drs_tx_hash"
                     }
