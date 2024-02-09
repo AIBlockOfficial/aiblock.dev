@@ -51,7 +51,7 @@ export default function Home(): JSX.Element {
           <h2>Get Started</h2>
           <p>You can start building and using the ABlock tooling by exploring the documentation and API</p>
           <div className={styles.blockButton}>
-            <a className="button button--primary button--lg" href="/docs/">
+            <a className="button button--primary button--lg" href="/docs/welcome">
               Developer Documentation
             </a>
           </div>

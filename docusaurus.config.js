@@ -58,7 +58,7 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "tutorials-overview",
+            docId: "welcome",
             position: "left",
             label: "Documentation"
           },
@@ -67,6 +67,11 @@ const config = {
             docId: "api/overview",
             position: "left",
             label: "API"
+          },
+          {
+            href: "https://discord.gg/dDgabkJMEG",
+            label: "Discord",
+            position: "right"
           },
           {
             href: "https://github.com/ABlockOfficial",
@@ -82,15 +87,15 @@ const config = {
             items: [
               {
                 label: 'Documentation',
-                to: '/docs',
+                to: '/docs/welcome',
               },
               {
                 label: 'API',
-                to: '/api/overview',
+                to: '/docs/api/overview',
               },
               {
                 label: 'Tutorials',
-                to: '/docs/basic-tutorials/get-started',
+                to: '/docs/tutorials-overview',
               },
             ],
           },
