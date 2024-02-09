@@ -90,7 +90,10 @@ paths:
         content:
           application/json:
             schema:
+              type: array
               example: [0, 10, 20000]
+              items:
+                type: number
         required: true
       responses:
         "200":
@@ -144,15 +147,6 @@ paths:
                 $ref: "#/components/schemas/ResponseBadRequest"
 components:
   schemas:
-    # Script:
-    #   type: object
-    #   description: Block script
-    #   properties:
-    #     stack:
-    #       type: array
-    #       description: script stack
-    #       items:
-    #         type: string
     ResponseDebugData:
       type: object
       properties:
@@ -312,42 +306,55 @@ components:
             items:
               type: object
               example: 
-              # [
-              #   "eefe38...a1aca0",
-              #     {
-              #         block: {
-              #             header: {
-              #                 "version": 0,
-              #                 "bits": 0,
-              #                 "nonce": [],
-              #                 "b_num": 0,
-              #                 "seed_value": [],
-              #                 "previous_hash": null,
-              #                 "merkle_root_hash": ""
-              #             },
-              #             transactions: [
-              #                 "000001",
-              #                 "000002",
-              #                 "000003",
-              #                 "000004",
-              #             ]
-              #         },
-              #         mining_tx_hash_and_nonces: {
-              #             "1": [
-              #                 "g458b6a340cdb3f40f66adff12637aeb",
-              #                 [
-              #                     112,
-              #                     129,
-              #                     50,
-              #                     22,
-              #                     128,
-              #                     18,
-              #                     179,
-              #                 ]
-              #             ]
-              #         }
-              #     }
-              # ]
+                {
+                  "id": "8bdc6c43fa004725bbd5eabef41e9d5d",
+                  "status": "Success",
+                  "reason": "Database item(s) successfully retrieved",
+                  "route": "block_by_num",
+                  "content": [
+                    [
+                      "b00b7bb7ee1b41c857db05c86f8cf0f5548734d57dcb930605744d24425ea975d",
+                        {
+                          "block": {
+                              "header": {
+                                  "version": 6,
+                                  "bits": 0,
+                                  "nonce_and_mining_tx_hash": [
+                                    [
+                                      54,
+                                      94,
+                                      67,
+                                      154,
+                                      ...
+                                    ],
+                                    "g4c25d5bf7f3bff93b5cf34bb1dbf4a7"
+                                    ],
+                                    "b_num": 0,
+                                    "timestamp": 0,
+                                    "seed_value": [
+                                        57,
+                                        52,
+                                        57,
+                                        57,
+                                        ...
+                                    ],
+                                    "previous_hash": null,
+                                    "txs_merkle_root_and_hash": [
+                                                    "6187c89a825c908668d7ade3d900fa38468be1d0dd5995adc690e6            1c9f3c4717",
+                                                    "fd72629f4bb412913474be46095d1b65cac336b67be8db0959460c            4a41016ff6"
+                                    ]
+                                },
+                                "transactions": [
+                                    "000000",
+                                    "000001",
+                                    "000010",
+                                    "000011"
+                                ]
+                            }
+                        }
+                    ]
+                ]
+            }
     ResponseBlockchainEntry:
       type: object
       properties:

@@ -161,47 +161,60 @@ paths:
 ### ------ Schemas ------ ###     
 components:
   schemas:
-
     # REQUEST BODY
     FetchBalance:
       type: object
-      example:
-          {
-            address_list: [
-            "e1e957ba8e44843bb80e9d6d905066ec98763ca797093181ab6c695934549035"
-            ]
-          }
-
+      properties:
+        address_list:
+          description: list of addresses to fetch from
+          type: array
+          items:
+            type: string
+          example: 
+            ["e1e957ba8e44843bb80e9d6d905066ec98763ca797093181ab6c695934549035"]
+    
     ItemCreate:
-          type: object
-          example:
-            {
-              item_amount: 1000,
-              script_public_key: "b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01",
-              public_key: "ffe056dcad98fbeb8fdeb79ef95fb49b0c9b5d2bc3c5191cb08df55fa71c4e5d",
-              signature: "014643bab9a5859ccf6b0403d68c38b26b8888a41034b533f1a0ec2ba6b3afad5ac988e630a69b28f068c74d386df0ae86410aca1c8b1ce0b968f09b83111d07",
-              drs_tx_hash_spec: "Default"
-            }
+      type: object
+      properties:
+          item_amount:
+            type: number
+            example: 10
+            description: The amount of `Item` assets to create
+          script_public_key: 
+            type: string
+            example: "b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01"
+            description: Address
+          public_key: 
+            type: string
+            example: "ffe056dcad98fbeb8fdeb79ef95fb49b0c9b5d2bc3c5191cb08df55fa71c4e5d"
+            description: Key-pair to use for the creation of the item-assets
+
+          signature: 
+            type: string
+            example: "014643bab9a5859ccf6b0403d68c38b26b8888a41034b533f1a0ec2ba6b3afad5ac988e630a69b28f068c74d386df0ae86410aca1c8b1ce0b968f09b83111d07"
+            description: Signature to use for the creation of the item-assets
+
+          drs_tx_hash_spec:
+            type: string
+            example: "Default"
+            description: Whether to create `Item` assets that contain the default DRS identifier
+
 
     TransactionCreate:
       type: object
       xml:
         name: txcreate
       properties:
-        id:
-          type: string
-          example: a957bc20
-          description: The ID of the transaction being created
         inputs:
           type: array
           items:
             $ref: '#/components/schemas/TransactionInput'
           description: The inputs to the transaction
         outputs:
-          description: The outputs of the transaction
-          type: integer
-          format: int32
-          example: 7
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionOutput'
+          description: The outputs to the transaction
         version:
           type: integer
           format: int8
@@ -228,21 +241,66 @@ components:
 
     TransactionInput:
       type: object
-      properties:
-        previous_out:
-          type: string
-          example: 'f0698b112da09'
-        script_signature:
-          $ref: '#/components/schemas/Script'
       xml:
         name: txinput
-    Script:
+      properties:
+        previous_out:
+          $ref: '#/components/schemas/previousOut'
+
+        script_signature:
+          $ref: '#/components/schemas/Pay2PkH'
+          
+    previousOut:
+      description: Previous output tx hash
+      type: object
+      properties: 
+        t_hash:
+          type: string
+          example: 'f0698b112da09'
+          description: Transaction hash
+        n:
+          type: number
+          example: 1
+          description: .
+        
+    Pay2PkH:
       type: object
       properties:
-        stack:
-          type: array
-          items:
-            type: string
+        signable_data:
+          type: string
+          example: "1b061ff7e94765f95a2a5122d3bde757f2daaacef762c5aef2bf237ca3da2abf"
+        signature:
+          type: string
+          example: "b576d3f5c1703206bad8b9de0ce3a3167e203b78164c86d78774534c930a535a31c49adae9e70569008c0329fb4a9128ca96d350f47a88ce06ef5a334506f803"
+        public_key:
+          type: string
+          example: "5e7856117f404562c47dbdccfb8c23dc9ec69be14df5712bb459eeb440f40808"
+        address_version:
+          type: string
+          example: "null"
+            
+    TransactionOutput:
+      type: object
+      xml:
+        name: txinput
+      properties:
+        value:
+          type: object
+          properties:
+            Token:
+              type: number
+              example: 10
+              description: Token amount
+        locktime:
+          type: number
+          example: 0
+        drs_block_hash: 
+          type: string
+          example: "null"
+          description: block hash DRS identifier
+        script_public_key: 
+          type: string
+          example: "ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030"
 
     # RESPONSE BODY
     ResponseCreateItem:
@@ -444,8 +502,3 @@ components:
         content:
           type: string
           example: null
-  # securitySchemes:
-  #   api_key:
-  #     type: apiKey
-  #     name: api_key
-  #     in: header
