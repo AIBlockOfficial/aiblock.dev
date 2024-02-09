@@ -1,0 +1,62 @@
+---
+title: Get Started
+description: Get started with a Valence Node
+sidebar_label: Get Started
+sidebar_position: 0
+hide_title: false
+tags:
+  - valence
+  - get started
+---
+
+### 📚 Prerequisites
+
+In order to run this server as a community provider, or simply to use it yourself, you'll need to have <a href="https://www.docker.com/products/docker-desktop/">Docker</a> installed (minimum tested v20.10.12) and be comfortable working with the command line. 
+
+If you'd like to develop on this repo, you'll have the following additional requirements:
+
+- **Rust** (tested on 1.68.0 nightly)
+
+<br/>
+
+### 🔧 Installation
+
+With Docker installed and running, you can clone this repo and get everything installed with the following:
+
+```sh
+# SSH clone
+git clone git@gitlab.com:ABlockOfficial/Valence.git
+
+# Navigate to the repo
+cd Valence
+
+# Build Docker image
+docker build -t valence .
+```
+
+<br/>
+
+### 🏎️ Running
+
+To use the server as is, you can simply run the following in the root folder of the repo:
+
+```sh
+docker-compose up -d
+```
+
+Docker will orchestrate the node itself, the Redis instance, and the MongoDB long-term storage, after which you can make 
+calls to your server at port **3030**. Data saved to the Redis and MongoDB instances is kept within a Docker volume.
+
+To run the server in a development environment, run the following command:
+
+```sh
+cargo build --release
+
+cargo run --release
+```
+
+<br/>
+
+## How it Works
+
+The server functions on a very basic set of rules. Clients exchange data between each other through the use of public key addresses. If Alice wants to exchange data with Bob, she will need to supply the Valence node with Bob's address, as well as her own address, public key, and signature in the call headers. The next time Bob fetches data from the server using his public key address, he would find that Alice has exchanged data to him.

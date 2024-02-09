@@ -1,0 +1,44 @@
+---
+title: "ABlock Block Mining Process"
+description: "Learn about ABlock's Block Mining Process"
+sidebar_label: Block Mining
+sidebar_position: 6
+hide_title: true
+tags:
+  - deep dive documentation
+  - ablock network
+---
+
+# Block Mining Process
+
+The process for mining a block on the network is somewhat complex and involves several steps. Here's a general overview:
+
+1. Users send their transactions to the [Mempool](mempool-node) ring, where all valid transactions are placed into a waiting pool to be included in a block.
+
+2. When the block process starts, transactions from the waiting pool are added to the next block and sent to all [Miners](miner-node) participating in this round.
+
+3. Miners mine the block and send their Proof-of-Works (PoWs) back to the Mempool ring.
+
+4. The Mempool ring selects the final winner, who receives a token reward, and the block along with its winning information is sent to the [Storage](storage-node) ring.
+
+The mining process involves communications between the Mempool ring and the Miners during the direct mining of the block.
+
+## UNiCORN Construction
+
+The entire mining process requires the use of a single [UNiCORN](unicorns), generated from a seed value. This seed value is composed of the transactions going into the block, the applications of all Miners who want to mine the block, and the list of successful Miners from two blocks ago.
+
+This UNiCORN is used for processes like Miner subset selection and Miner winner selection. The construction involves pruning input values to their hashes to save on storage costs.
+
+## Process for a Single Block
+
+Once a UNiCORN is constructed, the output is placed into a pseudo-random number generator (PRNG) as a seed to select a subset of the Miners who applied. This subset is the only group allowed to start mining the block. After a Miner finds a valid PoW, they submit it to the Mempool ring, storing all successful PoWs from participating Miners in a pending list.
+
+When the round is considered closed, the winner is selected using the pre-calculated UNiCORN. The block is then sent to the Storage ring for permanent storage.
+
+## Parallel Pipeline for All Blocks
+
+In practice, a more efficient parallel process is used where two blocks are mined simultaneously. The `previous_hash` field in the block header is crucial in this process, as it no longer points to the immediately preceding block. Instead, it's composed of values from two blocks previous to the preceding block (e.g., `t - 2` and `t - 3` instead of `t - 1`).
+
+This process is described in the diagram for block `n + 2`, where the `previous_hash` is composed of the previous hash of block `n - 1` and the hash of the entire block in `n`.
+
+Finally, after a winner is found and selected, the Mempool ring sends the block, along with the UNiCORN input values, to the Storage ring for storage.

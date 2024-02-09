@@ -1,0 +1,72 @@
+---
+title: "ABlock Transactions"
+description: "Learn about ABlock's Transactions"
+sidebar_label: Transactions
+sidebar_position: 5
+hide_title: true
+tags:
+  - deep dive documentation
+  - ablock network
+---
+
+# Transactions
+Transactions in the ABlock system are structured similarly to those found in Bitcoin. They consist primarily of a reference to a previous spendable amount on the blockchain (for ABlock, this can be tokens or items (data assets) ) and a reference to an address to send the spendable amount to. To accomplish this, the spender is required to verify that they are the original owner of the spendable amount through public key signature schemes.
+
+## Structure
+
+In the codebase, a transaction is structured as follows:
+
+```rust
+pub struct Transaction {
+    pub inputs: Vec<TxIn>,
+    pub outputs: Vec<TxOut>,
+    pub version: usize,
+    pub druid_info: Option<DdeValues>,
+}
+```
+
+The attributes we care about for ownership verification are `inputs` and `outputs`, corresponding to the `TxIn` and `TxOut` data structures respectively.
+
+## Inputs
+
+The inputs to a transaction are codified in the `TxIn` data structure:
+
+```rust
+pub struct TxIn {
+    pub previous_out: Option<OutPoint>,
+    pub script_signature: Script,
+}
+```
+
+ where the `OutPoint` referenced in `previous_out`:
+
+```rust
+pub struct OutPoint {
+    pub t_hash: String,
+    pub n: i32,
+}
+```
+`OutPoint` has a `t_hash` corresponding to the hash of the previous spendable transaction in the blockchain. Within the `script_signature` attribute, we find a transaction execution script that defines how the spendable amount should actually be spent. Included in all `script_signature` entries is at least one signature which matches the public key of the spendable transaction already in the blockchain.
+
+## Outputs
+
+The outputs of a transaction are codified in the `TxOut` data structure:
+
+```rust
+pub struct TxOut {
+    pub value: Asset,
+    pub locktime: u64,
+    pub drs_block_hash: Option<String>,
+    pub script_public_key: Option<String>,
+}
+```
+
+Here we'll focus on the `script_public_key`, which is the public key that the owner of the transaction needs to use and sign with in order to spend the amount in the future.
+
+## Signing
+
+In the ABlock system, to tie the `TxIn` of the current transaction to the `TxOut` of the previous one, the user needs to sign the **hash of the `OutPoint`** referencing that `TxOut`. This ensures that spending a `TxOut` amount is impossible without:
+
+- **(A)** The `OutPoint` referencing a specific `TxOut`
+- **(B)** The user having the private key corresponding to the `TxOut`'s public key
+- **(C)** Being able to sign with the private key to on-spend the tokens

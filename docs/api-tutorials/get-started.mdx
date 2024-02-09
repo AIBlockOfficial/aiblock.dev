@@ -1,0 +1,50 @@
+---
+title: "Get Started"
+description: "Get started with ABlock API"
+sidebar_label: Get Started
+sidebar_position: 0
+hide_title: true
+tags:
+  - ablock API
+  - getting started
+---
+
+## Get Started with ABlock API
+
+### Postman Collections
+
+Before diving into the ABlock API, ensure you have the necessary tools. Head to the [**ABlock Postman Collection**](/docs/postman-collections) and download our latest Postman collection. This equips you with all the resources needed to seamlessly integrate ABlock functionalities into your applications.
+
+### Using Postman
+
+To make the most out of ABlock API, start by doing the following steps:
+
+#### **Importing Collections and Environments**
+
+After downloading the Postman collections, import them into your Postman workspace.
+Set up the necessary environments to tailor the API interactions to your specific needs.
+
+#### **Making Requests**
+
+Utilize the Postman collections to make requests to various ABlock API endpoints.
+Before diving into advanced API operations, it's recommended to run the debug-data route on all three nodes.
+This route provides comprehensive information about each node, including the list of accessible endpoints.
+
+### ✅ Verify API Functionality
+
+Before implementing any extensive API operations, use the debug-data route to ensure everything is functioning correctly. Running this route provides comprehensive information about each node, including the list of accessible endpoints.
+
+Example of a ```debug-data``` reponse on **Storage node**:
+
+```json
+"node_type": "Storage",
+        "node_api": [
+            "block_by_num",
+            "latest_block",
+            "blockchain_entry",
+            "debug_data"
+        ],
+```
+<br/><br/>
+
+### 🚀 More content comming soon!

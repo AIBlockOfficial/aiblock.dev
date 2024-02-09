@@ -1,0 +1,2438 @@
+{
+	"info": {
+		"_postman_id": "7355adb9-7162-4841-b5fa-e45bb62efd84",
+		"name": "Infrastructure_ABlock",
+		"description": "The ABlock API allows you to interact with the ABlock chain without the need for complicated, risky smart contracts. It's here to let you work with ABlock in a way that's fast, simple and secure.\n\n#### Usefull links\n\n- [ABlock Developer website ](https://a-block.io/) & [](https://a-block.io/)[API documentation](https://a-block.io/docs/api/overview)\n- [ABlock Official website](https://a-block.net/)\n- [ABlock Github](https://github.com/ABlockOfficial)\n- [ABlock Discord](https://discord.com/invite/dDgabkJMEG)\n    \n\n#### Contact\n\n[byron.houwens@a-block.net](https://mailto:byron.houwens@a-block.net)\n\n#### License\n\n[GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11894270"
+	},
+	"item": [
+		{
+			"name": "Mempool",
+			"item": [
+				{
+					"name": "debug_data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code is 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{mempool_api_endpoint}}:{{mempool_api_port}}/debug_data",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{mempool_api_endpoint}}"
+							],
+							"port": "{{mempool_api_port}}",
+							"path": [
+								"debug_data"
+							]
+						},
+						"description": "Get general information about the current node."
+					},
+					"response": [
+						{
+							"name": "200_mempool",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://49.12.234.10:3003/debug_data",
+									"protocol": "http",
+									"host": [
+										"49",
+										"12",
+										"234",
+										"10"
+									],
+									"port": "3003",
+									"path": [
+										"debug_data"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "461"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 25 Jan 2024 17:23:23 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"da3d41d18b0141b6932dc320f677ab2d\",\n    \"status\": \"Success\",\n    \"reason\": \"Debug data successfully retrieved\",\n    \"route\": \"debug_data\",\n    \"content\": {\n        \"node_type\": \"Compute\",\n        \"node_api\": [\n            \"fetch_balance\",\n            \"create_item_asset\",\n            \"create_transactions\",\n            \"utxo_addresses\",\n            \"address_construction\",\n            \"pause_nodes\",\n            \"resume_nodes\",\n            \"update_shared_config\",\n            \"get_shared_config\",\n            \"debug_data\"\n        ],\n        \"node_peers\": [\n            [\n                \"127.0.0.1:12330\",\n                \"127.0.0.1:12330\",\n                \"Storage\"\n            ]\n        ],\n        \"routes_pow\": {\n            \"create_transactions\": 2\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "utxo_addresses",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{mempool_api_endpoint}}:{{mempool_api_port}}/utxo_addresses",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{mempool_api_endpoint}}"
+							],
+							"port": "{{mempool_api_port}}",
+							"path": [
+								"utxo_addresses"
+							]
+						},
+						"description": "Get list of UTXO addresses."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://49.12.234.10:3003/utxo_addresses",
+									"protocol": "http",
+									"host": [
+										"49",
+										"12",
+										"234",
+										"10"
+									],
+									"port": "3003",
+									"path": [
+										"utxo_addresses"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"c9456ab061134d9a8f5651f86646d4d0\",\n    \"status\": \"Success\",\n    \"reason\": \"UTXO addresses successfully retrieved\",\n    \"route\": \"utxo_addresses\",\n    \"content\": [\n        \"963add370937ffc687426d15018c3c96281d7ff5d74f0e3934aa6efe9d92af6c\",\n        \"e423d1f7c5c2bc1ba9228f0acd92ea3dfca09db782c92a9437327243cbe49de3\",\n        \"9abecce828349a99fb3275b24c0547945f3f823b410581a581fef47e39724678\",\n        \"427c73c7dae9ad2da423542595c14eb99d83ec4d1c6cbfdfe6f7f187cde93751\",\n        \"649afb41b98969deefc4f33ae4a0c9b6786b870d2a020c30181192d18ef18c52\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "fetch_balance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": true,
+						"followRedirects": true,
+						"disableUrlEncoding": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"addrss_list\": [\r\n  \"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{mempool_api_endpoint}}:{{mempool_api_port}}/fetch_balance",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{mempool_api_endpoint}}"
+							],
+							"port": "{{mempool_api_port}}",
+							"path": [
+								"fetch_balance"
+							]
+						},
+						"description": "Fetches the balance/s for 1 or more addresses."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"address_list\": [\r\n  \"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://49.12.234.10:3003/fetch_balance",
+									"protocol": "http",
+									"host": [
+										"49",
+										"12",
+										"234",
+										"10"
+									],
+									"port": "3003",
+									"path": [
+										"fetch_balance"
+									]
+								}
+							},
+							"status": "OK",
+							"code": "200",
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "1366"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 25 Jan 2024 16:57:04 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"b7f3d0f2f5db43ad83ca55b5ed720061\",\n    \"status\": \"Success\",\n    \"reason\": \"Balance successfully fetched\",\n    \"route\": \"fetch_balance\",\n    \"content\": {\n        \"total\": {\n            \"tokens\": 50000,\n            \"items\": {\n                \"g60073baefe40c0faad38d16cd6a84a0\": 10,\n            }\n        },\n        \"address_list\": {\n            \"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g60073baefe40c0faad38d16cd6a84a0\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Item\": {\n                            \"amount\": 10,\n                            \"drs_tx_hash\": \"g60073baefe40c0faad38d16cd6a84a0\",\n                            \"metadata\": \"{\\\"metafield1\\\":\\\"test\\\",\\\"metafield2\\\":\\\"test\\\"}\"\n                        }\n                    }\n                },\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"ge271efd3f6420264cad0297211d5a86\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 50000\n                    }\n                }\n            ]\n        }\n    }\n}"
+						},
+						{
+							"name": "400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{mempool_api_endpoint}}:{{mempool_api_port}}/fetch_balance",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{mempool_api_endpoint}}"
+									],
+									"port": "{{mempool_api_port}}",
+									"path": [
+										"fetch_balance"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "85"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 30 Jan 2024 13:03:42 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
+						}
+					]
+				},
+				{
+					"name": "create_item_asset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"item_amount\": 1000,\r\n  \"script_public_key\": \"b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01\",\r\n  \"public_key\": \"ffe056dcad98fbeb8fdeb79ef95fb49b0c9b5d2bc3c5191cb08df55fa71c4e5d\",\r\n  \"signature\": \"014643bab9a5859ccf6b0403d68c38b26b8888a41034b533f1a0ec2ba6b3afad5ac988e630a69b28f068c74d386df0ae86410aca1c8b1ce0b968f09b83111d07\",\r\n  \"drs_tx_hash_spec\": \"Default\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{mempool_api_endpoint}}:{{mempool_api_port}}/create_item_asset",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{mempool_api_endpoint}}"
+							],
+							"port": "{{mempool_api_port}}",
+							"path": [
+								"create_item_asset"
+							]
+						},
+						"description": "Create new item/asset."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"item_amount\": 1000,\r\n  \"script_public_key\": \"b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01\",\r\n  \"public_key\": \"ffe056dcad98fbeb8fdeb79ef95fb49b0c9b5d2bc3c5191cb08df55fa71c4e5d\",\r\n  \"signature\": \"014643bab9a5859ccf6b0403d68c38b26b8888a41034b533f1a0ec2ba6b3afad5ac988e630a69b28f068c74d386df0ae86410aca1c8b1ce0b968f09b83111d07\",\r\n  \"drs_tx_hash_spec\": \"Default\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://49.12.234.10:3003/create_item_asset",
+									"protocol": "http",
+									"host": [
+										"49",
+										"12",
+										"234",
+										"10"
+									],
+									"port": "3003",
+									"path": [
+										"create_item_asset"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "367"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 25 Jan 2024 17:22:04 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"9ff1e1444a3049f8a1e352e9f14cc470\",\n    \"status\": \"Success\",\n    \"reason\": \"Item asset(s) created\",\n    \"route\": \"create_item_asset\",\n    \"content\": {\n        \"asset\": {\n            \"asset\": {\n                \"Item\": {\n                    \"amount\": 1000,\n                    \"drs_tx_hash\": \"default_drs_tx_hash\",\n                    \"metadata\": null\n                }\n            },\n            \"extra_info\": null\n        },\n        \"to_address\": \"b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01\",\n        \"tx_hash\": \"default_drs_tx_hash\"\n    }\n}"
+						},
+						{
+							"name": "400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{mempool_api_endpoint}}:{{mempool_api_port}}/create_item_asset",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{mempool_api_endpoint}}"
+									],
+									"port": "{{mempool_api_port}}",
+									"path": [
+										"create_item_asset"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "85"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 30 Jan 2024 13:01:39 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The Mempool node is a special type of node responsible for collecting transactions and bundling them into new blocks. They also partition the mining network for mining and validate the blocks that these partitions mine. _There are only a limited number of Mempool nodes._"
+		},
+		{
+			"name": "Storage",
+			"item": [
+				{
+					"name": "debug_data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{storage_api_endpoint}}:{{storage_api_port}}/debug_data",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{storage_api_endpoint}}"
+							],
+							"port": "{{storage_api_port}}",
+							"path": [
+								"debug_data"
+							]
+						},
+						"description": "Get general information about the current node."
+					},
+					"response": [
+						{
+							"name": "200_storage",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{storage_api_endpoint}}:{{storage_api_port}}/debug_data",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{storage_api_endpoint}}"
+									],
+									"port": "{{storage_api_port}}",
+									"path": [
+										"debug_data"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "411"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 26 Jan 2024 09:52:32 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"c1fb2ed1047f48f5a656a919b86105e1\",\n    \"status\": \"Success\",\n    \"reason\": \"Debug data successfully retrieved\",\n    \"route\": \"debug_data\",\n    \"content\": {\n        \"node_type\": \"Storage\",\n        \"node_api\": [\n            \"block_by_num\",\n            \"transactions_by_key\",\n            \"latest_block\",\n            \"blockchain_entry\",\n            \"check_transaction_presence\",\n            \"address_construction\",\n            \"debug_data\"\n        ],\n        \"node_peers\": [\n            [\n                \"127.0.0.1:12300\",\n                \"127.0.0.1:12300\",\n                \"Compute\"\n            ]\n        ],\n        \"routes_pow\": {\n            \"create_transactions\": 2\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "latest_block",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false,
+						"followRedirects": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{storage_api_endpoint}}:{{storage_api_port}}/latest_block",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{storage_api_endpoint}}"
+							],
+							"port": "{{storage_api_port}}",
+							"path": [
+								"latest_block"
+							]
+						},
+						"description": "Get the latest block successfully mined and stored on this Storage node."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://49.12.234.10:3001/latest_block",
+									"protocol": "http",
+									"host": [
+										"49",
+										"12",
+										"234",
+										"10"
+									],
+									"port": "3001",
+									"path": [
+										"latest_block"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "1242"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 26 Jan 2024 09:40:42 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"34ea8e7ed00b4978be7fc3ef3c50739c\",\n    \"status\": \"Success\",\n    \"reason\": \"Database item(s) successfully retrieved\",\n    \"route\": \"latest_block\",\n    \"content\": {\n        \"block\": {\n            \"header\": {\n                \"version\": 5,\n                \"bits\": 0,\n                \"nonce_and_mining_tx_hash\": [\n                    [\n                        45,\n                        14,\n                        155,\n                        179,\n                        174,\n                        7,\n                        113,\n                        195,\n                        158,\n                        110,\n                        194,\n                        18,\n                        3,\n                        63,\n                        53,\n                        142\n                    ],\n                    \"geb055649bb09c5a8e2f96912a2b47ee\"\n                ],\n                \"b_num\": 372541,\n                \"seed_value\": [\n                    54,\n                    55,\n                    52,\n                    49,\n                    57,\n                    49,\n                    56,\n                    53,\n                    54,\n                    55,\n                    53,\n                    48,\n                    52,\n                    52,\n                    57,\n                    48,\n                    50,\n                    52,\n                    55,\n                    53,\n                    50,\n                    50,\n                    49,\n                    57,\n                    51,\n                    53,\n                    54,\n                    49,\n                    57,\n                    49,\n                    51,\n                    55,\n                    52,\n                    49,\n                    52,\n                    52,\n                    56,\n                    51,\n                    53,\n                    57,\n                    56,\n                    54,\n                    49,\n                    55,\n                    52,\n                    49,\n                    55,\n                    57,\n                    56,\n                    48,\n                    54,\n                    52,\n                    53,\n                    52,\n                    56,\n                    53,\n                    53,\n                    51,\n                    56,\n                    55,\n                    51,\n                    52,\n                    50,\n                    53,\n                    52,\n                    57,\n                    49,\n                    50,\n                    54,\n                    49,\n                    48,\n                    50,\n                    49,\n                    52,\n                    52,\n                    53,\n                    53,\n                    45,\n                    57,\n                    52,\n                    55,\n                    51,\n                    55,\n                    48,\n                    53,\n                    51,\n                    52,\n                    50,\n                    51,\n                    50,\n                    51,\n                    49,\n                    52,\n                    52,\n                    51,\n                    52,\n                    50,\n                    51,\n                    56,\n                    49,\n                    54,\n                    50,\n                    51,\n                    51,\n                    53,\n                    57,\n                    50,\n                    53,\n                    52,\n                    54,\n                    56,\n                    53,\n                    51,\n                    54,\n                    54,\n                    50,\n                    49,\n                    49,\n                    51,\n                    54,\n                    55,\n                    48,\n                    52,\n                    48,\n                    50,\n                    52,\n                    57,\n                    57,\n                    48,\n                    56,\n                    53,\n                    49,\n                    52,\n                    52,\n                    54,\n                    56,\n                    54,\n                    52,\n                    51,\n                    52,\n                    52,\n                    54,\n                    55,\n                    51,\n                    56,\n                    54,\n                    49,\n                    55,\n                    52,\n                    48,\n                    57,\n                    56,\n                    49,\n                    57,\n                    49,\n                    52,\n                    53,\n                    55,\n                    55,\n                    52,\n                    48,\n                    56,\n                    54,\n                    56,\n                    50,\n                    52,\n                    54,\n                    55,\n                    52,\n                    56,\n                    48,\n                    54,\n                    53,\n                    53,\n                    54,\n                    50,\n                    50,\n                    51,\n                    56,\n                    49,\n                    56,\n                    56,\n                    56,\n                    48,\n                    54,\n                    57,\n                    50,\n                    57,\n                    53,\n                    53,\n                    57,\n                    55,\n                    56,\n                    54,\n                    50,\n                    48,\n                    54,\n                    53,\n                    51,\n                    52,\n                    52,\n                    56,\n                    51,\n                    55,\n                    53,\n                    48,\n                    55,\n                    48,\n                    52,\n                    55,\n                    56,\n                    50,\n                    56,\n                    54,\n                    56,\n                    48,\n                    53,\n                    54,\n                    55,\n                    56,\n                    48,\n                    57,\n                    56,\n                    55,\n                    48,\n                    48,\n                    48,\n                    54,\n                    54,\n                    49,\n                    52,\n                    52,\n                    52,\n                    53\n                ],\n                \"previous_hash\": \"b0052d4e03a085c0702f11f4aa8843be3aa86d0587844a769df6d253ffd8588ca\",\n                \"txs_merkle_root_and_hash\": [\n                    \"\",\n                    \"48dda5bbe9171a6656206ec56c595c5834b6cf38c5fe71bcb44fe43833aee9df\"\n                ]\n            },\n            \"transactions\": []\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "block_by_num",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[0, 10, 28965]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{storage_api_endpoint}}:{{storage_api_port}}/block_by_num",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{storage_api_endpoint}}"
+							],
+							"port": "{{storage_api_port}}",
+							"path": [
+								"block_by_num"
+							]
+						},
+						"description": "Fetches block/s from the chain by block number. Multiple block numbers can be supplied in the same request body."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[0, 11, 156]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://49.12.234.10:3001/block_by_num",
+									"protocol": "http",
+									"host": [
+										"49",
+										"12",
+										"234",
+										"10"
+									],
+									"port": "3001",
+									"path": [
+										"block_by_num"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "1348"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 26 Jan 2024 09:43:10 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"e224ba03c5f041a1987a97de64ec9013\",\n    \"status\": \"Success\",\n    \"reason\": \"Database item(s) successfully retrieved\",\n    \"route\": \"block_by_num\",\n    \"content\": [\n        [\n            \"b00bb82500d9239f5f628eebd7cd647aadf1944435f7530ae1ffce4a715ab244d\",\n            {\n                \"block\": {\n                    \"header\": {\n                        \"version\": 5,\n                        \"bits\": 0,\n                        \"nonce_and_mining_tx_hash\": [\n                            [\n                                114,\n                                139,\n                                76,\n                                21,\n                                15,\n                                199,\n                                17,\n                                43,\n                                161,\n                                141,\n                                65,\n                                67,\n                                73,\n                                71,\n                                121,\n                                123\n                            ],\n                            \"g08069541868be551d0d838c7b417c55\"\n                        ],\n                        \"b_num\": 0,\n                        \"seed_value\": [\n                            57,\n                            52,\n                            57,\n                            57,\n                            55,\n                            57,\n                            51,\n                            56,\n                            54,\n                            55,\n                            48,\n                            52,\n                            53,\n                            56,\n                            56,\n                            51,\n                            51,\n                            49,\n                            49,\n                            51,\n                            52,\n                            56,\n                            48,\n                            48,\n                            52,\n                            51,\n                            56,\n                            55,\n                            48,\n                            56,\n                            53,\n                            50,\n                            55,\n                            54,\n                            56,\n                            49,\n                            52,\n                            50,\n                            49,\n                            48,\n                            51,\n                            52,\n                            55,\n                            52,\n                            56,\n                            56,\n                            53,\n                            55,\n                            52,\n                            55,\n                            54,\n                            51,\n                            57,\n                            57,\n                            57,\n                            54,\n                            52,\n                            56,\n                            52,\n                            56,\n                            54,\n                            51,\n                            48,\n                            55,\n                            56,\n                            50,\n                            49,\n                            53,\n                            50,\n                            52,\n                            54,\n                            53,\n                            57,\n                            55,\n                            55,\n                            57,\n                            55,\n                            45,\n                            53,\n                            54,\n                            48,\n                            49,\n                            54,\n                            49,\n                            57,\n                            53,\n                            50,\n                            52,\n                            55,\n                            52,\n                            50,\n                            53,\n                            54,\n                            49,\n                            49,\n                            51,\n                            53,\n                            53,\n                            49,\n                            57,\n                            53,\n                            50,\n                            56,\n                            48,\n                            51,\n                            49,\n                            56,\n                            55,\n                            54,\n                            50,\n                            48,\n                            56,\n                            51,\n                            51,\n                            49,\n                            49,\n                            48,\n                            57,\n                            53,\n                            49,\n                            49,\n                            50,\n                            51,\n                            53,\n                            53,\n                            49,\n                            49,\n                            52,\n                            54,\n                            49,\n                            51,\n                            54,\n                            57,\n                            56,\n                            49,\n                            55,\n                            48,\n                            57,\n                            48,\n                            49,\n                            51,\n                            49,\n                            56,\n                            49,\n                            53,\n                            48,\n                            48,\n                            52,\n                            48,\n                            54,\n                            52,\n                            49,\n                            52,\n                            48,\n                            50,\n                            56,\n                            49,\n                            49,\n                            48,\n                            49,\n                            57,\n                            48,\n                            51,\n                            51,\n                            48,\n                            54,\n                            49,\n                            51,\n                            56,\n                            50,\n                            53,\n                            49,\n                            49,\n                            57,\n                            51,\n                            52,\n                            57,\n                            57,\n                            49,\n                            51,\n                            52,\n                            52,\n                            51,\n                            48,\n                            54,\n                            54,\n                            51,\n                            55,\n                            52,\n                            55,\n                            57,\n                            50,\n                            54,\n                            55,\n                            55,\n                            48,\n                            51,\n                            52,\n                            55,\n                            48,\n                            49,\n                            53,\n                            55,\n                            54,\n                            50,\n                            51,\n                            57,\n                            51,\n                            53,\n                            52,\n                            56,\n                            50,\n                            51,\n                            57,\n                            57,\n                            52,\n                            52,\n                            52,\n                            49,\n                            54,\n                            54,\n                            51,\n                            52,\n                            48,\n                            49,\n                            54,\n                            52,\n                            49,\n                            48,\n                            48,\n                            48,\n                            50,\n                            49,\n                            56,\n                            48\n                        ],\n                        \"previous_hash\": null,\n                        \"txs_merkle_root_and_hash\": [\n                            \"6187c89a825c908668d7ade3d900fa38468be1d0dd5995adc690e61c9f3c4717\",\n                            \"fd72629f4bb412913474be46095d1b65cac336b67be8db0959460c4a41016ff6\"\n                        ]\n                    },\n                    \"transactions\": [\n                        \"000000\",\n                        \"000001\",\n                        \"000010\",\n                        \"000011\"\n                    ]\n                }\n            }\n        ]\n    ]\n}"
+						},
+						{
+							"name": "400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{storage_api_endpoint}}:{{storage_api_port}}/block_by_num",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{storage_api_endpoint}}"
+									],
+									"port": "{{storage_api_port}}",
+									"path": [
+										"block_by_num"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "85"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 30 Jan 2024 13:15:27 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
+						}
+					]
+				},
+				{
+					"name": "blockchain_entry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"b002aaf9b9845413a53aadc80cbd92347ac93a0c9df1f594105916f8f616f4d30\"",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{storage_api_endpoint}}:{{storage_api_port}}/blockchain_entry",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{storage_api_endpoint}}"
+							],
+							"port": "{{storage_api_port}}",
+							"path": [
+								"blockchain_entry"
+							]
+						},
+						"description": "Fetches a block or transaction from the chain."
+					},
+					"response": [
+						{
+							"name": "200_transaction",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\"000001\"",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://49.12.234.10:3001/blockchain_entry",
+									"protocol": "http",
+									"host": [
+										"49",
+										"12",
+										"234",
+										"10"
+									],
+									"port": "3001",
+									"path": [
+										"blockchain_entry"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "728"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 26 Jan 2024 09:46:58 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"aa5ba323b1654941a5d30ee3a5dba07d\",\n    \"status\": \"Success\",\n    \"reason\": \"Database item(s) successfully retrieved\",\n    \"route\": \"blockchain_entry\",\n    \"content\": {\n        \"Transaction\": {\n            \"inputs\": [\n                {\n                    \"previous_out\": null,\n                    \"script_signature\": {\n                        \"stack\": [\n                            {\n                                \"Bytes\": \"+ (39) No person shall be seized or imprisoned, or stripped of their rights or possessions, or outlawed or exiled, or deprived of their standing in any way, nor will we proceed with force against them, or send others to do so, except by the lawful judgment of their equals or by the law of the land.\"\n                            }\n                        ]\n                    }\n                }\n            ],\n            \"outputs\": [\n                {\n                    \"value\": {\n                        \"Token\": 5\n                    },\n                    \"locktime\": 0,\n                    \"drs_block_hash\": null,\n                    \"script_public_key\": \"f8fc43b48455b84b0165393284d56d93ebe16781a34a7f0ce92074a4c176a16a\"\n                }\n            ],\n            \"version\": 5,\n            \"druid_info\": null\n        }\n    }\n}"
+						},
+						{
+							"name": "200_block",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\"b002aaf9b9845413a53aadc80cbd92347ac93a0c9df1f594105916f8f616f4d30\"",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{storage_api_endpoint}}:{{storage_api_port}}/blockchain_entry",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{storage_api_endpoint}}"
+									],
+									"port": "{{storage_api_port}}",
+									"path": [
+										"blockchain_entry"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "1259"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 26 Jan 2024 09:48:11 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"06b317649b054307acbd05bed687218c\",\n    \"status\": \"Success\",\n    \"reason\": \"Database item(s) successfully retrieved\",\n    \"route\": \"blockchain_entry\",\n    \"content\": {\n        \"Block\": {\n            \"block\": {\n                \"header\": {\n                    \"version\": 5,\n                    \"bits\": 0,\n                    \"nonce_and_mining_tx_hash\": [\n                        [\n                            183,\n                            126,\n                            38,\n                            54,\n                            95,\n                            10,\n                            50,\n                            30,\n                            25,\n                            113,\n                            181,\n                            137,\n                            185,\n                            186,\n                            37,\n                            41\n                        ],\n                        \"gf585460c954986e09c01e365d5fef99\"\n                    ],\n                    \"b_num\": 372555,\n                    \"seed_value\": [\n                        57,\n                        51,\n                        52,\n                        55,\n                        56,\n                        48,\n                        54,\n                        52,\n                        48,\n                        57,\n                        54,\n                        49,\n                        56,\n                        54,\n                        57,\n                        54,\n                        52,\n                        52,\n                        52,\n                        57,\n                        48,\n                        57,\n                        56,\n                        52,\n                        53,\n                        56,\n                        53,\n                        52,\n                        57,\n                        51,\n                        56,\n                        49,\n                        49,\n                        53,\n                        54,\n                        50,\n                        53,\n                        49,\n                        50,\n                        53,\n                        55,\n                        52,\n                        51,\n                        50,\n                        50,\n                        56,\n                        56,\n                        49,\n                        54,\n                        53,\n                        56,\n                        50,\n                        55,\n                        56,\n                        57,\n                        53,\n                        48,\n                        50,\n                        50,\n                        55,\n                        54,\n                        51,\n                        57,\n                        51,\n                        56,\n                        49,\n                        48,\n                        49,\n                        54,\n                        57,\n                        51,\n                        53,\n                        48,\n                        52,\n                        51,\n                        54,\n                        52,\n                        45,\n                        52,\n                        52,\n                        57,\n                        54,\n                        54,\n                        51,\n                        57,\n                        51,\n                        52,\n                        53,\n                        49,\n                        51,\n                        55,\n                        53,\n                        49,\n                        52,\n                        55,\n                        52,\n                        49,\n                        57,\n                        51,\n                        51,\n                        57,\n                        51,\n                        52,\n                        51,\n                        54,\n                        55,\n                        50,\n                        53,\n                        51,\n                        56,\n                        57,\n                        50,\n                        55,\n                        51,\n                        49,\n                        53,\n                        56,\n                        57,\n                        55,\n                        53,\n                        56,\n                        48,\n                        56,\n                        52,\n                        57,\n                        53,\n                        55,\n                        53,\n                        49,\n                        54,\n                        51,\n                        51,\n                        53,\n                        57,\n                        48,\n                        53,\n                        51,\n                        53,\n                        48,\n                        50,\n                        52,\n                        52,\n                        51,\n                        57,\n                        53,\n                        53,\n                        49,\n                        52,\n                        55,\n                        57,\n                        48,\n                        52,\n                        52,\n                        57,\n                        51,\n                        52,\n                        53,\n                        52,\n                        50,\n                        57,\n                        48,\n                        56,\n                        51,\n                        48,\n                        48,\n                        53,\n                        52,\n                        53,\n                        53,\n                        53,\n                        54,\n                        52,\n                        51,\n                        52,\n                        51,\n                        54,\n                        55,\n                        50,\n                        55,\n                        53,\n                        51,\n                        49,\n                        56,\n                        56,\n                        57,\n                        52,\n                        57,\n                        55,\n                        55,\n                        54,\n                        55,\n                        50,\n                        51,\n                        57,\n                        56,\n                        49,\n                        55,\n                        57,\n                        48,\n                        57,\n                        55,\n                        51,\n                        48,\n                        53,\n                        51,\n                        48,\n                        48,\n                        52,\n                        55,\n                        49,\n                        57,\n                        56,\n                        53,\n                        51,\n                        50,\n                        54,\n                        56,\n                        56,\n                        56,\n                        54,\n                        50,\n                        53,\n                        49,\n                        49,\n                        48,\n                        54,\n                        52,\n                        56,\n                        54,\n                        50,\n                        55,\n                        54,\n                        50,\n                        53,\n                        50\n                    ],\n                    \"previous_hash\": \"b00d97c00b0e7da4d52c1ef8d6b63e35b425bf383066d9920ba6ad0b0cc82c140\",\n                    \"txs_merkle_root_and_hash\": [\n                        \"\",\n                        \"48dda5bbe9171a6656206ec56c595c5834b6cf38c5fe71bcb44fe43833aee9df\"\n                    ]\n                },\n                \"transactions\": []\n            }\n        }\n    }\n}"
+						},
+						{
+							"name": "400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{storage_api_endpoint}}:{{storage_api_port}}/blockchain_entry",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{storage_api_endpoint}}"
+									],
+									"port": "{{storage_api_port}}",
+									"path": [
+										"blockchain_entry"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "85"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 30 Jan 2024 13:18:21 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The Storage node is responsible for storing the full blockchain history. Once blocks are mined by the miners and sent to the Mempool nodes for validation, they are pushed on to the Storage nodes for long-term storage. Anybody is allowed to request a full history of the blockchain from the Storage nodes, but they are not required to keep such a history to participate in the network. _There are only a limited number of Storage nodes_."
+		},
+		{
+			"name": "Miner",
+			"item": [
+				{
+					"name": "debug_data",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/debug_data",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{miner_api_endpoint}}"
+							],
+							"port": "{{miner_api_port}}",
+							"path": [
+								"debug_data"
+							]
+						},
+						"description": "Get general information about the current node."
+					},
+					"response": [
+						{
+							"name": "200_miner",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/debug_data",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{miner_api_endpoint}}"
+									],
+									"port": "{{miner_api_port}}",
+									"path": [
+										"debug_data"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "508"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 26 Jan 2024 10:41:48 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"ccba87d83ca44a4e9405afdf8bbc2a30\",\n    \"status\": \"Success\",\n    \"reason\": \"Debug data successfully retrieved\",\n    \"route\": \"debug_data\",\n    \"content\": {\n        \"node_type\": \"Miner/User\",\n        \"node_api\": [\n            \"wallet_info\",\n            \"make_payment\",\n            \"export_keypairs\",\n            \"import_keypairs\",\n            \"update_running_total\",\n            \"create_item_asset\",\n            \"payment_address\",\n            \"change_passphrase\",\n            \"current_mining_block\",\n            \"debug_data\"\n        ],\n        \"node_peers\": [\n            [\n                \"127.0.0.1:12300\",\n                \"127.0.0.1:12300\",\n                \"Compute\"\n            ],\n            [\n                \"127.0.0.1:12300\",\n                \"127.0.0.1:12300\",\n                \"Compute\"\n            ]\n        ],\n        \"routes_pow\": {\n            \"create_transactions\": 2\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "wallet_info",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/wallet_info",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{miner_api_endpoint}}"
+							],
+							"port": "{{miner_api_port}}",
+							"path": [
+								"wallet_info"
+							]
+						},
+						"description": "Get wallet information about current miner wallet."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://49.12.234.10:3004/wallet_info",
+									"protocol": "http",
+									"host": [
+										"49",
+										"12",
+										"234",
+										"10"
+									],
+									"port": "3004",
+									"path": [
+										"wallet_info"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "2617"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 24 Jan 2024 11:57:20 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"3ac824a675494b8d8da2b04adb3d1da4\",\n    \"status\": \"Success\",\n    \"reason\": \"Wallet info successfully fetched\",\n    \"route\": \"wallet_info\",\n    \"content\": {\n        \"running_total\": 4470.347182539683,\n        \"item_total\": {},\n        \"addresses\": {\n            \"0846c2dd10769b32da139031a817b204ac952e231702b75f25483ce2521b9fca\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"gc8615eeb8246578f47bfd2aca5e0fd3\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510182\n                    }\n                }\n            ],\n            \"08ad788646f0df967ded003e7a37818a6ac03e93c29ff0b4b9bb7b3fc8612432\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g52069855842f143eec5303aa8693f6b\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510183\n                    }\n                }\n            ],\n            \"5b1217a121f2cebfe6da4a8314204884d47cfd88be69a838b3d210bc00baef3f\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g4984fd5c54cf2efcd2cbf78b4c343e5\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510182\n                    }\n                }\n            ],\n            \"5b442a1875fc2a5fbca766faa8955d54b6cbfe930ed51740e7be936552de0fa8\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g0eaab0b2138b439ad5599473a3b3bb6\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510182\n                    }\n                }\n            ],\n            \"5bcfd2808883e46c2e6a68bbc1c64e0f72e0fa887ca0e7edb01936d160461e54\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g2cf57da49155e937ebb5af1639fd15f\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510183\n                    }\n                }\n            ],\n            \"66221636d1a93cfa78e6f0d64dd48f17ddf33d7e59383e0c129ad814592a4c9d\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g400dd6996f11a7e154c790d01b18c62\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510184\n                    }\n                }\n            ],\n            \"915d6a2f88ca7bf5afe22370c66a4c64608fca13465e52aa831a5fc4f8bab13f\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g3263421c58fb96c746b47b86d566a1c\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510183\n                    }\n                }\n            ],\n            \"9780946e096309a2095919da01ce56a7455cb187d94af00abbc445938dab39be\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"gae1df3bc082301098120115c70f74fb\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510184\n                    }\n                }\n            ],\n            \"a3c52a7400fc1175d3186f731705781257612d0039e42d7abf98a97e936f802d\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g0111ed1f9dae362d1af9ab840d53e0c\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510185\n                    }\n                }\n            ],\n            \"ace6e52b34602248d35aa565c7721345bef12cf8c151dc619cb590586ebac016\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"gf7dd9a8061272d533b238ccbe63f045\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510183\n                    }\n                }\n            ],\n            \"c1ea1e80cb01a8a5deb592a8a7a2a3c1f2a8d2d21456a78543b03ac3b5713062\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g46588006c931c6dce479d0884b5411c\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510182\n                    }\n                }\n            ],\n            \"c39e34f48cfe5b00b5b0c7bb5920db02959eab7e44905dab1f610a51e042fbfd\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"gcd537491c6fdbd161db2ba04c2f16e6\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510184\n                    }\n                }\n            ],\n            \"eb4cda782a8495a1ce6979d6e4ff02fa5e820f9f8f8a01d884effb0c07704a4f\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g296355ba934453f310dc5352c5be526\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510184\n                    }\n                }\n            ],\n            \"f12bd3b2eeb701a2569f2c15b8caa5625389f405d61571e64d8b1eef0cb8e0f1\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g0f2936419a5da624cac4905c0c0f8a8\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510183\n                    }\n                }\n            ],\n            \"fc25fe5d199b352bcd3dd7cc71aace3d4ba0cc49e34379b1555c22786736ba50\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g29c350c18fdab7617af0b375d6a8569\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510185\n                    }\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "payment_address",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/payment_address",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{miner_api_endpoint}}"
+							],
+							"port": "{{miner_api_port}}",
+							"path": [
+								"payment_address"
+							]
+						},
+						"description": "Generate a new payment address."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/payment_address",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{miner_api_endpoint}}"
+									],
+									"port": "{{miner_api_port}}",
+									"path": [
+										"payment_address"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "204"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 26 Jan 2024 10:00:14 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"899a36aaf48b432abe9f24d12612ddc6\",\n    \"status\": \"Success\",\n    \"reason\": \"New payment address generated\",\n    \"route\": \"payment_address\",\n    \"content\": \"9becf4f5ff00be99cbd4c4432abfeebc5bb645b1290f36aebc4e4aef9bd5bb20\"\n}"
+						}
+					]
+				},
+				{
+					"name": "current_mining_block",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/current_mining_block",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{miner_api_endpoint}}"
+							],
+							"port": "{{miner_api_port}}",
+							"path": [
+								"current_mining_block"
+							]
+						},
+						"description": "Get current mining block."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/current_mining_block",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{miner_api_endpoint}}"
+									],
+									"port": "{{miner_api_port}}",
+									"path": [
+										"current_mining_block"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "1243"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 26 Jan 2024 10:39:19 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"82203225e0eb46ed9ff705b71e3efa4a\",\n    \"status\": \"Success\",\n    \"reason\": \"Current mining block successfully retrieved\",\n    \"route\": \"current_mining_block\",\n    \"content\": {\n        \"block\": {\n            \"version\": 6,\n            \"bits\": 0,\n            \"nonce_and_mining_tx_hash\": [\n                [],\n                \"\"\n            ],\n            \"b_num\": 510,\n            \"timestamp\": 1706264384,\n            \"seed_value\": [\n                55,\n                54,\n                50,\n                56,\n                53,\n                48,\n                49,\n                49,\n                56,\n                50,\n                54,\n                54,\n                48,\n                51,\n                48,\n                48,\n                51,\n                57,\n                56,\n                52,\n                57,\n                54,\n                50,\n                51,\n                50,\n                49,\n                55,\n                57,\n                51,\n                49,\n                55,\n                52,\n                53,\n                55,\n                52,\n                50,\n                52,\n                49,\n                51,\n                52,\n                51,\n                57,\n                48,\n                52,\n                55,\n                55,\n                49,\n                50,\n                52,\n                56,\n                51,\n                48,\n                49,\n                51,\n                51,\n                49,\n                50,\n                55,\n                51,\n                54,\n                55,\n                48,\n                55,\n                49,\n                51,\n                54,\n                56,\n                54,\n                53,\n                52,\n                55,\n                54,\n                49,\n                52,\n                51,\n                51,\n                56,\n                45,\n                54,\n                56,\n                53,\n                55,\n                51,\n                56,\n                51,\n                53,\n                52,\n                55,\n                50,\n                50,\n                52,\n                49,\n                54,\n                50,\n                48,\n                54,\n                56,\n                53,\n                57,\n                48,\n                53,\n                51,\n                57,\n                57,\n                53,\n                50,\n                55,\n                49,\n                48,\n                48,\n                56,\n                55,\n                57,\n                51,\n                53,\n                51,\n                57,\n                51,\n                56,\n                49,\n                50,\n                48,\n                52,\n                53,\n                53,\n                55,\n                56,\n                56,\n                56,\n                54,\n                51,\n                50,\n                50,\n                53,\n                56,\n                50,\n                49,\n                50,\n                56,\n                54,\n                52,\n                50,\n                54,\n                48,\n                55,\n                54,\n                48,\n                53,\n                48,\n                52,\n                49,\n                51,\n                57,\n                52,\n                54,\n                57,\n                52,\n                49,\n                48,\n                57,\n                48,\n                51,\n                54,\n                53,\n                51,\n                48,\n                56,\n                56,\n                49,\n                57,\n                49,\n                52,\n                51,\n                54,\n                50,\n                48,\n                51,\n                51,\n                51,\n                51,\n                57,\n                57,\n                48,\n                54,\n                56,\n                51,\n                50,\n                54,\n                53,\n                56,\n                52,\n                51,\n                50,\n                48,\n                50,\n                55,\n                54,\n                50,\n                56,\n                56,\n                52,\n                57,\n                48,\n                55,\n                50,\n                52,\n                55,\n                51,\n                54,\n                56,\n                53,\n                55,\n                54,\n                50,\n                56,\n                50,\n                55,\n                57,\n                55,\n                54,\n                49,\n                55,\n                55,\n                57,\n                51,\n                48,\n                54,\n                55,\n                50,\n                53,\n                51,\n                48,\n                52,\n                52,\n                56\n            ],\n            \"previous_hash\": \"b00cceb4d0ec780809d9fab459e90e18aa075f0ae8f9a8b1f71e9a8e808f0c06e\",\n            \"txs_merkle_root_and_hash\": [\n                \"e493af736127f6278c37d1f199cd9f77c27476ca73bef4955a95490c9246e9d2\",\n                \"57e065cd0271dc2e11b93495032871e412f1d9faa0dc40bc688e197a9deb22f8\"\n            ]\n        },\n        \"reward\": 7510071\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "export_keypairs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/export_keypairs",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{miner_api_endpoint}}"
+							],
+							"port": "{{miner_api_port}}",
+							"path": [
+								"export_keypairs"
+							]
+						},
+						"description": "Export list of miner wallet keypairs."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/export_keypairs",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{miner_api_endpoint}}"
+									],
+									"port": "{{miner_api_port}}",
+									"path": [
+										"export_keypairs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "197055"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 26 Jan 2024 10:57:03 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"63559ebb932543778df8fe68d710c36d\",\n    \"status\": \"Success\",\n    \"reason\": \"Key-pairs successfully exported\",\n    \"route\": \"export_keypairs\",\n    \"content\": {\n        \"addresses\": {\n            \"000a443bd71f5df1e2b4e069e1ade86caf69ea24634f2bb4804d0b047c38fa63\": {\n                \"public_key\": \"5641aaa5dbac3dfa3a2d298b605c254a4b343ee45de5db72f541b6a5167f7671\",\n                \"secret_key\": \"3053020101300506032b657004220420c94a1bde216add0a5f437e8ddfd58c0373abfab7c15f118aaba8227d462dd351a1230321005641aaa5dbac3dfa3a2d298b605c254a4b343ee45de5db72f541b6a5167f7671\",\n                \"address_version\": null\n            },\n            \"005ffca917471edc70e59451a75e36a66e470936ef5ce87cf1b5e42a4769ba88\": {\n                \"public_key\": \"c1ece3821c4080fb3d405f30edc7bcc48cdc09929acde412ea750f46ccf824e4\",\n                \"secret_key\": \"3053020101300506032b6570042204206fe1b8b551c8cd27be16f0b5a2f6332530c7421c64420bd0e83b9b34d36cccb6a123032100c1ece3821c4080fb3d405f30edc7bcc48cdc09929acde412ea750f46ccf824e4\",\n                \"address_version\": null\n            },\n            \"00628247c7120dfdbb8b44a13468b78771a264246edeb25b2a41dc9202d7e52b\": {\n                \"public_key\": \"e6a1755799aded3057581674ccaa68cab22a813295d9513bd809527f459ee6d7\",\n                \"secret_key\": \"3053020101300506032b657004220420363a5e0b83e53a383887c2178172fb0707348bbe3aa0c6aee9e2a60031e6c3bba123032100e6a1755799aded3057581674ccaa68cab22a813295d9513bd809527f459ee6d7\",\n                \"address_version\": null\n            },\n            \"00ba52fe06de6e77784e6462a64a285ed2fce4b31173683fc74b77d94866520d\": {\n                \"public_key\": \"9624139ba7521c7f8891b1bbebe61d9e4ec5c4df6a5f06dff059c0d669c2c2a9\",\n                \"secret_key\": \"3053020101300506032b657004220420d0b265a2e5f1bb51c30f3af7b0a40af2f3b977c1a6a0d4f815f882efa971a5eda1230321009624139ba7521c7f8891b1bbebe61d9e4ec5c4df6a5f06dff059c0d669c2c2a9\",\n                \"address_version\": null\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "make_payment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var gen = require('uuid');",
+									"var uuid = gen.v4();",
+									"",
+									"pm.environment.set(\"REQ_UUID\", uuid.replaceAll('-', ''));",
+									"",
+									"console.log(pm.environment.get(\"REQ_UUID\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "default"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"address\": \"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\",\n    \"amount\": 1000000,\n    \"passphrase\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/make_payment",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{miner_api_endpoint}}"
+							],
+							"port": "{{miner_api_port}}",
+							"path": [
+								"make_payment"
+							]
+						},
+						"description": "Make payment from miner wallet to address."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "default"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"address\": \"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\",\n    \"amount\": 1000000,\n    \"passphrase\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/make_payment",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{miner_api_endpoint}}"
+									],
+									"port": "{{miner_api_port}}",
+									"path": [
+										"make_payment"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "238"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 26 Jan 2024 10:56:51 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"46d70750def94eb6a28569fa8c6934f8\",\n    \"status\": \"Success\",\n    \"reason\": \"Payment processing\",\n    \"route\": \"make_payment\",\n    \"content\": {\n        \"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\": {\n            \"asset\": {\n                \"Token\": 1000000\n            },\n            \"extra_info\": null\n        }\n    }\n}"
+						},
+						{
+							"name": "400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "default"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/make_payment",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{miner_api_endpoint}}"
+									],
+									"port": "{{miner_api_port}}",
+									"path": [
+										"make_payment"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "85"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 30 Jan 2024 13:21:49 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
+						}
+					]
+				},
+				{
+					"name": "change_passphrase",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"old_passphrase\": \" \",\r\n   \"new_passphrase\": \"new_passphrase\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{user_api_endpoint}}:{{user_api_port}}/change_passphrase",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{user_api_endpoint}}"
+							],
+							"port": "{{user_api_port}}",
+							"path": [
+								"change_passphrase"
+							]
+						},
+						"description": "Change miner wallet passphrase."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"old_passphrase\": \" \",\r\n   \"new_passphrase\": \"new_passphrase\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{user_api_endpoint}}:{{user_api_port}}/change_passphrase",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{user_api_endpoint}}"
+									],
+									"port": "{{user_api_port}}",
+									"path": [
+										"change_passphrase"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "148"
+								},
+								{
+									"key": "date",
+									"value": "Fri, 26 Jan 2024 11:19:05 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"cad45f2be7124d1e91c900b10bc01caf\",\n    \"status\": \"Success\",\n    \"reason\": \"Passphrase changed successfully\",\n    \"route\": \"change_passphrase\",\n    \"content\": \"null\"\n}"
+						},
+						{
+							"name": "400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{user_api_endpoint}}:{{user_api_port}}/change_passphrase",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{user_api_endpoint}}"
+									],
+									"port": "{{user_api_port}}",
+									"path": [
+										"change_passphrase"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "85"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 30 Jan 2024 13:25:26 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
+						}
+					]
+				},
+				{
+					"name": "update_running_total",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address_list\": [\"02b2c8d9c2b5e2b746d829b7a5faccd9325680f5760c5d679a8a4bf3cf8a49dd\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{user_api_endpoint}}:{{user_api_port}}/update_running_total",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{user_api_endpoint}}"
+							],
+							"port": "{{user_api_port}}",
+							"path": [
+								"update_running_total"
+							]
+						},
+						"description": "Update running total."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"address_list\": [\"02b2c8d9c2b5e2b746d829b7a5faccd9325680f5760c5d679a8a4bf3cf8a49dd\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{user_api_endpoint}}:{{user_api_port}}/update_running_total",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{user_api_endpoint}}"
+									],
+									"port": "{{user_api_port}}",
+									"path": [
+										"update_running_total"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "141"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 30 Jan 2024 13:27:49 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"7748242a8f2b480a92f1c23cf27158ba\",\n    \"status\": \"Success\",\n    \"reason\": \"Running total updated\",\n    \"route\": \"update_running_total\",\n    \"content\": \"null\"\n}"
+						},
+						{
+							"name": "update_running_total",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{user_api_endpoint}}:{{user_api_port}}/update_running_total",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{user_api_endpoint}}"
+									],
+									"port": "{{user_api_port}}",
+									"path": [
+										"update_running_total"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "85"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 30 Jan 2024 13:29:15 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
+						}
+					]
+				},
+				{
+					"name": "address_construction",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"pub_key\": [109, 133, 37, 100, 46, 243, 13, 156, 189, 123, 142, 12, 24, 169, 49, 186, 187, 0, 63, 27, 129, 207, 183, 13, 156, 208, 171, 164, 179, 118, 131, 183]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/address_construction",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{miner_api_endpoint}}"
+							],
+							"port": "{{miner_api_port}}",
+							"path": [
+								"address_construction"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"pub_key\": [109, 133, 37, 100, 46, 243, 13, 156, 189, 123, 142, 12, 24, 169, 49, 186, 187, 0, 63, 27, 129, 207, 183, 13, 156, 208, 171, 164, 179, 118, 131, 183]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/address_construction",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{miner_api_endpoint}}"
+									],
+									"port": "{{miner_api_port}}",
+									"path": [
+										"address_construction"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "212"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 30 Jan 2024 15:09:09 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"32fd9cadfdcb4089971e6f93c2e700bd\",\n    \"status\": \"Success\",\n    \"reason\": \"Address successfully constructed\",\n    \"route\": \"address_construction\",\n    \"content\": \"ca0abdcd2826a77218af0914601ee34c7ff44127aab9d0671267b25a7d36946a\"\n}"
+						},
+						{
+							"name": "400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/address_construction",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{miner_api_endpoint}}"
+									],
+									"port": "{{miner_api_port}}",
+									"path": [
+										"address_construction"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "85"
+								},
+								{
+									"key": "date",
+									"value": "Tue, 30 Jan 2024 15:12:08 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
+						}
+					]
+				}
+			],
+			"description": "The Miner node is most like the Bitcoin miner you may be familiar with. They are responsible for mining new blocks that they receive from the Mempool nodes and collect the associated block reward for their efforts. They are only able to mine a block if they manage to get into the partition for that round. _There can be an unlimited number of Miner nodes_."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var gen = require('uuid');",
+					"var uuid = gen.v4();",
+					"pm.environment.set(\"REQ_UUID\", uuid.replaceAll('-', ''));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

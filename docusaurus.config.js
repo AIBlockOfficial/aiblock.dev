@@ -8,7 +8,7 @@ const { DOCUSAURUS_VERSION } = require("@docusaurus/utils");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'A-Block',
+  title: 'ABlock',
   url: 'http://localhost:3000/',
   baseUrl: '/',
   onBrokenLinks: "warn",
@@ -58,7 +58,7 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "intro",
+            docId: "welcome",
             position: "left",
             label: "Documentation"
           },
@@ -67,6 +67,11 @@ const config = {
             docId: "api/overview",
             position: "left",
             label: "API"
+          },
+          {
+            href: "https://discord.gg/dDgabkJMEG",
+            label: "Discord",
+            position: "right"
           },
           {
             href: "https://github.com/ABlockOfficial",
@@ -82,15 +87,15 @@ const config = {
             items: [
               {
                 label: 'Documentation',
-                to: '/docs',
+                to: '/docs/welcome',
               },
               {
                 label: 'API',
-                to: '/api/overview',
+                to: '/docs/api/overview',
               },
               {
                 label: 'Tutorials',
-                to: '/docs/basic-tutorials/get-started',
+                to: '/docs/tutorials-overview',
               },
             ],
           },
@@ -113,7 +118,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} A-Block Technologies AG`,
+        copyright: `Copyright © ${new Date().getFullYear()} ABlock Technologies AG`,
       },
       prism: {
         theme: lightCodeTheme,
@@ -129,7 +134,7 @@ const config = {
         docsPluginId: "classic",
         config: {
           mempool: {
-            specPath: "openapi/mempool.yml",
+            specPath: "openapi/mempool_openapi.yml",
             outputDir: "docs/api/mempool",
             sidebarOptions: {
               groupPathsBy: "tag",
@@ -139,7 +144,7 @@ const config = {
             hideSendButton: true,
           },
           storage: {
-            specPath: "openapi/storage.yml",
+            specPath: "openapi/storage_openapi.yml",
             outputDir: "docs/api/storage",
             sidebarOptions: {
               groupPathsBy: "tag",
@@ -147,18 +152,17 @@ const config = {
               sidebarCollapsible: false,
             },
             hideSendButton: true,
-          }
-          /** TODO */
-          // miner: {
-          //   specPath: "openapi/miner.yml",
-          //   outputDir: "docs/miner-api",
-          //   sidebarOptions: {
-          //     groupPathsBy: "tag",
-          //     categoryLinkSource: "tag"
-          // sidebarCollapsible: false,
-          //   },
-          //   hideSendButton: true,
-          // },
+          },
+          miner: {
+            specPath: "openapi/miner_openapi.yml",
+            outputDir: "docs/api/miner",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+              sidebarCollapsible: false,
+            },
+            hideSendButton: true,
+          },
         }
       },
     ],
