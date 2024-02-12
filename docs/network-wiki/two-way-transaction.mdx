@@ -15,13 +15,11 @@ Currently, Bitcoin payments reflect as "charity": Alice pays Bob 1 BTC for a mid
 
 ## How a 2WT Works
 
-Bob has [game item], an awesome [item type] used in the game [game] which he wishes to sell through the ABlock blockchain:
+Bob has a karambit, an rare knife skin used in the game Counter Strike which he wishes to sell through the ABlock blockchain. Alice decides to buy the in-game item. In the event that Alice pays Bob 100 ABC$ for the item skin, the following sequence occurs:
 
-Alice is new to the game, but wants to get a leg up on the competition and so decides to buy the in-game item. In the event that Alice pays Bob 100 ABC$ for the axe, the following sequence occurs:
+1. Alice creates a transaction that sends 100 ABC$ to Bob, and expects the encoding scheme for his karambit knife skin
 
-1. Alice creates a transaction that sends 100 ABC$ to Bob, and expects the encoding scheme for his [item type]
-
-2. Bob creates a transaction that sends the [item type] encoding scheme to Alice, and expects 100 ABC$ in return
+2. Bob creates a transaction that sends the karambit knife skin encoding scheme to Alice, and expects 100 ABC$ in return
 
 3. Alice and Bob exchange their respective halves of an identifier called a DRUID (Double Resolution Unique ID)
 
