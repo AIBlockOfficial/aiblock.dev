@@ -23,7 +23,7 @@ Fairness in block mining and Miner participation is ensured through the partitio
 
 The partitioning system forms the foundation of the Mempool-Miner balance. Instead of all miners mining each round, a select few are chosen, conserving energy. Miners not chosen can attempt to participate in the next round. The network structure each round is illustrated in the diagram, where only miner nodes inside the orange space can mine for a specific Mempool node:
 
-{/* Img */}
+![miner](./img/miner.svg)
 
 Each round, Miners can request to join a Mempool node's upcoming block mining. Each Mempool node has a limited number of miners in its partition. Once the partition limit is reached, the block can be sent for mining.
 
