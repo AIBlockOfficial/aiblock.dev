@@ -11,7 +11,7 @@ COPY ./ ./.
 RUN yarn build
 
 # Use distroless
-FROM cgr.dev/chainguard/nginx@sha256:3dd8fa303f77d7eb6ce541cb05009a5e8723bd7e3778b95131ab4a2d12fadb8f
+FROM cgr.dev/chainguard/nginx:latest@sha256:3dd8fa303f77d7eb6ce541cb05009a5e8723bd7e3778b95131ab4a2d12fadb8f
 
 # Copy built statc files to nginx www root
 COPY --from=build /a-block/build/ /usr/share/nginx/html/.
