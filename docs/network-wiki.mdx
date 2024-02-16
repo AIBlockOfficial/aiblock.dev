@@ -24,7 +24,7 @@ The ABlock system architecture mirrors much of what you'll find in the Bitcoin a
 
 The other major difference between ABlock and traditional blockchains is the introduction of the 2 way transaction system. Unlike traditional blockchains, our blockchain can record both the movement of tokens *and* the movement of assets for those tokens. Thanks to the Data Protocol, those assets can be your ownable and transactable data assets.
 
-To facilitate this, the ABlock architecture makes use of different types of nodes in its network. You can find out more about the different node types [here](node-types).
+To facilitate this, the ABlock architecture makes use of different types of nodes in its network. You can find out more about the different node types [here](network-wiki/node-types).
 
 ## Code Design
 We have a specific design philosophy regarding the code written at ABlock. The ideal is to have code which will be easily reusable, but most importantly easily understandable. We treat our code like a client-server relationship, where the code is the server and you, the human user, are the client. To that end we have adopted the [Three Tier Architecture](https://en.wikipedia.org/wiki/Multitier_architecture#Three-tier_architecture) approach popularised by [John J. Donovan](https://en.wikipedia.org/wiki/John_J._Donovan), which in brief consists of the following:
