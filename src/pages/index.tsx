@@ -3,13 +3,8 @@ import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import HomepageFeatureBlock from '@site/src/components/HomepageFeatureBlock';
-
-import blueA from '@site/static/img/blueA.svg';
-import greenA from '@site/static/img/greenA.svg';
-
 import styles from './styles.module.css';
-import heroImg from '../../static/img/utopia.jpg';
+import heroImg from '@site/static/img/utopia.jpg';
 
 /** HOMEPAGE */
 
@@ -51,7 +46,7 @@ export default function Home(): JSX.Element {
           <h2>Get Started</h2>
           <p>You can start building and using the ABlock tooling by exploring the documentation and API</p>
           <div className={styles.blockButton}>
-            <a className="button button--primary button--lg" href="/docs/welcome">
+            <a className="button button--primary button--lg" href="/docs">
               Developer Documentation
             </a>
           </div>

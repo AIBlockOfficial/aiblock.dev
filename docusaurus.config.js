@@ -87,7 +87,7 @@ const config = {
             items: [
               {
                 label: 'Documentation',
-                to: '/docs/welcome',
+                to: '/docs',
               },
               {
                 label: 'API',
