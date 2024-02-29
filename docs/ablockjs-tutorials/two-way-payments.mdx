@@ -5,28 +5,28 @@ sidebar_label: 2-Way Payments
 sidebar_position: 2
 hide_title: true
 tags:
-  - ablock.js
+  - A-Block.js
   - getting started
 ---
 
 # 2-Way Payments
 
-The problem in every blockchain (other than ABlock 😉) is that Alice pays Bob some coins, but the chain never records _why_. Put another way, there's no record of trade where Alice pays Bob 
+The problem in every blockchain (other than AIBlock 😉) is that Alice pays Bob some coins, but the chain never records _why_. Put another way, there's no record of trade where Alice pays Bob 
 for an item, and Bob sends Alice this item. Instead, payments on blockchain just look like charity, as though Alice felt sorry for Bob and decided to send him some coin for coffee (or maybe cocaine, the chain doesn't say). 
 The closest you can currently get is to create a smart contract that encapsulates this logic, but those take far too long to write and are prone to risky 
 and expensive bugs. 
 
-**2-Way payments solve this problem.** Alice can send Bob `10` tokens, and Bob can send Alice `1` item, and both events are recorded on the ABlock chain with no smart contracts, no fuss!
+**2-Way payments solve this problem.** Alice can send Bob `10` tokens, and Bob can send Alice `1` item, and both events are recorded on the AIBlock chain with no smart contracts, no fuss!
 
 <br></br>
 
 ## Send a Payment for an Item
 
-2-Way transactions on ABlock are atomic, meaning that either both Alice and Bob get what they want, or the entire transaction is canceled. But they're also async, meaning that Alice and Bob don't need to be online 
+2-Way transactions on AIBlock are atomic, meaning that either both Alice and Bob get what they want, or the entire transaction is canceled. But they're also async, meaning that Alice and Bob don't need to be online 
 at the same time in order for the transaction to go through. Let's test this as Alice, wanting to make a `10` token payment to Bob for `1` of his on-chain items
 
 ```javascript
-import { initIAssetToken, initIAssetItem, ABlockWallet } from '@a-block/a-blockjs';
+import { initIAssetToken, initIAssetItem, ABlockWallet } from '@ablock/a-blockjs';
 
 // ... wallet initialization set up
 
@@ -136,5 +136,5 @@ await wallet.accept2WayPayment(druid, pending2WayTransactions, allKeypairs);
 await wallet.reject2WayPayment(druid, pending2WayTransactions, allKeypairs);
 ```
 
-Once called, A-Block.js will automatically send the right response to the Valence node, and the entire 2-Way transaction can be executed on the ABlock chain if accepted. Once executed on-chain, 
+Once called, A-Block.js will automatically send the right response to the Valence node, and the entire 2-Way transaction can be executed on the AIBlock chain if accepted. Once executed on-chain, 
 both Alice and Bob will see the balances of their respective assets updated to reflect the trade.

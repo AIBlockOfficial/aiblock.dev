@@ -1,35 +1,35 @@
 ---
 title: "Get Started"
-description: "Get started setting up your ABlock wallet through the A-Block.js SDK"
+description: "Get started setting up your AIBlock wallet through the A-Block.js SDK"
 sidebar_label: Get Started
 sidebar_position: 0
 hide_title: true
 tags:
-  - ablock.js
+  - A-Block.js
   - getting started
 ---
 
 # Get Started
 
 ## Installation
-Integration wih ABlock can be done simply and easily through the <a href="https://github.com/ABlockOfficial/A-Block.js#a-blockjs">A-Block.js SDK</a>. 
+Integration wih AIBlock can be done simply and easily through the <a href="https://github.com/AIBlockOfficial/A-Block.js#a-blockjs">A-Block.js SDK</a>. 
 To get started, we can install it to our JavaScript/TypeScript project with `npm`:
 
 ```sh
-npm install @a-block/a-blockjs
+npm install @ablock/a-blockjs
 ```
 
 or alternatively with `yarn`:
 
 ```sh
-yarn add @a-block/a-blockjs
+yarn add @ablock/a-blockjs
 ```
 
 <br/><br/>
 
-## Create ABlock Wallet
+## Create AIBlock Wallet
 
-Creating an instance of an ABlock wallet can be done in three main ways:
+Creating an instance of an AIBlock wallet can be done in three main ways:
 
 1. **initNew**: A new wallet, created from scratch for a new user
 2. **fromSeed**: An existing wallet, generated from a saved seed phrase
@@ -39,10 +39,10 @@ Creating an instance of an ABlock wallet can be done in three main ways:
 
 ### Create a New Wallet
 
-You can create a new instance of an ABlock wallet via the SDK's `initNew` method:
+You can create a new instance of an AIBlock wallet via the SDK's `initNew` method:
 
 ```javascript
-    import { ABlockWallet } from '@a-block/a-blockjs';
+    import { ABlockWallet } from '@ablock/a-blockjs';
 
     const CONFIG = {
       mempoolHost: 'example.mempool.host.com',
@@ -120,7 +120,7 @@ wallet.fromSeed(sp, CONFIG).then((fromSeedResult) => {
 
 ### Offline Initialization
 
-In some cases, it might be desirable to initialize the wallet without a network connection. This will allow the wallet to be used offline, but will inadvertently prevent the wallet from being able to perform any operations that require interaction with the ABlock network. The following functions are available with an offline configuration:
+In some cases, it might be desirable to initialize the wallet without a network connection. This will allow the wallet to be used offline, but will inadvertently prevent the wallet from being able to perform any operations that require interaction with the AIBlock network. The following functions are available with an offline configuration:
 
 -   `regenAddresses` - Re-generate lost keypairs from a list of given addresses.
 -   `getNewKeypair` - Generate a new keypair.
@@ -132,7 +132,7 @@ In some cases, it might be desirable to initialize the wallet without a network 
 <br/>
 
 ```typescript
-import { ABlockWallet } from '@a-block/a-blockjs';
+import { ABlockWallet } from '@ablock/a-blockjs';
 
 // Create the wallet object
 const wallet = new ABlockWallet();
@@ -218,10 +218,10 @@ Once initialized, you can access all the functionalities within the wallet.
 
 ### Generating Keypairs
 
-ABlock is a UTXO blockchain, so you can generate a new keypair, for example, by using the `getNewKeypair` method:
+AIBlock is a UTXO blockchain, so you can generate a new keypair, for example, by using the `getNewKeypair` method:
 
 ```javascript
-import { ABlockWallet } from '@a-block/a-blockjs';
+import { ABlockWallet } from '@ablock/a-blockjs';
 
 const wallet = new ABlockWallet();
 
