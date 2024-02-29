@@ -1,11 +1,11 @@
 ---
 title: "Send and Receive Payments"
-description: "Sending and receiving payments through A-Block.js is quick and simple"
+description: "Sending and receiving payments through AIBlock.js is quick and simple"
 sidebar_label: Send and Receive Payments
 sidebar_position: 1
 hide_title: true
 tags:
-  - ablock.js
+  - aiblock.js
   - getting started
   - payments
 ---
@@ -13,14 +13,14 @@ tags:
 # Send and Receive Payments
 
 :::info
-Need **testnet tokens**? Contact us on [**ABlock discord**](https://discord.gg/dDgabkJMEG) and we will sort you out 😎
+Need **testnet tokens**? Contact us on [**AIBlock discord**](https://discord.gg/dDgabkJMEG) and we will sort you out 😎
 :::
 
-After setting up a wallet, you can send and receive payments very easily through the A-Block.js SDK. If you're developing 
+After setting up a wallet, you can send and receive payments very easily through the AIBlock.js SDK. If you're developing 
 this in a test environment, you can create 2 new keypairs. We'll use address 1 as our sender (Alice) and address 2 as our receiver (Bob).
 
 ```javascript
-import { ABlockWallet } from '@a-block/a-blockjs';
+import { ABlockWallet } from '@aiblock/a-blockjs';
 
 const wallet = new ABlockWallet();
 
@@ -95,4 +95,4 @@ The response structure for `bobBalance` will then be something like the followin
 }
 ```
 
-That's it! A-Block.js has been designed to make sending and receiving payments as quick and easy as possible. Next, we'll take a look at how to make atomic, 2-way payments.
+That's it! AIBlock.js has been designed to make sending and receiving payments as quick and easy as possible. Next, we'll take a look at how to make atomic, 2-way payments.

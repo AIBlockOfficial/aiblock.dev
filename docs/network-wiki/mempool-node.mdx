@@ -1,21 +1,21 @@
 ---
-title: "ABlock Mempool Node"
-description: "Learn about ABlock's Mempool node type"
+title: "AIBlock Mempool Node"
+description: "Learn about AIBlock's Mempool node type"
 sidebar_label: Mempool Node
 sidebar_position: 1
 hide_title: true
 tags:
   - deep dive documentation
-  - ablock network
+  - aiblock network
 ---
 
 # Mempool Node
 
-The Mempool node plays a crucial role in the ABlock network, serving as one part of the power balance. Unlike fully distributed mining, as seen in Bitcoin, ABlock opts for a compromise by employing a ring of decentralized Mempool nodes to facilitate transactions. Public, fully distributed Miner nodes are still responsible for mining the blocks and contributing to the fair decision-making process for transaction selection.
+The Mempool node plays a crucial role in the AIBlock network, serving as one part of the power balance. Unlike fully distributed mining, as seen in Bitcoin, AIBlock opts for a compromise by employing a ring of decentralized Mempool nodes to facilitate transactions. Public, fully distributed Miner nodes are still responsible for mining the blocks and contributing to the fair decision-making process for transaction selection.
 
 ## Balance of Power
 
-The network's security and trustlessness are influenced by the ring of Mempool nodes under ABlock's control. The Mempool nodes create blocks, while Miner nodes mine them, ensuring a balance of control. Removing either set of nodes jeopardizes the entire system, creating a balance akin to the Roman-style Senate and the Public-like Miner nodes.
+The network's security and trustlessness are influenced by the ring of Mempool nodes under AIBlock's control. The Mempool nodes create blocks, while Miner nodes mine them, ensuring a balance of control. Removing either set of nodes jeopardizes the entire system, creating a balance akin to the Roman-style Senate and the Public-like Miner nodes.
 
 ## Mempool Node Structure
 
@@ -32,7 +32,7 @@ In each round, all nodes within the Mempool ring share the responsibility of blo
 
 ## Mempool Nodes and Miner Nodes
 
-After a block is generated and mined, Miner nodes send requests to all Mempool nodes to participate in the next round of block mining. The ABlock protocol allows only partitions or subsets of the network to mine at any given time. Each Mempool node has its own partition of miners, changing every round. Once the partition list is full, Miner nodes for that Mempool node are selected. Winners, determined by a valid Proof-of-Work, send their block to the Mempool node for validation and storage. For detailed Miner operation, refer to [this wiki page](Miner-Node).
+After a block is generated and mined, Miner nodes send requests to all Mempool nodes to participate in the next round of block mining. The AIBlock protocol allows only partitions or subsets of the network to mine at any given time. Each Mempool node has its own partition of miners, changing every round. Once the partition list is full, Miner nodes for that Mempool node are selected. Winners, determined by a valid Proof-of-Work, send their block to the Mempool node for validation and storage. For detailed Miner operation, refer to [this wiki page](Miner-Node).
 
 ## Mempool Nodes and Storage Nodes
 

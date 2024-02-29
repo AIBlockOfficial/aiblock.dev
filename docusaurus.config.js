@@ -8,14 +8,14 @@ const { DOCUSAURUS_VERSION } = require("@docusaurus/utils");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'ABlock',
+  title: 'AIBlock',
   url: 'http://localhost:3000/',
   baseUrl: '/',
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.png",
-  organizationName: 'ABlockOfficial',
-  projectName: 'ablock.docs',
+  organizationName: 'AIBlockOfficial',
+  projectName: 'aiblock.docs',
 
   presets: [
     [
@@ -74,7 +74,7 @@ const config = {
             position: "right"
           },
           {
-            href: "https://github.com/ABlockOfficial",
+            href: "https://github.com/AIBlockOfficial",
             label: "GitHub",
             position: "right"
           }
@@ -113,12 +113,12 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/ABlockOfficial',
+                href: 'https://github.com/AIBlockOfficial',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} ABlock Technologies AG`,
+        copyright: `Copyright © ${new Date().getFullYear()} AIBlock Technologies AG`,
       },
       prism: {
         theme: lightCodeTheme,
