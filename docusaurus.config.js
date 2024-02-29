@@ -15,7 +15,7 @@ const config = {
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.png",
   organizationName: 'AIBlockOfficial',
-  projectName: 'aiblock.docs',
+  projectName: 'aiblock.dev',
 
   presets: [
     [
