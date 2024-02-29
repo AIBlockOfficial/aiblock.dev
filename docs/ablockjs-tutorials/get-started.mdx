@@ -16,13 +16,13 @@ Integration wih AIBlock can be done simply and easily through the <a href="https
 To get started, we can install it to our JavaScript/TypeScript project with `npm`:
 
 ```sh
-npm install @aiblock/a-blockjs
+npm install @ablock/a-blockjs
 ```
 
 or alternatively with `yarn`:
 
 ```sh
-yarn add @aiblock/a-blockjs
+yarn add @ablock/a-blockjs
 ```
 
 <br/><br/>
@@ -42,7 +42,7 @@ Creating an instance of an AIBlock wallet can be done in three main ways:
 You can create a new instance of an AIBlock wallet via the SDK's `initNew` method:
 
 ```javascript
-    import { ABlockWallet } from '@aiblock/a-blockjs';
+    import { ABlockWallet } from '@ablock/a-blockjs';
 
     const CONFIG = {
       mempoolHost: 'example.mempool.host.com',
@@ -132,7 +132,7 @@ In some cases, it might be desirable to initialize the wallet without a network 
 <br/>
 
 ```typescript
-import { ABlockWallet } from '@aiblock/a-blockjs';
+import { ABlockWallet } from '@ablock/a-blockjs';
 
 // Create the wallet object
 const wallet = new ABlockWallet();
@@ -221,7 +221,7 @@ Once initialized, you can access all the functionalities within the wallet.
 AIBlock is a UTXO blockchain, so you can generate a new keypair, for example, by using the `getNewKeypair` method:
 
 ```javascript
-import { ABlockWallet } from '@aiblock/a-blockjs';
+import { ABlockWallet } from '@ablock/a-blockjs';
 
 const wallet = new ABlockWallet();
 
