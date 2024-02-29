@@ -51,7 +51,7 @@ const sidebars = {
           items: [
             {
               type: "category",
-              label: "AIBlock.js",
+              label: "A-Block.js",
               link: {
                 type: "doc",
                 id: "ablockjs-tutorials"
