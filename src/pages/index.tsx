@@ -45,7 +45,7 @@ export default function Home(): JSX.Element {
         <div className={styles.block}>
           <h2>Get Started</h2>
           <p>You can start building and using the AIBlock tooling by exploring the documentation and API</p>
-          <div cletassName={styles.blockButton}>
+          <div className={styles.blockButton}>
             <a className="button button--primary button--lg" href="/docs">
               Developer Documentation
             </a>
