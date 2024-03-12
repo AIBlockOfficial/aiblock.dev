@@ -117,6 +117,19 @@ const config = {
               },
             ],
           },
+          {
+            title: 'Legal',
+            items: [
+              {
+                label: 'Terms of Use',
+                to: '/termsofuse',
+              },
+              {
+                label: 'Privacy Policy',
+                to: '/privacypolicy',
+              },
+            ],
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} AIBlock Technologies AG`,
       },
