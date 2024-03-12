@@ -106,6 +106,18 @@ const config = {
                 label: 'Discord',
                 href: 'https://discord.gg/dDgabkJMEG',
               },
+              {
+                label: 'X',
+                href: 'https://twitter.com/AI3lock',
+              },
+              {
+                label: 'Youtube',
+                href: 'https://www.youtube.com/@AI3lock',
+              },
+              {
+                label: 'Reddit',
+                href: 'https://www.reddit.com/r/AI3lock/',
+              }
             ],
           },
           {
@@ -122,11 +134,11 @@ const config = {
             items: [
               {
                 label: 'Terms of Use',
-                to: '/termsofuse',
+                to: 'legal/termsofuse',
               },
               {
                 label: 'Privacy Policy',
-                to: '/privacypolicy',
+                to: 'legal/privacypolicy',
               },
             ],
           },
