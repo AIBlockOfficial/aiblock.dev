@@ -68,14 +68,21 @@ const config = {
             position: "left",
             label: "API"
           },
-          {
-            href: "https://discord.gg/dDgabkJMEG",
-            label: "Discord",
-            position: "right"
-          },
+          // {
+          //   href: "https://discord.gg/dDgabkJMEG",
+          //   position: "right",
+          //   className: "header-ico .header-discord-link",
+          //   "aria-label": "AIBlock Discord",
+          // },
           {
             href: "https://github.com/AIBlockOfficial",
-            label: "GitHub",
+            position: "right",
+            className: "header-ico header-github-link",
+            "aria-label": "AIBlock GitHub",
+          },
+          {
+            href: "https://linktr.ee/ai3lock",
+            label: "More",
             position: "right"
           }
         ]
@@ -107,26 +114,13 @@ const config = {
                 href: 'https://discord.gg/dDgabkJMEG',
               },
               {
-                label: 'X',
-                href: 'https://twitter.com/AI3lock',
-              },
-              {
-                label: 'Youtube',
-                href: 'https://www.youtube.com/@AI3lock',
-              },
-              {
-                label: 'Reddit',
-                href: 'https://www.reddit.com/r/AI3lock/',
-              }
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
                 label: 'GitHub',
                 href: 'https://github.com/AIBlockOfficial',
               },
+              {
+                label: 'More',
+                href: 'https://linktr.ee/ai3lock',
+              }
             ],
           },
           {
