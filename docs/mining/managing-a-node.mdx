@@ -1,0 +1,104 @@
+---
+title: Managing a Node
+description: How to interact with a mining node
+sidebar_label: Managing a Node
+sidebar_position: 0
+hide_title: false
+tags:
+  - mining
+  - miner managing
+  - miner interaction
+---
+
+Mining nodes can be managed and interacted with through API calls directly. Miners, if started with the `--with_user_index` flag, will provide 
+the full range of API endpoints needed to handle tokens and keypairs accrued over the course of mining.
+
+## API Endpoints
+
+### **<img src="https://img.shields.io/badge/GET-2176FF" alt="GET"/> `wallet_info`**
+
+This endpoint will provide full information on the currently running miner, in particular the amount of tokens (and items, if applicable) the miner's 
+wallet has accrued.
+
+Example response:
+
+```json
+{
+    "id": "b06991e6acc945288819aee3df8d40f5",
+    "status": "Success",
+    "reason": "Wallet info successfully fetched",
+    "route": "wallet_info",
+    "content": {
+        "running_total": 28752801.881904762,
+        "item_total": {},
+        "addresses": {
+            "00b15e53a4d1a33742bce48e4213a89633abeaf87d9116f9e96b83ea7440d122": [
+                {
+                    "out_point": {
+                        "t_hash": "g118ce84fe0f416b43f9af805cc914b0",
+                        "n": 0
+                    },
+                    "value": {
+                        "Token": 7488539
+                    }
+                }
+            ],
+        }
+    }
+}
+```
+
+..
+
+### **<img src="https://img.shields.io/badge/GET-2176FF" alt="GET"/> `payment_address`**
+
+This endpoint will generate a new address for the miner node to be paid to, including the construction of an associated public/private keypair.
+
+Example response:
+
+```json
+{
+    "id": "33888339c1f74c5297833d8a87b38984",
+    "status": "Success",
+    "reason": "New payment address generated",
+    "route": "payment_address",
+    "content": "ca5314e0cadd38c40f6168e4c8a275a83750dbea1c34d034f024d35f66abc214"
+}
+```
+
+..
+
+### **<img src="https://img.shields.io/badge/POST-07BEB8" alt="POST"/> `make_payment`**
+
+This endpoint can be called in order to make a payment from the miner node to an address on the AIBlock network. The body of the request will 
+need to conform to the following structure:
+
+```json
+{
+    "address": "61e7f2a8bdc89d16fb7e9e13a82845a588af71d7ce3d25a27fe526c91393fb6f",
+    "amount": 72072000,
+    "passphrase": ""
+}
+```
+
+**NOTE: The `amount` field will be the number of token subunits. The number of subunits in an AIBlock token is 72072000, so if `amount` is 72072000 then you'll be 
+making a payment of 1 full token.**
+
+Example response:
+
+```json
+{
+    "id": "ab6a6f83948548149302d8aa344bb292",
+    "status": "Success",
+    "reason": "Payment processing",
+    "route": "make_payment",
+    "content": {
+        "61e7f2a8bdc89d16fb7e9e13a82845a588af71d7ce3d25a27fe526c91393fb6f": {
+            "asset": {
+                "Token": 72072000
+            },
+            "extra_info": null
+        }
+    }
+}
+```
