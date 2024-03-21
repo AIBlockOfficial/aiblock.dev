@@ -2,6 +2,8 @@ openapi: 3.0.3
 info:
   title: Mempool API
   description: |-
+    ⚠️ **Some sections may still be incomplete. We higly recommend getting started by downloading our [Postman collection](/docs/postman-collections)**.
+
     The Mempool node is a special type of node responsible for collecting transactions and bundling them into new blocks. 
     They also partition the mining network for mining and validate the blocks that these partitions mine. 
     There are only a limited number of Mempool nodes.  
@@ -10,12 +12,12 @@ info:
   license:
     name: GPL-3.0
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
-  version: 1.0.0
+  version: 1.0.1
 externalDocs:
   description: Find out more about AIBlock
-  url: https://a-block.net
+  url: https://aiblock.ch
 servers:
-  - url: http://49.12.234.10:3003
+  - url: http://37.27.23.104:3003
     description: Testnet Mempool Node
 # TAGS
 tags:
@@ -48,7 +50,53 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseDebugData'          
+                $ref: '#/components/schemas/ResponseDebugData'    
+  /total_supply:
+    get:
+      tags:
+        - info
+      summary: total_supply
+      description: Get total supply information.
+      operationId: totalSupply
+      parameters:
+        - in: header
+          name: x-cache-id
+          required: true
+          description: An idempotent key for retrieving cached responses from the node.
+          schema:
+              type: string
+              example: '4d1e5754af0931a15138445c3ecd1a82'
+              pattern: ^[a-z0-9]{32}$
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseTotalSupply'  
+  /issued_supply:
+    get:
+      tags:
+        - info
+      summary: issued
+      description: Get issued supply information.
+      operationId: issuedSupply
+      parameters:
+        - in: header
+          name: x-cache-id
+          required: true
+          description: An idempotent key for retrieving cached responses from the node.
+          schema:
+              type: string
+              example: '4d1e5754af0931a15138445c3ecd1a82'
+              pattern: ^[a-z0-9]{32}$
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseIssuedSupply' 
   /create_transactions:
     post:
       tags:
@@ -156,22 +204,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBadRequest'          
+                $ref: '#/components/schemas/ResponseBadRequest'  
 
 ### ------ Schemas ------ ###     
 components:
   schemas:
     # REQUEST BODY
     FetchBalance:
-      type: object
-      properties:
-        address_list:
-          description: list of addresses to fetch from
-          type: array
-          items:
-            type: string
-          example: 
-            ["e1e957ba8e44843bb80e9d6d905066ec98763ca797093181ab6c695934549035"]
+      type: array
+      description: list of addresses to fetch from
+      items:
+        type: string
+        example: 
+            "d6fa779a3de8b216c56375018375e490c7e2ce92918abce4caecf73b1f77c38f"
     
     ItemCreate:
       type: object
@@ -352,6 +397,7 @@ components:
             tx_hash:      
               type: string
               example: default_drs_tx_hash
+              
     ResponseDebugData:
       type: object
       properties:
@@ -376,7 +422,7 @@ components:
           properties:
             node_type:
               type: string
-              example: 'Compute'
+              example: 'Mempool'
               description: The type of this node
             node_api:
               type: array
@@ -394,6 +440,54 @@ components:
                 type: string
               example:
                 - 'Storage'
+                
+    ResponseTotalSupply:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '4d1e5754af0931a15138445c3ecd1a82'
+          description: The ID of the call, which corresponds to the x-cache-id used in the header
+        status:
+          type: string
+          example: 'Success'
+          description: The status of the call, which will be one of either "Success", "Error", or "Pending"
+        reason:
+          type: string
+          example: 'Successfully fetched total supply'
+          description: The reason for the status of the call. Most useful to debug errors
+        route:
+          type: string
+          example: 'total_supply'
+          description: The endpoint route that was called
+        content:
+          type: number
+          example: 360360000000000000
+          description: The total supply of tokens
+          
+    ResponseIssuedSupply:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '4d1e5754af0931a15138445c3ecd1a82'
+          description: The ID of the call, which corresponds to the x-cache-id used in the header
+        status:
+          type: string
+          example: 'Success'
+          description: The status of the call, which will be one of either "Success", "Error", or "Pending"
+        reason:
+          type: string
+          example: 'Successfully fetched issued supply'
+          description: The reason for the status of the call. Most useful to debug errors
+        route:
+          type: string
+          example: 'issued_supply'
+          description: The endpoint route that was called
+        content:
+          type: number
+          example: 94028360708339
+          description: The total supply of tokens
 
     ResponseCreateTransactions:
       type: object
@@ -417,26 +511,10 @@ components:
         content:
           type: object
           properties:
-            node_type:
-              type: string
-              example: 'Compute'
-              description: The type of this node
-            node_api:
-              type: array
-              description: The publicly visible endpoints available on this node
-              items:
-                type: string
-              example:
-                - fetch_balance
-                - create_item_asset
-                - create_transactions
-            node_peers:
-              type: array
-              description: The publicly visible nodes that this node is connected to
-              items:
-                type: string
-              example:
-                - 'Storage'
+            transaction:
+              type: object
+              example: 'This section is unfinished, refer to postman collection for more details'
+              description: This section is unfinished, refer to postman collection for more details
 
     ResponseFetchBalance:
       type: object

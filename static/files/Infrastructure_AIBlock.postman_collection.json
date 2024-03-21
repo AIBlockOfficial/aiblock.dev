@@ -1,8 +1,8 @@
 {
 	"info": {
 		"_postman_id": "7355adb9-7162-4841-b5fa-e45bb62efd84",
-		"name": "Infrastructure_ABlock",
-		"description": "The AIBlock API allows you to interact with the AIBlock chain without the need for complicated, risky smart contracts. It's here to let you work with AIBlock in a way that's fast, simple and secure.\n\n#### Usefull links\n\n- [AIBlock Developer website ](https://aiblock.dev/) & [](https://aiblock.dev/)[API documentation](https://aiblock.dev/docs/api/overview)\n- [AIBlock Official website](https://aiblock.ch/)\n- [AIBlock Github](https://github.com/AIBlockOfficial)\n- [AIBlock Discord](https://discord.com/invite/dDgabkJMEG)\n    \n\n#### Contact\n\n[byron.houwens@a-block.net](https://mailto:byron.houwens@a-block.net)\n\n#### License\n\n[GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)",
+		"name": "Infrastructure_AIBlock",
+		"description": "The AIBlock API allows you to interact with the AIBlock chain without the need for complicated, risky smart contracts. It's here to let you work with A-Block in a way that's fast, simple and secure.\n\n#### Usefull links\n\n- [AIBlock Developer website ](https://aiblock.dev/) & [](https://aiblock.dev/)[API documentation](https://aiblock.dev/docs/api/overview)\n    \n- [AIBlock Official website](https://a-block.net/)\n    \n- [AIBlock Github](https://github.com/AIBlockOfficial)\n    \n- [AIBlock Discord](https://discord.com/invite/dDgabkJMEG)\n    \n- [AIBlock Linktree](https://linktr.ee/ai3lock)\n    \n\n#### Contact\n\n[byron.houwens@a-block.net](https://mailto:byron.houwens@a-block.net)\n\n[robin.plojoux@a-block.net](https://mailto:robin.plojoux@a-block.net)\n\n#### License\n\n[GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "11894270"
 	},
@@ -17,7 +17,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Status code is 200', function () {\r",
+									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});"
 								],
@@ -63,13 +63,13 @@
 					},
 					"response": [
 						{
-							"name": "200_mempool",
+							"name": "200",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -79,13 +79,13 @@
 									}
 								],
 								"url": {
-									"raw": "http://49.12.234.10:3003/debug_data",
+									"raw": "http://37.27.23.104:3003/debug_data",
 									"protocol": "http",
 									"host": [
-										"49",
-										"12",
-										"234",
-										"10"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
 									"port": "3003",
 									"path": [
@@ -111,13 +111,24 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": \"da3d41d18b0141b6932dc320f677ab2d\",\n    \"status\": \"Success\",\n    \"reason\": \"Debug data successfully retrieved\",\n    \"route\": \"debug_data\",\n    \"content\": {\n        \"node_type\": \"Compute\",\n        \"node_api\": [\n            \"fetch_balance\",\n            \"create_item_asset\",\n            \"create_transactions\",\n            \"utxo_addresses\",\n            \"address_construction\",\n            \"pause_nodes\",\n            \"resume_nodes\",\n            \"update_shared_config\",\n            \"get_shared_config\",\n            \"debug_data\"\n        ],\n        \"node_peers\": [\n            [\n                \"127.0.0.1:12330\",\n                \"127.0.0.1:12330\",\n                \"Storage\"\n            ]\n        ],\n        \"routes_pow\": {\n            \"create_transactions\": 2\n        }\n    }\n}"
+							"body": "{\n    \"id\": \"da3d41d18b0141b6932dc320f677ab2d\",\n    \"status\": \"Success\",\n    \"reason\": \"Debug data successfully retrieved\",\n    \"route\": \"debug_data\",\n    \"content\": {\n        \"node_type\": \"Compute\",\n        \"node_api\": [\n            \"fetch_balance\",\n            \"create_receipt_asset\",\n            \"create_transactions\",\n            \"utxo_addresses\",\n            \"address_construction\",\n            \"pause_nodes\",\n            \"resume_nodes\",\n            \"update_shared_config\",\n            \"get_shared_config\",\n            \"debug_data\"\n        ],\n        \"node_peers\": [\n            [\n                \"127.0.0.1:12330\",\n                \"127.0.0.1:12330\",\n                \"Storage\"\n            ]\n        ],\n        \"routes_pow\": {\n            \"create_transactions\": 2\n        }\n    }\n}"
 						}
 					]
 				},
 				{
-					"name": "utxo_addresses",
+					"name": "total_supply",
 					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
 						{
 							"listen": "prerequest",
 							"script": {
@@ -143,17 +154,17 @@
 							}
 						],
 						"url": {
-							"raw": "{{protocol}}://{{mempool_api_endpoint}}:{{mempool_api_port}}/utxo_addresses",
+							"raw": "{{protocol}}://{{mempool_api_endpoint}}:{{mempool_api_port}}/total_supply",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{mempool_api_endpoint}}"
 							],
 							"port": "{{mempool_api_port}}",
 							"path": [
-								"utxo_addresses"
+								"total_supply"
 							]
 						},
-						"description": "Get list of UTXO addresses."
+						"description": "Get general information about the current node."
 					},
 					"response": [
 						{
@@ -163,7 +174,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -173,32 +184,146 @@
 									}
 								],
 								"url": {
-									"raw": "http://49.12.234.10:3003/utxo_addresses",
+									"raw": "http://37.27.23.104:3003/total_supply",
 									"protocol": "http",
 									"host": [
-										"49",
-										"12",
-										"234",
-										"10"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
 									"port": "3003",
 									"path": [
-										"utxo_addresses"
+										"total_supply"
 									]
 								}
 							},
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "",
-									"type": "text"
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "157"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 21 Mar 2024 08:45:43 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": \"c9456ab061134d9a8f5651f86646d4d0\",\n    \"status\": \"Success\",\n    \"reason\": \"UTXO addresses successfully retrieved\",\n    \"route\": \"utxo_addresses\",\n    \"content\": [\n        \"963add370937ffc687426d15018c3c96281d7ff5d74f0e3934aa6efe9d92af6c\",\n        \"e423d1f7c5c2bc1ba9228f0acd92ea3dfca09db782c92a9437327243cbe49de3\",\n        \"9abecce828349a99fb3275b24c0547945f3f823b410581a581fef47e39724678\",\n        \"427c73c7dae9ad2da423542595c14eb99d83ec4d1c6cbfdfe6f7f187cde93751\",\n        \"649afb41b98969deefc4f33ae4a0c9b6786b870d2a020c30181192d18ef18c52\"\n    ]\n}"
+							"body": "{\n    \"id\": \"6813acdd02b64fea9fcc998cf3ab6624\",\n    \"status\": \"Success\",\n    \"reason\": \"Successfully fetched total supply\",\n    \"route\": \"total_supply\",\n    \"content\": 360360000000000000\n}"
+						}
+					]
+				},
+				{
+					"name": "issued_supply",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{mempool_api_endpoint}}:{{mempool_api_port}}/issued_supply",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{mempool_api_endpoint}}"
+							],
+							"port": "{{mempool_api_port}}",
+							"path": [
+								"issued_supply"
+							]
+						},
+						"description": "Get general information about the current node."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://37.27.23.104:3003/issued_supply",
+									"protocol": "http",
+									"host": [
+										"37",
+										"27",
+										"23",
+										"104"
+									],
+									"port": "3003",
+									"path": [
+										"issued_supply"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "155"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 21 Mar 2024 08:46:06 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"19278b35534f4008ab69f99b3c9edc23\",\n    \"status\": \"Success\",\n    \"reason\": \"Successfully fetched issued supply\",\n    \"route\": \"issued_supply\",\n    \"content\": 92111025706708\n}"
 						}
 					]
 				},
@@ -213,7 +338,8 @@
 									"    pm.response.to.have.status(200);\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -222,7 +348,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -247,7 +374,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"addrss_list\": [\r\n  \"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\"\r\n  ]\r\n}",
+							"raw": "[\"cf63d7c3fe64773c2cd470ff54e5fd1769f5cc7bc9f3264a5c1ee29ecb31d4a9\"]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -275,7 +402,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -286,7 +413,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"address_list\": [\r\n  \"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\"\r\n  ]\r\n}",
+									"raw": "[\"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\"]\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -294,13 +421,13 @@
 									}
 								},
 								"url": {
-									"raw": "http://49.12.234.10:3003/fetch_balance",
+									"raw": "http://37.27.23.104:3003/fetch_balance",
 									"protocol": "http",
 									"host": [
-										"49",
-										"12",
-										"234",
-										"10"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
 									"port": "3003",
 									"path": [
@@ -309,7 +436,7 @@
 								}
 							},
 							"status": "OK",
-							"code": "200",
+							"code": 200,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
@@ -326,7 +453,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": \"b7f3d0f2f5db43ad83ca55b5ed720061\",\n    \"status\": \"Success\",\n    \"reason\": \"Balance successfully fetched\",\n    \"route\": \"fetch_balance\",\n    \"content\": {\n        \"total\": {\n            \"tokens\": 50000,\n            \"items\": {\n                \"g60073baefe40c0faad38d16cd6a84a0\": 10,\n            }\n        },\n        \"address_list\": {\n            \"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g60073baefe40c0faad38d16cd6a84a0\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Item\": {\n                            \"amount\": 10,\n                            \"drs_tx_hash\": \"g60073baefe40c0faad38d16cd6a84a0\",\n                            \"metadata\": \"{\\\"metafield1\\\":\\\"test\\\",\\\"metafield2\\\":\\\"test\\\"}\"\n                        }\n                    }\n                },\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"ge271efd3f6420264cad0297211d5a86\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 50000\n                    }\n                }\n            ]\n        }\n    }\n}"
+							"body": "{\n    \"id\": \"b7f3d0f2f5db43ad83ca55b5ed720061\",\n    \"status\": \"Success\",\n    \"reason\": \"Balance successfully fetched\",\n    \"route\": \"fetch_balance\",\n    \"content\": {\n        \"total\": {\n            \"tokens\": 50000,\n            \"receipts\": {\n                \"g60073baefe40c0faad38d16cd6a84a0\": 10,\n            }\n        },\n        \"address_list\": {\n            \"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g60073baefe40c0faad38d16cd6a84a0\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Receipt\": {\n                            \"amount\": 10,\n                            \"drs_tx_hash\": \"g60073baefe40c0faad38d16cd6a84a0\",\n                            \"metadata\": \"{\\\"metafield1\\\":\\\"test\\\",\\\"metafield2\\\":\\\"test\\\"}\"\n                        }\n                    }\n                },\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"ge271efd3f6420264cad0297211d5a86\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 50000\n                    }\n                }\n            ]\n        }\n    }\n}"
 						},
 						{
 							"name": "400",
@@ -399,7 +526,8 @@
 									"});\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -408,7 +536,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -428,7 +557,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"item_amount\": 1000,\r\n  \"script_public_key\": \"b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01\",\r\n  \"public_key\": \"ffe056dcad98fbeb8fdeb79ef95fb49b0c9b5d2bc3c5191cb08df55fa71c4e5d\",\r\n  \"signature\": \"014643bab9a5859ccf6b0403d68c38b26b8888a41034b533f1a0ec2ba6b3afad5ac988e630a69b28f068c74d386df0ae86410aca1c8b1ce0b968f09b83111d07\",\r\n  \"drs_tx_hash_spec\": \"Default\"\r\n}",
+							"raw": "{\r\n    \"item_amount\": 1,\r\n    \"script_public_key\": \"881244ab6ccccf37efc13a051fc7f9a47d3fc623d26c4b07d373e1b8b40720b7\",\r\n    \"public_key\": \"ae7c8238b1a79ae72dfe27ef608c31b713b01a4b8144d6be3d9bd32d83b8fc3b\",\r\n    \"signature\": \"3d920151b954a014e761dea0d5dc0c68ab332a50a2e2907707890fec2d0fa1b1994b4b86a8cd851b4ff8b2bcb38466fa8618bcb13344e9509a013121706aaf09\",\r\n    \"version\": null,\r\n    \"genesis_hash_spec\": \"Create\",\r\n    \"metadata\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -446,7 +575,7 @@
 								"create_item_asset"
 							]
 						},
-						"description": "Create new item/asset."
+						"description": "Create new receipt/asset."
 					},
 					"response": [
 						{
@@ -456,7 +585,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -467,7 +596,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"item_amount\": 1000,\r\n  \"script_public_key\": \"b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01\",\r\n  \"public_key\": \"ffe056dcad98fbeb8fdeb79ef95fb49b0c9b5d2bc3c5191cb08df55fa71c4e5d\",\r\n  \"signature\": \"014643bab9a5859ccf6b0403d68c38b26b8888a41034b533f1a0ec2ba6b3afad5ac988e630a69b28f068c74d386df0ae86410aca1c8b1ce0b968f09b83111d07\",\r\n  \"drs_tx_hash_spec\": \"Default\"\r\n}",
+									"raw": "{\"item_amount\":10,\"script_public_key\":\"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\",\"public_key\":\"81903fa291a7f1bdbd91fc7de4aacd1df40a8ceb42a3c51e2eef7e572dbbbd3c\",\"signature\":\"de9963ee1f8470d2a66d66626dc58648866b074c77ba6b4a16b03907f3345653be9b5b64bf9a517d1ab2361e8ade6d8ad50f7de0768ab455686227c22a0b5d0a\",\"version\":null,\"drs_tx_hash_spec\":\"Create\",\"metadata\":\"{\\\"imageURL\\\":\\\"...\\\",\\\"description\\\":\\\"...\\\"}\"}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -475,13 +604,13 @@
 									}
 								},
 								"url": {
-									"raw": "http://49.12.234.10:3003/create_item_asset",
+									"raw": "http://37.27.23.104:3003/create_item_asset",
 									"protocol": "http",
 									"host": [
-										"49",
-										"12",
-										"234",
-										"10"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
 									"port": "3003",
 									"path": [
@@ -499,15 +628,15 @@
 								},
 								{
 									"key": "content-length",
-									"value": "367"
+									"value": "426"
 								},
 								{
 									"key": "date",
-									"value": "Thu, 25 Jan 2024 17:22:04 GMT"
+									"value": "Thu, 08 Feb 2024 13:24:44 GMT"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": \"9ff1e1444a3049f8a1e352e9f14cc470\",\n    \"status\": \"Success\",\n    \"reason\": \"Item asset(s) created\",\n    \"route\": \"create_item_asset\",\n    \"content\": {\n        \"asset\": {\n            \"asset\": {\n                \"Item\": {\n                    \"amount\": 1000,\n                    \"drs_tx_hash\": \"default_drs_tx_hash\",\n                    \"metadata\": null\n                }\n            },\n            \"extra_info\": null\n        },\n        \"to_address\": \"b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01\",\n        \"tx_hash\": \"default_drs_tx_hash\"\n    }\n}"
+							"body": "{\n    \"id\": \"f4f8b2fca058444fab97c601666784db\",\n    \"status\": \"Success\",\n    \"reason\": \"Item asset(s) created\",\n    \"route\": \"create_item_asset\",\n    \"content\": {\n        \"asset\": {\n            \"asset\": {\n                \"Item\": {\n                    \"amount\": 10,\n                    \"drs_tx_hash\": \"gb9d5181126772d81001bea50e806be7\",\n                    \"metadata\": \"{\\\"imageURL\\\":\\\"...\\\",\\\"description\\\":\\\"...\\\"}\"\n                }\n            },\n            \"extra_info\": null\n        },\n        \"to_address\": \"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\",\n        \"tx_hash\": \"gb9d5181126772d81001bea50e806be7\"\n    }\n}"
 						},
 						{
 							"name": "400",
@@ -567,6 +696,70 @@
 							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
 						}
 					]
+				},
+				{
+					"name": "create_transactions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-cache-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"inputs\":[\n    {\n        \"previous_out\":\n            {\"t_hash\":\"g9547195bab35e5d31baf0378dfc1373\",\"n\":1},\n        \"script_signature\":\n            {\"Pay2PkH\":\n                {\n                    \"signable_data\":\"1b061ff7e94765f95a2a5122d3bde757f2daaacef762c5aef2bf237ca3da2abf\",\n                    \"signature\":\"b576d3f5c1703206bad8b9de0ce3a3167e203b78164c86d78774534c930a535a31c49adae9e70569008c0329fb4a9128ca96d350f47a88ce06ef5a334506f803\",\n                    \"public_key\":\"5e7856117f404562c47dbdccfb8c23dc9ec69be14df5712bb459eeb440f40808\",\n                    \"address_version\":null\n                }\n            }\n    }],\n    \"outputs\":[\n        {\n            \"value\":{\"Token\":10},\n            \"locktime\":0,\n            \"genesis_hash\":null,\n            \"script_public_key\":\"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\"\n        },\n        {\n            \"value\":{\"Token\":15170},\n            \"locktime\":0,\n            \"genesis_hash\":null,\n            \"script_public_key\":\"93ef12d0389e703e087475314cc3d17330e80e95dc48cb8fdc4dbef0a961e08d\"\n        }],\n        \"version\":2,\"druid_info\":null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{mempool_api_endpoint}}:{{mempool_api_port}}/create_transactions",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{mempool_api_endpoint}}"
+							],
+							"port": "{{mempool_api_port}}",
+							"path": [
+								"create_transactions"
+							]
+						},
+						"description": "Create new transaction/s, which will be submitted to the Mempool nodes for inclusion into a new block. This call assumes a full transaction as part of the request body, which might make raw calls difficult to manage. For convenience, it may be best to use an A-Block library or SDK that abstracts this call for you."
+					},
+					"response": []
 				}
 			],
 			"description": "The Mempool node is a special type of node responsible for collecting transactions and bundling them into new blocks. They also partition the mining network for mining and validate the blocks that these partitions mine. _There are only a limited number of Mempool nodes._"
@@ -633,7 +826,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -643,12 +836,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{protocol}}://{{storage_api_endpoint}}:{{storage_api_port}}/debug_data",
-									"protocol": "{{protocol}}",
+									"raw": "http://37.27.23.104:3001/debug_data",
+									"protocol": "http",
 									"host": [
-										"{{storage_api_endpoint}}"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
-									"port": "{{storage_api_port}}",
+									"port": "3001",
 									"path": [
 										"debug_data"
 									]
@@ -739,7 +935,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -749,13 +945,13 @@
 									}
 								],
 								"url": {
-									"raw": "http://49.12.234.10:3001/latest_block",
+									"raw": "http://37.27.23.104:3001/latest_block",
 									"protocol": "http",
 									"host": [
-										"49",
-										"12",
-										"234",
-										"10"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
 									"port": "3001",
 									"path": [
@@ -796,7 +992,8 @@
 									"    pm.response.to.have.status(200);\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -805,7 +1002,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -825,7 +1023,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[0, 10, 28965]",
+							"raw": "[0, 22]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -853,7 +1051,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -872,13 +1070,13 @@
 									}
 								},
 								"url": {
-									"raw": "http://49.12.234.10:3001/block_by_num",
+									"raw": "http://37.27.23.104:3001/block_by_num",
 									"protocol": "http",
 									"host": [
-										"49",
-										"12",
-										"234",
-										"10"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
 									"port": "3001",
 									"path": [
@@ -976,7 +1174,8 @@
 									"    pm.response.to.have.status(200);\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -985,7 +1184,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -1005,7 +1205,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\"b002aaf9b9845413a53aadc80cbd92347ac93a0c9df1f594105916f8f616f4d30\"",
+							"raw": "[\"ga523dec216a2216804cac360b60861f\"]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1033,7 +1233,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -1052,13 +1252,13 @@
 									}
 								},
 								"url": {
-									"raw": "http://49.12.234.10:3001/blockchain_entry",
+									"raw": "http://37.27.23.104:3001/blockchain_entry",
 									"protocol": "http",
 									"host": [
-										"49",
-										"12",
-										"234",
-										"10"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
 									"port": "3001",
 									"path": [
@@ -1217,7 +1417,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -1228,7 +1429,8 @@
 									"    pm.response.to.have.status(200);",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -1247,12 +1449,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/debug_data",
+							"raw": "{{protocol}}://{{miner_api_endpoint}}:{{user_api_port}}/debug_data",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{miner_api_endpoint}}"
 							],
-							"port": "{{miner_api_port}}",
+							"port": "{{user_api_port}}",
 							"path": [
 								"debug_data"
 							]
@@ -1267,7 +1469,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -1277,12 +1479,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/debug_data",
-									"protocol": "{{protocol}}",
+									"raw": "http://37.27.23.104:3004/debug_data",
+									"protocol": "http",
 									"host": [
-										"{{miner_api_endpoint}}"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
-									"port": "{{miner_api_port}}",
+									"port": "3004",
 									"path": [
 										"debug_data"
 									]
@@ -1374,7 +1579,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -1416,7 +1621,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": \"3ac824a675494b8d8da2b04adb3d1da4\",\n    \"status\": \"Success\",\n    \"reason\": \"Wallet info successfully fetched\",\n    \"route\": \"wallet_info\",\n    \"content\": {\n        \"running_total\": 4470.347182539683,\n        \"item_total\": {},\n        \"addresses\": {\n            \"0846c2dd10769b32da139031a817b204ac952e231702b75f25483ce2521b9fca\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"gc8615eeb8246578f47bfd2aca5e0fd3\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510182\n                    }\n                }\n            ],\n            \"08ad788646f0df967ded003e7a37818a6ac03e93c29ff0b4b9bb7b3fc8612432\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g52069855842f143eec5303aa8693f6b\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510183\n                    }\n                }\n            ],\n            \"5b1217a121f2cebfe6da4a8314204884d47cfd88be69a838b3d210bc00baef3f\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g4984fd5c54cf2efcd2cbf78b4c343e5\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510182\n                    }\n                }\n            ],\n            \"5b442a1875fc2a5fbca766faa8955d54b6cbfe930ed51740e7be936552de0fa8\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g0eaab0b2138b439ad5599473a3b3bb6\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510182\n                    }\n                }\n            ],\n            \"5bcfd2808883e46c2e6a68bbc1c64e0f72e0fa887ca0e7edb01936d160461e54\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g2cf57da49155e937ebb5af1639fd15f\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510183\n                    }\n                }\n            ],\n            \"66221636d1a93cfa78e6f0d64dd48f17ddf33d7e59383e0c129ad814592a4c9d\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g400dd6996f11a7e154c790d01b18c62\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510184\n                    }\n                }\n            ],\n            \"915d6a2f88ca7bf5afe22370c66a4c64608fca13465e52aa831a5fc4f8bab13f\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g3263421c58fb96c746b47b86d566a1c\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510183\n                    }\n                }\n            ],\n            \"9780946e096309a2095919da01ce56a7455cb187d94af00abbc445938dab39be\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"gae1df3bc082301098120115c70f74fb\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510184\n                    }\n                }\n            ],\n            \"a3c52a7400fc1175d3186f731705781257612d0039e42d7abf98a97e936f802d\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g0111ed1f9dae362d1af9ab840d53e0c\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510185\n                    }\n                }\n            ],\n            \"ace6e52b34602248d35aa565c7721345bef12cf8c151dc619cb590586ebac016\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"gf7dd9a8061272d533b238ccbe63f045\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510183\n                    }\n                }\n            ],\n            \"c1ea1e80cb01a8a5deb592a8a7a2a3c1f2a8d2d21456a78543b03ac3b5713062\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g46588006c931c6dce479d0884b5411c\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510182\n                    }\n                }\n            ],\n            \"c39e34f48cfe5b00b5b0c7bb5920db02959eab7e44905dab1f610a51e042fbfd\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"gcd537491c6fdbd161db2ba04c2f16e6\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510184\n                    }\n                }\n            ],\n            \"eb4cda782a8495a1ce6979d6e4ff02fa5e820f9f8f8a01d884effb0c07704a4f\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g296355ba934453f310dc5352c5be526\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510184\n                    }\n                }\n            ],\n            \"f12bd3b2eeb701a2569f2c15b8caa5625389f405d61571e64d8b1eef0cb8e0f1\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g0f2936419a5da624cac4905c0c0f8a8\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510183\n                    }\n                }\n            ],\n            \"fc25fe5d199b352bcd3dd7cc71aace3d4ba0cc49e34379b1555c22786736ba50\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g29c350c18fdab7617af0b375d6a8569\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 7510185\n                    }\n                }\n            ]\n        }\n    }\n}"
+							"body": "{\n    \"id\": \"3ac824a675494b8d8da2b04adb3d1da4\",\n    \"status\": \"Success\",\n    \"reason\": \"Wallet info successfully fetched\",\n    \"route\": \"wallet_info\",\n    \"content\": {\n        \"running_total\": 1265976.487091256,\n        \"running_total_tokens\": 91241457377641,\n        \"locked_total\": 4479.096303474304,\n        \"locked_total_tokens\": 322817428784,\n        \"available_total\": 1261497.3907877817,\n        \"available_total_tokens\": 90918639948857,\n        \"item_total\": {},\n        \"addresses\": {\n            \"0846c2dd10769b32da139031a817b204ac952e231702b75f25483ce2521b9fca\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"gc8615eeb8246578f47bfd2aca5e0fd3\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"08ad788646f0df967ded003e7a37818a6ac03e93c29ff0b4b9bb7b3fc8612432\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g52069855842f143eec5303aa8693f6b\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"5b1217a121f2cebfe6da4a8314204884d47cfd88be69a838b3d210bc00baef3f\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g4984fd5c54cf2efcd2cbf78b4c343e5\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"5b442a1875fc2a5fbca766faa8955d54b6cbfe930ed51740e7be936552de0fa8\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g0eaab0b2138b439ad5599473a3b3bb6\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"5bcfd2808883e46c2e6a68bbc1c64e0f72e0fa887ca0e7edb01936d160461e54\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g2cf57da49155e937ebb5af1639fd15f\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"66221636d1a93cfa78e6f0d64dd48f17ddf33d7e59383e0c129ad814592a4c9d\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g400dd6996f11a7e154c790d01b18c62\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"915d6a2f88ca7bf5afe22370c66a4c64608fca13465e52aa831a5fc4f8bab13f\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g3263421c58fb96c746b47b86d566a1c\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"9780946e096309a2095919da01ce56a7455cb187d94af00abbc445938dab39be\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"gae1df3bc082301098120115c70f74fb\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"a3c52a7400fc1175d3186f731705781257612d0039e42d7abf98a97e936f802d\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g0111ed1f9dae362d1af9ab840d53e0c\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"ace6e52b34602248d35aa565c7721345bef12cf8c151dc619cb590586ebac016\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"gf7dd9a8061272d533b238ccbe63f045\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"c1ea1e80cb01a8a5deb592a8a7a2a3c1f2a8d2d21456a78543b03ac3b5713062\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g46588006c931c6dce479d0884b5411c\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"c39e34f48cfe5b00b5b0c7bb5920db02959eab7e44905dab1f610a51e042fbfd\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"gcd537491c6fdbd161db2ba04c2f16e6\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"eb4cda782a8495a1ce6979d6e4ff02fa5e820f9f8f8a01d884effb0c07704a4f\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g296355ba934453f310dc5352c5be526\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"f12bd3b2eeb701a2569f2c15b8caa5625389f405d61571e64d8b1eef0cb8e0f1\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g0f2936419a5da624cac4905c0c0f8a8\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ],\n            \"fc25fe5d199b352bcd3dd7cc71aace3d4ba0cc49e34379b1555c22786736ba50\": [\n                {\n                    \"out_point\": {\n                        \"t_hash\": \"g29c350c18fdab7617af0b375d6a8569\",\n                        \"n\": 0\n                    },\n                    \"value\": {\n                        \"Token\": 3260858492\n                    }\n                }\n            ]\n        }\n    }\n}"
 						}
 					]
 				},
@@ -1479,7 +1684,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -1489,12 +1694,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/payment_address",
-									"protocol": "{{protocol}}",
+									"raw": "http://37.27.23.104:3004/payment_address",
+									"protocol": "http",
 									"host": [
-										"{{miner_api_endpoint}}"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
-									"port": "{{miner_api_port}}",
+									"port": "3004",
 									"path": [
 										"payment_address"
 									]
@@ -1581,7 +1789,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -1591,12 +1799,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/current_mining_block",
-									"protocol": "{{protocol}}",
+									"raw": "http://37.27.23.104:3004/current_mining_block",
+									"protocol": "http",
 									"host": [
-										"{{miner_api_endpoint}}"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
-									"port": "{{miner_api_port}}",
+									"port": "3004",
 									"path": [
 										"current_mining_block"
 									]
@@ -1683,7 +1894,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -1693,12 +1904,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/export_keypairs",
-									"protocol": "{{protocol}}",
+									"raw": "http://37.27.23.104:3004/export_keypairs",
+									"protocol": "http",
 									"host": [
-										"{{miner_api_endpoint}}"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
-									"port": "{{miner_api_port}}",
+									"port": "3004",
 									"path": [
 										"export_keypairs"
 									]
@@ -1727,6 +1941,187 @@
 					]
 				},
 				{
+					"name": "import_keypairs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-request-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"addresses\": {\n            \"0033430bea48f205a421ba9cec481766b830683782d3a478c5b1d0ae7a4d5690\": {\n                \"public_key\": \"e8edeecfc681150ad1cb54f039247c47b17b4dedac899ab7801123013499c657\",\n                \"secret_key\": \"3053020101300506032b657004220420dab5e3259fb39c0b58033cdaab5695a4cd2f488d12a9c6b0cc0d654e4cf2f228a123032100e8edeecfc681150ad1cb54f039247c47b17b4dedac899ab7801123013499c657\",\n                \"address_version\": null\n            },\n            \"009441293f8635b9ed4703bdd59bd0b24d39096d166cbe834e56f7f3ee9795c8\": {\n                \"public_key\": \"e71c1af8657920444564b7d22f559e29449352393762677c285de03caf33699d\",\n                \"secret_key\": \"3053020101300506032b657004220420b8bba4fadf359af4f3cc4d71a69c9117fb61199eca5e1434e9b51209f77a9bbba123032100e71c1af8657920444564b7d22f559e29449352393762677c285de03caf33699d\",\n                \"address_version\": null\n            }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/import_keypairs",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{miner_api_endpoint}}"
+							],
+							"port": "{{miner_api_port}}",
+							"path": [
+								"import_keypairs"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-request-id",
+										"value": "",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"addresses\": {\n            \"0033430bea48f205a421ba9cec481766b830683782d3a478c5b1d0ae7a4d5690\": {\n                \"public_key\": \"e8edeecfc681150ad1cb54f039247c47b17b4dedac899ab7801123013499c657\",\n                \"secret_key\": \"3053020101300506032b657004220420dab5e3259fb39c0b58033cdaab5695a4cd2f488d12a9c6b0cc0d654e4cf2f228a123032100e8edeecfc681150ad1cb54f039247c47b17b4dedac899ab7801123013499c657\",\n                \"address_version\": null\n            },\n            \"009441293f8635b9ed4703bdd59bd0b24d39096d166cbe834e56f7f3ee9795c8\": {\n                \"public_key\": \"e71c1af8657920444564b7d22f559e29449352393762677c285de03caf33699d\",\n                \"secret_key\": \"3053020101300506032b657004220420b8bba4fadf359af4f3cc4d71a69c9117fb61199eca5e1434e9b51209f77a9bbba123032100e71c1af8657920444564b7d22f559e29449352393762677c285de03caf33699d\",\n                \"address_version\": null\n            },\n            \"046ef5a01d6e0b548ff13504a63421f70af62f1da93c6364de209b1fd3f252c8\": {\n                \"public_key\": \"10b7ee0d74c2eb96bc36711d17e56c388069e3b0f5e4d8931ab4a14c01be4727\",\n                \"secret_key\": \"3053020101300506032b6570042204200598ca8c3db5212ce0c5c366c8f8e96896272e3788f875a8fbb310e9dbe32170a12303210010b7ee0d74c2eb96bc36711d17e56c388069e3b0f5e4d8931ab4a14c01be4727\",\n                \"address_version\": null\n            },\n            \"04bfdf003f307963e12fb41bbfd5e72b9bc05356b79cb47e7570d942724d6be6\": {\n                \"public_key\": \"74b42b2e5738d2251e297c0a0a3491827e80eabc42d5a217027b9425042e0d60\",\n                \"secret_key\": \"3053020101300506032b657004220420c46a850e6cc94c10d9d277ab9803754fa9aa7090796ae042673e572a6b034c2aa12303210074b42b2e5738d2251e297c0a0a3491827e80eabc42d5a217027b9425042e0d60\",\n                \"address_version\": null\n            },\n            \"08049bce4f1c46d04706741e7ee440ace1358598ca5112245e336ad5dfb6fd20\": {\n                \"public_key\": \"f2d7a630b258c698c410fd048c5bde4a20f40f7f9db7bf3f9102f1249f23379d\",\n                \"secret_key\": \"3053020101300506032b657004220420d0b7ceda067f9cd600fde741d751f69ccdc331baf7a980803c86b1dea07e7263a123032100f2d7a630b258c698c410fd048c5bde4a20f40f7f9db7bf3f9102f1249f23379d\",\n                \"address_version\": null\n            },\n            \"0ce07880093fcb94fae5b19f41fba561a1ff2b9e594c8c43d9940512d12bc4e8\": {\n                \"public_key\": \"9c2cf848a42c596457dcfcd1bd4433cd9f54cecc3d56630bb1fb4d32369b0eb8\",\n                \"secret_key\": \"3053020101300506032b657004220420bf8de23d73a801135d92b86dd1c087223bf4b3731222af0f9df4f0976bd43a31a1230321009c2cf848a42c596457dcfcd1bd4433cd9f54cecc3d56630bb1fb4d32369b0eb8\",\n                \"address_version\": null\n            },\n            \"0deb5ad14e49f5e8da54f7df0c1df5646245a750a1ca2e6f753f876563ea619e\": {\n                \"public_key\": \"a15bf319a382f54923bf45b08a6c7020b46d86d64ed79b618f359c6851c6103c\",\n                \"secret_key\": \"3053020101300506032b657004220420f1c4903e6f59c558e18b0a77a4532d06851b47d9def3a5d2e289938563b3bcb5a123032100a15bf319a382f54923bf45b08a6c7020b46d86d64ed79b618f359c6851c6103c\",\n                \"address_version\": null\n            },\n            \"10d6c1400c374d00e8939e19fe544e1fc581fbf4bb81712ff4a879a84dea9c18\": {\n                \"public_key\": \"0b70e6fb1bae51efdc17bfc689fc983b2d67baff8f2e85cf72f2d319d22faa88\",\n                \"secret_key\": \"3053020101300506032b657004220420cee1500feaf90e0624f5bef74c59f3941cd318f8896fe11c197b2056017eb09da1230321000b70e6fb1bae51efdc17bfc689fc983b2d67baff8f2e85cf72f2d319d22faa88\",\n                \"address_version\": null\n            },\n            \"123893534898e5d91c0217ce39992e49332763a9ada557aabeb22fe92c06d694\": {\n                \"public_key\": \"8f772f171c82ed87d18ca191b76ae294610affc4301f0ffabcdc5bf90a6280a2\",\n                \"secret_key\": \"3053020101300506032b6570042204208bb8b730ee9b82652ef85e454ac8c265e1929ce67bdba0e497be08b6c4e02a79a1230321008f772f171c82ed87d18ca191b76ae294610affc4301f0ffabcdc5bf90a6280a2\",\n                \"address_version\": null\n            },\n            \"1675238d750ffdc3feb42c309be7fbe14446c3977e7e2f0ab8d2d98e583bf927\": {\n                \"public_key\": \"f763fdfee983e6e8df2565d746dfa81bc6d55c160b1a3cfc820f1a391f45ec82\",\n                \"secret_key\": \"3053020101300506032b6570042204203fd4b432fe4c91164851fab4cc2b3dbf1bbc17ddbd43b54bb5bd5d95ac2edd7fa123032100f763fdfee983e6e8df2565d746dfa81bc6d55c160b1a3cfc820f1a391f45ec82\",\n                \"address_version\": null\n            },\n            \"16937e871d6366184fb4e9af6d4ef8b1951f697666bd39d7b29d20c0e131f847\": {\n                \"public_key\": \"0b6a25dd2eb6dee7592b618c145932276791f20b68d3821bd40baf4c18a8d11c\",\n                \"secret_key\": \"3053020101300506032b6570042204204c61ef2676257f4c5e76a772184d8604f819e87b55dece7fb7d6086f9e051ef8a1230321000b6a25dd2eb6dee7592b618c145932276791f20b68d3821bd40baf4c18a8d11c\",\n                \"address_version\": null\n            },\n            \"193c806da691e62d34edd43341e364c88fec26fb9499142f8dcc2b649b00d487\": {\n                \"public_key\": \"3aaa69e6654d60c56a8997ef117eeae204b3e831d6db39810fc246b95590428e\",\n                \"secret_key\": \"3053020101300506032b6570042204207eddebd1150e3564fad7f083fd670cb2f856d631bd781efa27328f3ab9ea5620a1230321003aaa69e6654d60c56a8997ef117eeae204b3e831d6db39810fc246b95590428e\",\n                \"address_version\": null\n            },\n            \"199c0628c0721c51f7d31f8f66986209bdbbd9f780ade68cb34097cf8ef76fb5\": {\n                \"public_key\": \"29128cb833357642339371455956367ba18a7ca148d41bfc2212955a9f4feed7\",\n                \"secret_key\": \"3053020101300506032b657004220420b21b1218a20847190e3cc369875774a90cd26cfbf20b71cd21047efb9000a2a1a12303210029128cb833357642339371455956367ba18a7ca148d41bfc2212955a9f4feed7\",\n                \"address_version\": null\n            },\n            \"1b959a05acacf79a14f63c73c73f17300019a2ee1437f66eb12e35f56087cbc2\": {\n                \"public_key\": \"94b03b94a1aa2d71fed5cdcbe566c42794d26bd7d21bb491f891db4965eea9a1\",\n                \"secret_key\": \"3053020101300506032b6570042204205033ad0f4133d23d372c7a4f3e0399bcddc3f2427a8be1e2c1414af7e500d597a12303210094b03b94a1aa2d71fed5cdcbe566c42794d26bd7d21bb491f891db4965eea9a1\",\n                \"address_version\": null\n            },\n            \"1d2f26f0b46d3d38a32c3d767ecce9e347b58c0ac18b6b78180b80064fc8d2e1\": {\n                \"public_key\": \"d33a08326c2183ffeaff6383d13c1110f9c9182e846b203a70b1b854d302638d\",\n                \"secret_key\": \"3053020101300506032b657004220420b653d97109ff3d189979397487db83d083339b13e7da8def138b27c61a18bb24a123032100d33a08326c2183ffeaff6383d13c1110f9c9182e846b203a70b1b854d302638d\",\n                \"address_version\": null\n            },\n            \"1dee4c69e50506d0252b0e04c8181ce961185d6cdfb06e82f07f562324f3687d\": {\n                \"public_key\": \"1d6d4a79ad97af4adefb34786822b0f6940c45c500480e674331bf5f8ff3a73d\",\n                \"secret_key\": \"3053020101300506032b6570042204204ea64fccc7abda66fe7bfdadc8196a123f3cff266f7b04b8fe08824f1eabe70aa1230321001d6d4a79ad97af4adefb34786822b0f6940c45c500480e674331bf5f8ff3a73d\",\n                \"address_version\": null\n            },\n            \"1e647c3edafc1ee1e5e4f50c4ba821d94c1eac07abed3031d1fd14ab723804c8\": {\n                \"public_key\": \"c0c3288ebe476ce339415401d92f54565e7818189d086d1253b29c18115b10b9\",\n                \"secret_key\": \"3053020101300506032b657004220420ac104bd98055ad37ba25d65810ff916ed0192330c2e6b216d3b1d20983ced9c9a123032100c0c3288ebe476ce339415401d92f54565e7818189d086d1253b29c18115b10b9\",\n                \"address_version\": null\n            },\n            \"21b79a9fdad2cc00514c8c8d1533579a3b1087e055a36cb99952da8f58d95b1e\": {\n                \"public_key\": \"fca4c4aa22a6b68368c580e127ec9b451e15eacff576b61a0876cd20cee4aad6\",\n                \"secret_key\": \"3053020101300506032b657004220420e2554f7469920dc8289ee5942c203ba79be5d076b58f2238278ceedf78aac3a5a123032100fca4c4aa22a6b68368c580e127ec9b451e15eacff576b61a0876cd20cee4aad6\",\n                \"address_version\": null\n            },\n            \"234445d2e82553f9dc0a3bb646d1a2d42be61623d63a72ddb5fc98de05f045d6\": {\n                \"public_key\": \"de4324abd1c3c0fa61216ea757129f6928ad3a1f6085e85d21c994d9592fb8bd\",\n                \"secret_key\": \"3053020101300506032b6570042204203c556fa44bd416fafe4ed4e4efc20dc5b701724c606dbd75f76498e14114bedda123032100de4324abd1c3c0fa61216ea757129f6928ad3a1f6085e85d21c994d9592fb8bd\",\n                \"address_version\": null\n            },\n            \"238ce1e6d24e4340d49a07024e320a4611963d0449ba08070e43e8a50b2bff56\": {\n                \"public_key\": \"ef259e66eb0447b5bac0fc00b11b5d2f2e3246dd33dccbc7102f694209bf1141\",\n                \"secret_key\": \"3053020101300506032b6570042204204328a10c4de5df03a7ccd02ff399b051a69703b016418b649c3afb021720412ca123032100ef259e66eb0447b5bac0fc00b11b5d2f2e3246dd33dccbc7102f694209bf1141\",\n                \"address_version\": null\n            },\n            \"2af699f220a1bf8aa910e6a47dfec1bf42085b65516a3fc36eff8a3714a53ccf\": {\n                \"public_key\": \"a85f5927b02868aa236aec4054741cdd64bf7a8eb342725710cdceca9b5759b2\",\n                \"secret_key\": \"3053020101300506032b6570042204202db774e5c24ae512d1fd3bf89b71518d2e439032abcfe45631a451d261462990a123032100a85f5927b02868aa236aec4054741cdd64bf7a8eb342725710cdceca9b5759b2\",\n                \"address_version\": null\n            },\n            \"2dfaae1e655450fac86076443d1fdb8e516e20b1c9ae758a8ec2de58f632e63f\": {\n                \"public_key\": \"de4329fb88282b7612f02d5312f3839764c15da68d11ba4a71029d4db6cf832b\",\n                \"secret_key\": \"3053020101300506032b657004220420d557200b01846552a44821651932edad6e3f5c18b15d574ef2384bc6e8c06695a123032100de4329fb88282b7612f02d5312f3839764c15da68d11ba4a71029d4db6cf832b\",\n                \"address_version\": null\n            },\n            \"2e302fdeb5319659053629ad6bfa1314e5547a312b4dee611601426066715a84\": {\n                \"public_key\": \"fea97bbf84b46af20fc5d9f9ddae23b01f89b28f36818bae61b89d603fbf84b3\",\n                \"secret_key\": \"3053020101300506032b6570042204209d08c651e5ab6a0b5b9a902d6d7bf310ff09315ce8197060b1e5916911c19db8a123032100fea97bbf84b46af20fc5d9f9ddae23b01f89b28f36818bae61b89d603fbf84b3\",\n                \"address_version\": null\n            },\n            \"2e48baa2ed4ee862b050d3bcfa45657598a2ae179cd2aa5efe8e279e322e09be\": {\n                \"public_key\": \"ea7e8ef5c4de12141c92fa7f9103c942c2c9d6c43660a24b7233d0301e20e7c3\",\n                \"secret_key\": \"3053020101300506032b65700422042082ff802a45c6e67e3b30ed0ce8e07ad1918b5edfa8118ad5af3dbaa8c204430ba123032100ea7e8ef5c4de12141c92fa7f9103c942c2c9d6c43660a24b7233d0301e20e7c3\",\n                \"address_version\": null\n            },\n            \"3336c3185bc4b0fe05068405c6b8fe14f93d9f3275eae1b755a5587f7833efb8\": {\n                \"public_key\": \"def2fa29ba4f33da5fd9263720cdf004e728351266d41f44c5504d243c694dda\",\n                \"secret_key\": \"3053020101300506032b657004220420bd3a09ae993587c20501228e8082fe12d79fe4b4ecf8abe91fd8fa2079fbf471a123032100def2fa29ba4f33da5fd9263720cdf004e728351266d41f44c5504d243c694dda\",\n                \"address_version\": null\n            },\n            \"3513c6ac09ca5b3b6957d268d161ffe16d91ed96d73bbf350989aec59fa78b9b\": {\n                \"public_key\": \"4279d2f8fda3ca3b4e8a4e21a064d0af81521339a048c2929986363fea61c263\",\n                \"secret_key\": \"3053020101300506032b65700422042073ce7dd7c8247a8639885a54b5a44968232dffa0db2284ee4056a973a61db062a1230321004279d2f8fda3ca3b4e8a4e21a064d0af81521339a048c2929986363fea61c263\",\n                \"address_version\": null\n            },\n            \"3a01ae6ef1ef796c7e902b060b85199ed49166be6bf87d582a0cb4f43f995804\": {\n                \"public_key\": \"a8077182c97703f6c3bc075606c44eadd26135e0d5de9e14f50a496879195f62\",\n                \"secret_key\": \"3053020101300506032b6570042204205cd1ed48ac7c1c13ebdb142dd8eed9adb26bf7dcb28df359b7480c2ac4854cc0a123032100a8077182c97703f6c3bc075606c44eadd26135e0d5de9e14f50a496879195f62\",\n                \"address_version\": null\n            },\n            \"3dbfda1bb88508caa319fd8efa04e3da3bcedccfa8ca9848bb17c6300cd69c7b\": {\n                \"public_key\": \"9705e0edfbbe5bdf54f7a65c072a374a1bee0155b3274931afe0b645609b3299\",\n                \"secret_key\": \"3053020101300506032b6570042204203a3a35b758315820b30dc3b139c6973f1dc85b44f7c124a5a9b5b2cfad2277d2a1230321009705e0edfbbe5bdf54f7a65c072a374a1bee0155b3274931afe0b645609b3299\",\n                \"address_version\": null\n            },\n            \"4039364025a0bd29623e8872e5e10324478097dedc6b9bb96bd810820ba3a687\": {\n                \"public_key\": \"b59c7f1b27a57c64b69985d48e011b5b3ffd1961bd2aa31adaef757dcca72a7a\",\n                \"secret_key\": \"3053020101300506032b657004220420a7821cdfbe1edfc917e8e5ee87533ccc2464c503ad16ef6a0e3cf74dd0d5172aa123032100b59c7f1b27a57c64b69985d48e011b5b3ffd1961bd2aa31adaef757dcca72a7a\",\n                \"address_version\": null\n            },\n            \"42362d46a1ad9b355d8c390eed935e9038b3c656aee2ac92060c57844dabfdd3\": {\n                \"public_key\": \"f2b10fcb5db972cdb8845972cafcd9df1093569f26f351e6045ad47fe401b7ea\",\n                \"secret_key\": \"3053020101300506032b65700422042029262f21c3df028a1c9e2740b9ae6a46cab11019e81cf82708d15e309d3c3f0fa123032100f2b10fcb5db972cdb8845972cafcd9df1093569f26f351e6045ad47fe401b7ea\",\n                \"address_version\": null\n            },\n            \"4356ea9b24df8ff85c127d3390e66cbb7e750c849519a5733f47f8e181d21deb\": {\n                \"public_key\": \"cb7a4b0988356c37b3d73cc18d6c545c4588d488656169beefd87d5c973f591d\",\n                \"secret_key\": \"3053020101300506032b6570042204209caa4e66663ec28257cdb78d7820c2f7109fc1ccaf43b35813361e141463c3fca123032100cb7a4b0988356c37b3d73cc18d6c545c4588d488656169beefd87d5c973f591d\",\n                \"address_version\": null\n            },\n            \"446c26f034759141e9c35182204499f46684cc4f435c2e82979864357b25fe89\": {\n                \"public_key\": \"4302b93da5113443b86a82640983562011e402d2c156cbfb3755403446e5efd7\",\n                \"secret_key\": \"3053020101300506032b657004220420d9c3896a927b6ccd7a747df32b1753f87f2bdfe03035c957c6ea4d8f9323d360a1230321004302b93da5113443b86a82640983562011e402d2c156cbfb3755403446e5efd7\",\n                \"address_version\": null\n            },\n            \"4481f5f291604db163efabb5ee5463da13ba3c55322775386e3034eadc182200\": {\n                \"public_key\": \"b4ee17f147f6911d4c94391f2c256b10aa94e893e596fe73128e480939fc7545\",\n                \"secret_key\": \"3053020101300506032b6570042204205488a6c686309031a2553e487d2c1e91fb250a684aba672df04cce19d4d988faa123032100b4ee17f147f6911d4c94391f2c256b10aa94e893e596fe73128e480939fc7545\",\n                \"address_version\": null\n            },\n            \"45755c18be358506df9ec38bc1dd0179d3d030ad24c2935b9ebd3de9f78d2342\": {\n                \"public_key\": \"2d1aa10008e4c5003e594e29ef55952a1fdfbfc317b0e601aadfc7d27bc363a8\",\n                \"secret_key\": \"3053020101300506032b657004220420f35aaa9d5bf9e346e68a7ff947e2a41824933918569c82cf42523aeaaff527f8a1230321002d1aa10008e4c5003e594e29ef55952a1fdfbfc317b0e601aadfc7d27bc363a8\",\n                \"address_version\": null\n            },\n            \"47bf398efc1ca1247b1c071ef7e3838cd2eb88901f9e6e3a7d05ac42208d124f\": {\n                \"public_key\": \"53b8e549b72a90e1bd66be438dc034d2dbe331f06ca5cb8462e5ab478543ab91\",\n                \"secret_key\": \"3053020101300506032b65700422042026deb4ffa309366302fbca9ed079aa1e8066dca0bde4e9cdfccabec0c66fb460a12303210053b8e549b72a90e1bd66be438dc034d2dbe331f06ca5cb8462e5ab478543ab91\",\n                \"address_version\": null\n            }\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://37.27.23.104:3004/import_keypairs",
+									"protocol": "http",
+									"host": [
+										"37",
+										"27",
+										"23",
+										"104"
+									],
+									"port": "3004",
+									"path": [
+										"import_keypairs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "2454"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 31 Jan 2024 15:01:06 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"\",\n    \"status\": \"Success\",\n    \"reason\": \"Key-pairs successfully imported\",\n    \"route\": \"import_keypairs\",\n    \"content\": [\n        \"0033430bea48f205a421ba9cec481766b830683782d3a478c5b1d0ae7a4d5690\",\n        \"009441293f8635b9ed4703bdd59bd0b24d39096d166cbe834e56f7f3ee9795c8\",\n        \"046ef5a01d6e0b548ff13504a63421f70af62f1da93c6364de209b1fd3f252c8\",\n        \"04bfdf003f307963e12fb41bbfd5e72b9bc05356b79cb47e7570d942724d6be6\",\n        \"08049bce4f1c46d04706741e7ee440ace1358598ca5112245e336ad5dfb6fd20\",\n        \"0ce07880093fcb94fae5b19f41fba561a1ff2b9e594c8c43d9940512d12bc4e8\",\n        \"0deb5ad14e49f5e8da54f7df0c1df5646245a750a1ca2e6f753f876563ea619e\",\n        \"10d6c1400c374d00e8939e19fe544e1fc581fbf4bb81712ff4a879a84dea9c18\",\n        \"123893534898e5d91c0217ce39992e49332763a9ada557aabeb22fe92c06d694\",\n        \"1675238d750ffdc3feb42c309be7fbe14446c3977e7e2f0ab8d2d98e583bf927\",\n        \"16937e871d6366184fb4e9af6d4ef8b1951f697666bd39d7b29d20c0e131f847\",\n        \"193c806da691e62d34edd43341e364c88fec26fb9499142f8dcc2b649b00d487\",\n        \"199c0628c0721c51f7d31f8f66986209bdbbd9f780ade68cb34097cf8ef76fb5\",\n        \"1b959a05acacf79a14f63c73c73f17300019a2ee1437f66eb12e35f56087cbc2\",\n        \"1d2f26f0b46d3d38a32c3d767ecce9e347b58c0ac18b6b78180b80064fc8d2e1\",\n        \"1dee4c69e50506d0252b0e04c8181ce961185d6cdfb06e82f07f562324f3687d\",\n        \"1e647c3edafc1ee1e5e4f50c4ba821d94c1eac07abed3031d1fd14ab723804c8\",\n        \"21b79a9fdad2cc00514c8c8d1533579a3b1087e055a36cb99952da8f58d95b1e\",\n        \"234445d2e82553f9dc0a3bb646d1a2d42be61623d63a72ddb5fc98de05f045d6\",\n        \"238ce1e6d24e4340d49a07024e320a4611963d0449ba08070e43e8a50b2bff56\",\n        \"2af699f220a1bf8aa910e6a47dfec1bf42085b65516a3fc36eff8a3714a53ccf\",\n        \"2dfaae1e655450fac86076443d1fdb8e516e20b1c9ae758a8ec2de58f632e63f\",\n        \"2e302fdeb5319659053629ad6bfa1314e5547a312b4dee611601426066715a84\",\n        \"2e48baa2ed4ee862b050d3bcfa45657598a2ae179cd2aa5efe8e279e322e09be\",\n        \"3336c3185bc4b0fe05068405c6b8fe14f93d9f3275eae1b755a5587f7833efb8\",\n        \"3513c6ac09ca5b3b6957d268d161ffe16d91ed96d73bbf350989aec59fa78b9b\",\n        \"3a01ae6ef1ef796c7e902b060b85199ed49166be6bf87d582a0cb4f43f995804\",\n        \"3dbfda1bb88508caa319fd8efa04e3da3bcedccfa8ca9848bb17c6300cd69c7b\",\n        \"4039364025a0bd29623e8872e5e10324478097dedc6b9bb96bd810820ba3a687\",\n        \"42362d46a1ad9b355d8c390eed935e9038b3c656aee2ac92060c57844dabfdd3\",\n        \"4356ea9b24df8ff85c127d3390e66cbb7e750c849519a5733f47f8e181d21deb\",\n        \"446c26f034759141e9c35182204499f46684cc4f435c2e82979864357b25fe89\",\n        \"4481f5f291604db163efabb5ee5463da13ba3c55322775386e3034eadc182200\",\n        \"45755c18be358506df9ec38bc1dd0179d3d030ad24c2935b9ebd3de9f78d2342\",\n        \"47bf398efc1ca1247b1c071ef7e3838cd2eb88901f9e6e3a7d05ac42208d124f\"\n    ]\n}"
+						},
+						{
+							"name": "400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-request-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/import_keypairs",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{miner_api_endpoint}}"
+									],
+									"port": "{{miner_api_port}}",
+									"path": [
+										"import_keypairs"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "85"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 31 Jan 2024 15:01:42 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
+						}
+					]
+				},
+				{
 					"name": "make_payment",
 					"event": [
 						{
@@ -1740,7 +2135,8 @@
 									"",
 									"console.log(pm.environment.get(\"REQ_UUID\"));"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -1760,7 +2156,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"address\": \"ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030\",\n    \"amount\": 1000000,\n    \"passphrase\": \"\"\n}",
+							"raw": "{\n    \"address\": \"7699dc794892e4e8cb49990f231ea5cd7f328a688dcde0a03ac28e5b0bf41d91\",\n    \"amount\": 252000,\n    \"passphrase\": \" \"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1788,7 +2184,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "default"
 									},
 									{
@@ -1807,12 +2203,15 @@
 									}
 								},
 								"url": {
-									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/make_payment",
-									"protocol": "{{protocol}}",
+									"raw": "http://37.27.23.104:3004/make_payment",
+									"protocol": "http",
 									"host": [
-										"{{miner_api_endpoint}}"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
-									"port": "{{miner_api_port}}",
+									"port": "3004",
 									"path": [
 										"make_payment"
 									]
@@ -1898,6 +2297,189 @@
 					]
 				},
 				{
+					"name": "create_item_asset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-request-id",
+								"value": "{{REQ_UUID}}",
+								"type": "text"
+							},
+							{
+								"key": "x-nonce",
+								"value": "0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"item_amount\": 1,\r\n  \"script_public_key\": \"b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01\",\r\n  \"public_key\": \"ffe056dcad98fbeb8fdeb79ef95fb49b0c9b5d2bc3c5191cb08df55fa71c4e5d\",\r\n  \"signature\": \"014643bab9a5859ccf6b0403d68c38b26b8888a41034b533f1a0ec2ba6b3afad5ac988e630a69b28f068c74d386df0ae86410aca1c8b1ce0b968f09b83111d07\",\r\n  \"genisis_hash_spec\": \"Default\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{mempool_api_endpoint}}:{{mempool_api_port}}/create_item_asset",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{mempool_api_endpoint}}"
+							],
+							"port": "{{mempool_api_port}}",
+							"path": [
+								"create_item_asset"
+							]
+						},
+						"description": "Create new receipt/asset."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-request-id",
+										"value": "",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"receipt_amount\": 1000,\r\n  \"script_public_key\": \"b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01\",\r\n  \"public_key\": \"ffe056dcad98fbeb8fdeb79ef95fb49b0c9b5d2bc3c5191cb08df55fa71c4e5d\",\r\n  \"signature\": \"014643bab9a5859ccf6b0403d68c38b26b8888a41034b533f1a0ec2ba6b3afad5ac988e630a69b28f068c74d386df0ae86410aca1c8b1ce0b968f09b83111d07\",\r\n  \"genesis_hash_spec\": \"Default\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://49.12.234.10:3003/create_receipt_asset",
+									"protocol": "http",
+									"host": [
+										"49",
+										"12",
+										"234",
+										"10"
+									],
+									"port": "3003",
+									"path": [
+										"create_receipt_asset"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "367"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 25 Jan 2024 17:22:04 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"9ff1e1444a3049f8a1e352e9f14cc470\",\n    \"status\": \"Success\",\n    \"reason\": \"Receipt asset(s) created\",\n    \"route\": \"create_receipt_asset\",\n    \"content\": {\n        \"asset\": {\n            \"asset\": {\n                \"Receipt\": {\n                    \"amount\": 1000,\n                    \"genesis_hash\": \"default_genesis_hash\",\n                    \"metadata\": null\n                }\n            },\n            \"extra_info\": null\n        },\n        \"to_address\": \"b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01\",\n        \"genesis_hash\": \"default_genesis_hash\"\n    }\n}"
+						},
+						{
+							"name": "400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-request-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"item_amunt\": 1,\r\n  \"script_public_key\": \"b46f37c1dc444f76eed55eee851dcbc34b8795ed1c7731a638d578e2803bfb01\",\r\n  \"public_key\": \"ffe056dcad98fbeb8fdeb79ef95fb49b0c9b5d2bc3c5191cb08df55fa71c4e5d\",\r\n  \"signature\": \"014643bab9a5859ccf6b0403d68c38b26b8888a41034b533f1a0ec2ba6b3afad5ac988e630a69b28f068c74d386df0ae86410aca1c8b1ce0b968f09b83111d07\",\r\n  \"genesis_hash_spec\": \"Default\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{mempool_api_endpoint}}:{{mempool_api_port}}/create_item_asset",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{mempool_api_endpoint}}"
+									],
+									"port": "{{mempool_api_port}}",
+									"path": [
+										"create_item_asset"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "85"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 31 Jan 2024 15:02:43 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
+						}
+					]
+				},
+				{
 					"name": "change_passphrase",
 					"event": [
 						{
@@ -1908,7 +2490,8 @@
 									"    pm.response.to.have.status(200);\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -1956,7 +2539,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -1975,12 +2558,15 @@
 									}
 								},
 								"url": {
-									"raw": "{{protocol}}://{{user_api_endpoint}}:{{user_api_port}}/change_passphrase",
-									"protocol": "{{protocol}}",
+									"raw": "http://37.27.23.104:3000/change_passphrase",
+									"protocol": "http",
 									"host": [
-										"{{user_api_endpoint}}"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
-									"port": "{{user_api_port}}",
+									"port": "3000",
 									"path": [
 										"change_passphrase"
 									]
@@ -2062,6 +2648,63 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
+						},
+						{
+							"name": "401",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-cache-id",
+										"value": "{{REQ_UUID}}",
+										"type": "text"
+									},
+									{
+										"key": "x-nonce",
+										"value": "0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"old_passphrase\": \" \",\r\n   \"new_passphrase\": \"new_passphrase\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{user_api_endpoint}}:{{user_api_port}}/change_passphrase",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{user_api_endpoint}}"
+									],
+									"port": "{{user_api_port}}",
+									"path": [
+										"change_passphrase"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "content-length",
+									"value": "133"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 21 Mar 2024 08:52:01 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"4fffc0488966460393721901b4612ecf\",\n    \"status\": \"Error\",\n    \"reason\": \"Invalid passphrase\",\n    \"route\": \"change_passphrase\",\n    \"content\": \"null\"\n}"
 						}
 					]
 				},
@@ -2096,7 +2739,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"address_list\": [\"02b2c8d9c2b5e2b746d829b7a5faccd9325680f5760c5d679a8a4bf3cf8a49dd\"]\r\n}",
+							"raw": "[\"02b2c8d9c2b5e2b746d829b7a5faccd9325680f5760c5d679a8a4bf3cf8a49dd\"]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2124,7 +2767,7 @@
 								"header": [
 									{
 										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
+										"value": "",
 										"type": "text"
 									},
 									{
@@ -2143,12 +2786,15 @@
 									}
 								},
 								"url": {
-									"raw": "{{protocol}}://{{user_api_endpoint}}:{{user_api_port}}/update_running_total",
-									"protocol": "{{protocol}}",
+									"raw": "http://37.27.23.104:3000/update_running_total",
+									"protocol": "http",
 									"host": [
-										"{{user_api_endpoint}}"
+										"37",
+										"27",
+										"23",
+										"104"
 									],
-									"port": "{{user_api_port}}",
+									"port": "3000",
 									"path": [
 										"update_running_total"
 									]
@@ -2175,7 +2821,7 @@
 							"body": "{\n    \"id\": \"7748242a8f2b480a92f1c23cf27158ba\",\n    \"status\": \"Success\",\n    \"reason\": \"Running total updated\",\n    \"route\": \"update_running_total\",\n    \"content\": \"null\"\n}"
 						},
 						{
-							"name": "update_running_total",
+							"name": "400",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -2226,182 +2872,6 @@
 								{
 									"key": "date",
 									"value": "Tue, 30 Jan 2024 13:29:15 GMT"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"id\": \"null\",\n    \"status\": \"Error\",\n    \"reason\": \"Bad request\",\n    \"route\": \"null\",\n    \"content\": \"null\"\n}"
-						}
-					]
-				},
-				{
-					"name": "address_construction",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-cache-id",
-								"value": "{{REQ_UUID}}",
-								"type": "text"
-							},
-							{
-								"key": "x-nonce",
-								"value": "0",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n   \"pub_key\": [109, 133, 37, 100, 46, 243, 13, 156, 189, 123, 142, 12, 24, 169, 49, 186, 187, 0, 63, 27, 129, 207, 183, 13, 156, 208, 171, 164, 179, 118, 131, 183]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/address_construction",
-							"protocol": "{{protocol}}",
-							"host": [
-								"{{miner_api_endpoint}}"
-							],
-							"port": "{{miner_api_port}}",
-							"path": [
-								"address_construction"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "200",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
-										"type": "text"
-									},
-									{
-										"key": "x-nonce",
-										"value": "0",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n   \"pub_key\": [109, 133, 37, 100, 46, 243, 13, 156, 189, 123, 142, 12, 24, 169, 49, 186, 187, 0, 63, 27, 129, 207, 183, 13, 156, 208, 171, 164, 179, 118, 131, 183]\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/address_construction",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{miner_api_endpoint}}"
-									],
-									"port": "{{miner_api_port}}",
-									"path": [
-										"address_construction"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "content-type",
-									"value": "application/json"
-								},
-								{
-									"key": "content-length",
-									"value": "212"
-								},
-								{
-									"key": "date",
-									"value": "Tue, 30 Jan 2024 15:09:09 GMT"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"id\": \"32fd9cadfdcb4089971e6f93c2e700bd\",\n    \"status\": \"Success\",\n    \"reason\": \"Address successfully constructed\",\n    \"route\": \"address_construction\",\n    \"content\": \"ca0abdcd2826a77218af0914601ee34c7ff44127aab9d0671267b25a7d36946a\"\n}"
-						},
-						{
-							"name": "400",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "x-cache-id",
-										"value": "{{REQ_UUID}}",
-										"type": "text"
-									},
-									{
-										"key": "x-nonce",
-										"value": "0",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{protocol}}://{{miner_api_endpoint}}:{{miner_api_port}}/address_construction",
-									"protocol": "{{protocol}}",
-									"host": [
-										"{{miner_api_endpoint}}"
-									],
-									"port": "{{miner_api_port}}",
-									"path": [
-										"address_construction"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "content-type",
-									"value": "application/json"
-								},
-								{
-									"key": "content-length",
-									"value": "85"
-								},
-								{
-									"key": "date",
-									"value": "Tue, 30 Jan 2024 15:12:08 GMT"
 								}
 							],
 							"cookie": [],

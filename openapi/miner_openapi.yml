@@ -2,18 +2,20 @@ openapi: 3.0.3
 info:
   title: Miner API
   description: |-
-    ⚠️ **This section is still a WIP and is incomplete.** The Miner node is most like the Bitcoin miner you may be familiar with. They are responsible for mining new blocks that they receive from the Mempool nodes and collect the associated block reward for their efforts. They are only able to mine a block if they manage to get into the partition for that round.
+    ⚠️ **Some sections may still be incomplete. We higly recommend getting started by downloading our [Postman collection](/docs/postman-collections)**.
+    
+    The Miner node is most like the Bitcoin miner you may be familiar with. They are responsible for mining new blocks that they receive from the Mempool nodes and collect the associated block reward for their efforts. They are only able to mine a block if they manage to get into the partition for that round.
   contact:
     email: byron.houwens@a-block.net
   license:
     name: GPL-3.0
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
-  version: 1.0.0
+  version: 1.0.1
 externalDocs:
   description: Find out more about AIBlock
-  url: https://a-block.net
+  url: https://aiblock.ch
 servers:
-  - url: http://49.12.234.10:3000
+  - url: http://37.27.23.104:3000
     description: Testnet Miner Node
 tags:
   - name: info

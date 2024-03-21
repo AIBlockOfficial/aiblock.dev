@@ -2,6 +2,8 @@ openapi: 3.0.3
 info:
   title: Storage API
   description: |-
+    ⚠️ **Some sections may still be incomplete. We higly recommend getting started by downloading our [Postman collection](/docs/postman-collections)**.
+
     The Storage node is responsible for storing the full blockchain history. 
     Once blocks are mined by the miners and sent to the Mempool nodes for validation, they are pushed on to the Storage nodes for long-term storage. 
     Anybody is allowed to request a full history of the blockchain from the Storage nodes, but they are not required to keep such a history to participate in the network.
@@ -10,12 +12,12 @@ info:
   license:
     name: GPL-3.0
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
-  version: 1.0.0
+  version: 1.0.1
 externalDocs:
   description: Find out more about AIBlock
-  url: https://a-block.net
+  url: https://aiblock.ch
 servers:
-  - url: http://49.12.234.10:3001
+  - url: http://37.27.23.104:3001
     description: Testnet Storage Node
 tags:
   - name: info
@@ -171,7 +173,7 @@ components:
           properties:
             node_type:
               type: string
-              example: "Compute"
+              example: "Storage"
               description: The type of this node
             node_api:
               type: array
@@ -179,16 +181,17 @@ components:
               items:
                 type: string
               example:
-                - fetch_balance
-                - create_item_asset
-                - create_transactions
+                - block_by_num
+                - latest_block,
+                - blockchain_entry,
+                - debug_data
             node_peers:
               type: array
               description: The publicly visible nodes that this node is connected to
               items:
                 type: string
               example:
-                - "Storage"
+                - "Mempool"
             routes_pow:
               type: object
               properties:
