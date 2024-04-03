@@ -8,7 +8,7 @@ info:
     They also partition the mining network for mining and validate the blocks that these partitions mine. 
     There are only a limited number of Mempool nodes.  
   contact:
-    email: byron.houwens@a-block.net
+    email: byron.houwens@a-block.ch
   license:
     name: GPL-3.0
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
