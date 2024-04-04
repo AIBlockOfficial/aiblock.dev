@@ -8,7 +8,7 @@ info:
     They also partition the mining network for mining and validate the blocks that these partitions mine. 
     There are only a limited number of Mempool nodes.  
   contact:
-    email: byron.houwens@a-block.net
+    email: byron.houwens@a-block.ch
   license:
     name: GPL-3.0
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -78,7 +78,7 @@ paths:
     get:
       tags:
         - info
-      summary: issued
+      summary: issued_supply
       description: Get issued supply information.
       operationId: issuedSupply
       parameters:
@@ -305,21 +305,30 @@ components:
           description: Transaction hash
         n:
           type: number
-          example: 1
-          description: .
+          example: 0
+          description: The index of the output in the input transaction
         
     Pay2PkH:
+      type: object
+      properties:
+        Pay2PkH:
+          $ref: '#/components/schemas/ScriptSig'
+    
+    ScriptSig:
       type: object
       properties:
         signable_data:
           type: string
           example: "1b061ff7e94765f95a2a5122d3bde757f2daaacef762c5aef2bf237ca3da2abf"
+          description: Data to sign for verification. This is a SHA3 hash of the previous outpoint's data in the form "${n}-${t_hash}"
         signature:
           type: string
           example: "b576d3f5c1703206bad8b9de0ce3a3167e203b78164c86d78774534c930a535a31c49adae9e70569008c0329fb4a9128ca96d350f47a88ce06ef5a334506f803"
+          description: Signature of the signable data
         public_key:
           type: string
           example: "5e7856117f404562c47dbdccfb8c23dc9ec69be14df5712bb459eeb440f40808"
+          description: Public key used to sign the signable data
         address_version:
           type: string
           example: "null"
@@ -339,10 +348,6 @@ components:
         locktime:
           type: number
           example: 0
-        drs_block_hash: 
-          type: string
-          example: "null"
-          description: block hash DRS identifier
         script_public_key: 
           type: string
           example: "ec66c99201a7a8299e5acace235b03932c7990cc479eca35ee1dd692a5d3c030"

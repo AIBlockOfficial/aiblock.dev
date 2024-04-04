@@ -8,7 +8,7 @@ info:
     Once blocks are mined by the miners and sent to the Mempool nodes for validation, they are pushed on to the Storage nodes for long-term storage. 
     Anybody is allowed to request a full history of the blockchain from the Storage nodes, but they are not required to keep such a history to participate in the network.
   contact:
-    email: byron.houwens@a-block.net
+    email: byron.houwens@a-block.ch
   license:
     name: GPL-3.0
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
