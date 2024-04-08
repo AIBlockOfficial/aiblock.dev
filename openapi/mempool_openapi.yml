@@ -38,7 +38,6 @@ paths:
       parameters:
         - in: header
           name: x-cache-id
-          required: true
           description: An idempotent key for retrieving cached responses from the node.
           schema:
               type: string
@@ -61,7 +60,6 @@ paths:
       parameters:
         - in: header
           name: x-cache-id
-          required: true
           description: An idempotent key for retrieving cached responses from the node.
           schema:
               type: string
@@ -84,7 +82,6 @@ paths:
       parameters:
         - in: header
           name: x-cache-id
-          required: true
           description: An idempotent key for retrieving cached responses from the node.
           schema:
               type: string
@@ -107,7 +104,6 @@ paths:
       parameters:
         - in: header
           name: x-cache-id
-          required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
               type: string
@@ -143,7 +139,6 @@ paths:
       parameters:
         - in: header
           name: x-cache-id
-          required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
               type: string
@@ -179,7 +174,6 @@ paths:
       parameters:
         - in: header
           name: x-cache-id
-          required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
               type: string
