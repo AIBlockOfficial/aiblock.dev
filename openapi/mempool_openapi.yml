@@ -314,7 +314,7 @@ components:
         signable_data:
           type: string
           example: "1b061ff7e94765f95a2a5122d3bde757f2daaacef762c5aef2bf237ca3da2abf"
-          description: Data to sign for verification. This is a SHA3 hash of the previous outpoint's data in the form "${n}-${t_hash}"
+          description: Data to sign for verification. This is a SHA3 hash of the all the transaction output "script_public_keys" and the "t_hash" of this input's previous output, for example "{output1.script_public_key}{output2.script_public_key}{t_hash}"
         signature:
           type: string
           example: "b576d3f5c1703206bad8b9de0ce3a3167e203b78164c86d78774534c930a535a31c49adae9e70569008c0329fb4a9128ca96d350f47a88ce06ef5a334506f803"
