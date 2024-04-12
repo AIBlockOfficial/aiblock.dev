@@ -17,7 +17,7 @@ externalDocs:
   description: Find out more about AIBlock
   url: https://aiblock.ch
 servers:
-  - url: http://37.27.23.104:3001
+  - url: https://storage.aiblock.dev
     description: Testnet Storage Node
 tags:
   - name: info
@@ -35,7 +35,6 @@ paths:
       parameters:
         - in: header
           name: x-cache-id
-          required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
             type: string
@@ -58,7 +57,6 @@ paths:
       parameters:
         - in: header
           name: x-cache-id
-          required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
             type: string
@@ -81,7 +79,6 @@ paths:
       parameters:
         - in: header
           name: x-cache-id
-          required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
             type: string
@@ -128,7 +125,6 @@ paths:
       parameters:
         - in: header
           name: x-cache-id
-          required: true
           description: An idempotent key for retrieving cached responses from the node
           schema:
             type: string

@@ -17,7 +17,7 @@ externalDocs:
   description: Find out more about AIBlock
   url: https://aiblock.ch
 servers:
-  - url: http://37.27.23.104:3003
+  - url: https://mempool.aiblock.dev
     description: Testnet Mempool Node
 # TAGS
 tags:

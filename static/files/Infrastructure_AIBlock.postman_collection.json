@@ -79,7 +79,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://37.27.23.104:3003/debug_data",
+									"raw": "https://mempool.aiblock.dev/debug_data",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -184,7 +184,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://37.27.23.104:3003/total_supply",
+									"raw": "https://mempool.aiblock.dev/total_supply",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -291,7 +291,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://37.27.23.104:3003/issued_supply",
+									"raw": "https://mempool.aiblock.dev/issued_supply",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -421,7 +421,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://37.27.23.104:3003/fetch_balance",
+									"raw": "https://mempool.aiblock.dev/fetch_balance",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -604,7 +604,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://37.27.23.104:3003/create_item_asset",
+									"raw": "https://mempool.aiblock.dev/create_item_asset",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -836,7 +836,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://37.27.23.104:3001/debug_data",
+									"raw": "https://storage.aiblock.dev/debug_data",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -945,7 +945,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://37.27.23.104:3001/latest_block",
+									"raw": "https://storage.aiblock.dev/latest_block",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -1070,7 +1070,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://37.27.23.104:3001/block_by_num",
+									"raw": "https://storage.aiblock.dev/block_by_num",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -1252,7 +1252,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://37.27.23.104:3001/blockchain_entry",
+									"raw": "https://storage.aiblock.dev/blockchain_entry",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -1479,7 +1479,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://37.27.23.104:3004/debug_data",
+									"raw": "http://localhost:3004/debug_data",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -1694,7 +1694,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://37.27.23.104:3004/payment_address",
+									"raw": "http://localhost:3004/payment_address",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -1799,7 +1799,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://37.27.23.104:3004/current_mining_block",
+									"raw": "http://localhost:3004/current_mining_block",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -1904,7 +1904,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://37.27.23.104:3004/export_keypairs",
+									"raw": "http://localhost:3004/export_keypairs",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -2028,7 +2028,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://37.27.23.104:3004/import_keypairs",
+									"raw": "http://localhost:3004/import_keypairs",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -2203,7 +2203,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://37.27.23.104:3004/make_payment",
+									"raw": "http://localhost:3004/make_payment",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -2558,7 +2558,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://37.27.23.104:3000/change_passphrase",
+									"raw": "http://localhost:3000/change_passphrase",
 									"protocol": "http",
 									"host": [
 										"37",
@@ -2786,7 +2786,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://37.27.23.104:3000/update_running_total",
+									"raw": "http://localhost:3000/update_running_total",
 									"protocol": "http",
 									"host": [
 										"37",
