@@ -16,6 +16,50 @@ Mining nodes in the AIBlock system can be installed in one of two ways:
 
 The Docker container is still currently being built, so for now you'll need to build from source in order to start mining.
 
+..
+
+## Docker Container
+
+**⚠️ Running docker on your machine will get you up and running quickly but should not be considered production level. This requires a lot more orchestration that is not in scope of this document.**
+
+Running a mining node through Docker can be done through two main methods:
+
+### Running Docker directly
+
+The Docker image for the miner node is available here:
+
+```bash
+ghcr.io/aiblockofficial/network/node-miner:latest
+```
+
+You can run the container from the image directly:
+
+```bash
+docker run -d -p --name aiblock-miner 3000:3000 \
+-v ./miner:/src \
+-v ./node_settings.toml:/etc/node_settings.toml \
+-e ADDRESS="127.0.0.1:12340" \
+-e WITH_USER_INDEX="127.0.0.1:12350" \
+ghcr.io/aiblockofficial/network/node-miner:latest miner
+```
+
+* `-p 3000:3000` sets ports used for the miner's REST API.
+* `-v ./miner:/src` mounts your local filesystem so the miner's wallet may be persisted.
+* `-e ADDRESS` sets the ip:port of the node. If more than one node will be running from the same IP address, the port number has to be different for each node. 
+* `-e WITH_USER_INDEX` also starts a miner node with a wallet to hold the tokens.
+
+You might also need to run with `--user` on some Linux systems for mounting permission purposes.
+
+
+### Using docker-compose
+
+You can clone `docker-compose.yml` files from the Docker nodes repo at: https://github.com/AIBlockOfficial/DockerNodes. 
+
+From the `DockerNodes` folder you can `cd miner-node`, and then run `docker-compose up -d` for detached mode and inspect the logs using `docker-compose logs --follow`. The miner node will 
+use the `node_settings.toml` in the folder for all the settings that would normally be declared manually in a direct run.
+
+..
+
 ## Build from Source
 
 To build a mining node from source, you can implement the following steps:
@@ -67,5 +111,5 @@ cargo build --release
 This will compile everything into a release state, from which you can then run the following to connect to the Playground testnet to mine:
 
 ```
-RUST_LOG=warp target/release/node miner --config=src/bin/node_settings_playground.toml --api_use_tls=0 --with_user_index=0`
+RUST_LOG=warp target/release/node miner --config=src/bin/node_settings_playground.toml --api_use_tls=0 --with_miner_index=0`
 ```

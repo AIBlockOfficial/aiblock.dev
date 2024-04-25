@@ -15,7 +15,49 @@ Lite nodes are the same as mining nodes within the AIBlock system, except that t
 1. Docker container
 2. Built from source
 
-The Docker container is still currently being built, so for now you'll need to build from source in order to start a lite node.
+..
+
+## Docker Container
+
+**⚠️ Running docker on your machine will get you up and running quickly but should not be considered production level. This requires a lot more orchestration that is not in scope of this document.**
+
+Running a mining node through Docker can be done through two main methods:
+
+### Running Docker directly
+
+The Docker image for the user node is available here:
+
+```bash
+ghcr.io/aiblockofficial/network/node-user:latest
+```
+
+You can run the container from the image directly:
+
+```bash
+docker run -d -p --name aiblock-user 3000:3000 \
+-v ./user:/src \
+-v ./node_settings.toml:/etc/node_settings.toml \
+-e ADDRESS="127.0.0.1:12340" \
+-e WITH_USER_INDEX="127.0.0.1:12350" \
+ghcr.io/aiblockofficial/network/node-user:latest user
+```
+
+* `-p 3000:3000` sets ports used for the user's REST API.
+* `-v ./user:/src` mounts your local filesystem so the user's wallet may be persisted.
+* `-e ADDRESS` sets the ip:port of the node. If more than one node will be running from the same IP address, the port number has to be different for each node. 
+* `-e WITH_USER_INDEX` also starts a user node with a wallet to hold the tokens.
+
+You might also need to run with `--user` on some Linux systems for mounting permission purposes.
+
+
+### Using docker-compose
+
+You can clone `docker-compose.yml` files from the Docker nodes repo at: https://github.com/AIBlockOfficial/DockerNodes. 
+
+From the `DockerNodes` folder you can `cd user-node`, and then run `docker-compose up -d` for detached mode and inspect the logs using `docker-compose logs --follow`. The user node will 
+use the `node_settings.toml` in the folder for all the settings that would normally be declared manually in a direct run.
+
+..
 
 ## Build from Source
 

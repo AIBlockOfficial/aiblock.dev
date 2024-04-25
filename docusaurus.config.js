@@ -9,7 +9,7 @@ const { DOCUSAURUS_VERSION } = require("@docusaurus/utils");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'AIBlock',
-  url: 'http://localhost:3000/',
+  url: 'http://localhost:3100/',
   baseUrl: '/',
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
