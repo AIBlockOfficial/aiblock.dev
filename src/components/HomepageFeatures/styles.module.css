@@ -18,5 +18,5 @@
 }
 
 .bg {
-  background: #f5f5f5;
+  background: var(--homepage-feature-block-bg);
 }
