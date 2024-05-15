@@ -16,7 +16,8 @@ const config = {
   favicon: "img/favicon.png",
   organizationName: 'AIBlockOfficial',
   projectName: 'aiblock.dev',
-
+  trailingSlash: false,
+  
   presets: [
     [
       "classic",
