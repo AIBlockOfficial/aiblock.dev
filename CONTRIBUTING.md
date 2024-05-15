@@ -229,6 +229,5 @@ The content of the commit message body should contain:
 
 In order to make it easier to structure commits properly we included the use of https://github.com/commitizen/cz-cli
 
-This tool will run on `git commit` and will guide you through a few steps to construct the correct commit message and then you can save the message with :q in vi
 
-This can be a bit cumbersome when commiting a lot so a workaroung is to run `git commit --all -m ''` which will automatically save your commit message without having to interact with vi at the end
+This tool will run on `npm run commit` and will guide you through a few steps to construct the correct commit message, alternatively you can still use `git commit` and manualy enter your message i.e `git commit -m 'chore: your description here'`
