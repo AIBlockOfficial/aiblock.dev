@@ -5,6 +5,10 @@
  - [Submission Guidelines](#submit)
  - [Commit Message Guidelines](#commit)
 
+## Found an Issue?
+
+If you find an issue in the documentation, you can help us by submitting an issue to our GitHub Repository. Even better, you can submit a Pull Request with a fix.
+
 ## <a name="branching"></a> Branching Strategy
 
 We have a main and branch from main to our feature/fix branches. The tip of main is considered 'latest develop' and then we tags in main that represent specific releases.
@@ -27,6 +31,20 @@ We have a main and branch from main to our feature/fix branches. The tip of main
 - test: Adding missing tests or correcting existing tests
 
 ## <a name="submit"></a> Submission Guidelines
+
+## Submitting an Issue
+
+Before you submit an issue, please search the issue tracker. An issue for your problem might already exist and the discussion might inform you of workarounds readily available.
+
+We want to fix all the issues as soon as possible, but before fixing a bug, we need to reproduce and confirm it. In order to reproduce bugs, we require that you provide a minimal reproduction. Having a minimal reproducible scenario gives us a wealth of important information without going back and forth to you with additional questions.
+
+A minimal reproduction allows us to quickly confirm a bug (or point out a coding problem) as well as confirm that we are fixing the right problem.
+
+We require a minimal reproduction to save maintainers' time and ultimately be able to fix more bugs. Often, developers find coding problems themselves while preparing a minimal reproduction. We understand that sometimes it might be hard to extract essential bits of code from a larger codebase, but we really need to isolate the problem before we can fix it.
+
+Unfortunately, we are not able to investigate / fix bugs without a minimal reproduction, so if we don't hear back from you, we are going to close an issue that doesn't have enough info to be reproduced.
+
+You can file new issues by selecting from our [new issue templates](https://github.com/aiblockofficial/aiblock.dev/issues/new/choose) and filling out the issue template.
 
 ### <a name="submit-pr"></a> Submitting a Pull Request (PR)
 
